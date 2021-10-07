@@ -3,20 +3,18 @@
 
 @section('content')
     <div class="container vh-100">
-        <div class="header row">
-            <div class="tw-text-center tw-text-3xl">Title</div>
-            <div class="col tw-text-center tw-text-sm">Subtitle</div>
+        <div class="header row text-center">
+            <div class="">Title</div>
+            <div class="">Subtitle</div>
         </div>
 
-        <div class="row">
-            <div class="d-grid gap-2 col-6 mx-auto">
-                <a class="btn btn-primary" href="/create" role="button">Создать</a>
-                <a class="btn btn-secondary" href="#" role="button">Найти</a>
-            </div>
+        <div class="row justify-content-center">
+            <a class="col-4 btn btn-primary" href="/create" role="button">Создать</a>
+            <a class="col-4 btn btn-secondary" href="#" role="button">Найти</a>
         </div>
 
-        <div class="footer row">
-            <div class="tw-text-center">Footer</div>
+        <div class="footer row text-center">
+            <div class="">Footer</div>
         </div>
     </div>
 @endsection
