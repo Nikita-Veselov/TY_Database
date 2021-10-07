@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateRecordRequest;
+use App\Models\ControlledPoint;
+use App\Models\Devices;
 use App\Models\Record;
+use App\Models\Workers;
 use Illuminate\Http\Request;
 
 class RecordController extends Controller
@@ -14,17 +18,22 @@ class RecordController extends Controller
      */
     public function index()
     {
-        return view('records');
+        return view('records.index', ['records' => Record::all()]);
     }
 
     /**
      * Show the form for creating a new resource.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        //
+        return view('records.create', [
+            'workers' => Workers::all(),
+            'devices' => Devices::all(),
+            'controlledPoints' => ControlledPoint::all(),
+        ]);
     }
 
     /**
@@ -33,9 +42,13 @@ class RecordController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateRecordRequest $request)
     {
-        //
+        Record::create([
+            '' => $request,
+            '' => $request
+        ]);
+        return $this->index()->with('success');
     }
 
     /**

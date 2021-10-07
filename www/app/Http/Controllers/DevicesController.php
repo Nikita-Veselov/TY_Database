@@ -2,30 +2,31 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateDeviceRequest;
 use App\Models\Devices;
 use Illuminate\Http\Request;
-use PhpParser\Node\Stmt\Return_;
 
 class DevicesController extends Controller
 {
-    /**
+     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        return view('devices');
+        return view('devices.index', ['devices' => Devices::all()]);
     }
 
     /**
      * Show the form for creating a new resource.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        //
+        return view('devices.create');
     }
 
     /**
@@ -34,9 +35,15 @@ class DevicesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateDeviceRequest $request)
     {
-        //
+        Devices::create([
+            'code' => $request->code,
+            'name' => $request->name,
+            'class' => $request->class,
+            'date' => $request->date,
+        ]);
+        return $this->index()->with('success');
     }
 
     /**

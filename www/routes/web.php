@@ -21,12 +21,13 @@ Route::get('/', function () {
     return view('frontpage');
 });
 
-Route::get('/records', [RecordController::class, 'index']);
+Route::resource('/records', RecordController::class);
 
-Route::get('/devices', [DevicesController::class, 'index']);
+Route::resource('/workers', WorkersController::class);
 
-Route::get('/workers', [WorkersController::class, 'index']);
+Route::resource('/devices', DevicesController::class);
 
-Route::get('/controlled-points', [ControlledPointController::class, 'index']);
+Route::resource('/controlledPoints', ControlledPointController::class);
+
 
 

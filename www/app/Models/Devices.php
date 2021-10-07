@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Devices extends Model
 {
     use HasFactory;
+
+    protected $table = 'devices';
+
+    public $timestamps = false;
+
+    protected $fillable = ['code', 'name', 'class', 'date'];
 }

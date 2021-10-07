@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateWorkerRequest;
 use App\Models\Workers;
 use Illuminate\Http\Request;
 
@@ -14,17 +15,18 @@ class WorkersController extends Controller
      */
     public function index()
     {
-        return view('workers');
+        return view('workers.index', ['workers' => Workers::all()]);
     }
 
     /**
      * Show the form for creating a new resource.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        //
+        return view('workers.create');
     }
 
     /**
@@ -33,9 +35,14 @@ class WorkersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateWorkerRequest $request)
     {
-        //
+        $BIO = $request->name1 . " " . $request->name2 . " " . $request->name3;
+        Workers::create([
+            'position' => $request->position,
+            'BIO' => $BIO
+        ]);
+        return $this->index()->with('success');
     }
 
     /**

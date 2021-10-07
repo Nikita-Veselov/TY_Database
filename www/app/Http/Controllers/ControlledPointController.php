@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateControlledPointRequest;
 use App\Models\ControlledPoint;
 use Illuminate\Http\Request;
 
@@ -14,17 +15,18 @@ class ControlledPointController extends Controller
      */
     public function index()
     {
-        return view('controlled-points');
+        return view('controlledPoints.index', ['controlledPoints' => ControlledPoint::all()]);
     }
 
     /**
      * Show the form for creating a new resource.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        //
+        return view('controlledPoints.create');
     }
 
     /**
@@ -33,15 +35,20 @@ class ControlledPointController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateControlledPointRequest $request)
     {
-        //
+        ControlledPoint::create([
+            'code' => $request->code,
+            'name' => $request->name,
+            'type' => $request->type,
+        ]);
+        return $this->index()->with('success');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\ControlledPoint  $record
+     * @param  \App\Models\Devices  $record
      * @return \Illuminate\Http\Response
      */
     public function show(ControlledPoint $record)
@@ -52,7 +59,7 @@ class ControlledPointController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\ControlledPoint  $record
+     * @param  \App\Models\Devices  $record
      * @return \Illuminate\Http\Response
      */
     public function edit(ControlledPoint $record)
@@ -64,7 +71,7 @@ class ControlledPointController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\ControlledPoint  $record
+     * @param  \App\Models\Devices  $record
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, ControlledPoint $record)
@@ -75,7 +82,7 @@ class ControlledPointController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\ControlledPoint  $record
+     * @param  \App\Models\Devices  $record
      * @return \Illuminate\Http\Response
      */
     public function destroy(ControlledPoint $record)

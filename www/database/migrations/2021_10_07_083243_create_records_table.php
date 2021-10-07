@@ -18,7 +18,7 @@ class CreateRecordsTable extends Migration
             $table->string('number');
             $table->string('type');
             $table->string('date');
-            $table->string('CPcode');
+            $table->string('controlledPoint');
             $table->timestamps();
         });
     }
