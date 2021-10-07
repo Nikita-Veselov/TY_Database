@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\ControlledPointController;
+use App\Http\Controllers\DevicesController;
+use App\Http\Controllers\RecordController;
+use App\Http\Controllers\WorkersController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,6 +20,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('frontpage');
 });
-Route::get('/create', function () {
-    return view('create');
-});
+
+Route::get('/records', [RecordController::class, 'index']);
+
+Route::get('/devices', [DevicesController::class, 'index']);
+
+Route::get('/workers', [WorkersController::class, 'index']);
+
+Route::get('/controlled-points', [ControlledPointController::class, 'index']);
+
+
