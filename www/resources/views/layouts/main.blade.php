@@ -14,8 +14,15 @@
     <link href="{{ asset('js/app.js') }}">
 </head>
 <body>
+    <div class="container d-flex flex-column mx-auto vh-100">
+        <x-header />
 
-    @yield('content')
+        <div class="main flex-grow-1">
+            @yield('content')
+        </div>
 
+        <x-footer />
+
+    </div>
 </body>
 </html>

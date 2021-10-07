@@ -31,7 +31,7 @@
     },
     "web_server": {
         "listen_on": ["127.0.0.1", 0],
-        "www_directory": "www/public",
+        "www_directory": "www/public/index.php",
         "index_files": ["index.php"],
         "cgi_interpreter": "php/php-cgi.exe",
         "cgi_extensions": ["php"],
