@@ -52,7 +52,7 @@ class DevicesController extends Controller
      * @param  \App\Models\Devices  $record
      * @return \Illuminate\Http\Response
      */
-    public function show(Devices $record)
+    public function show(Devices $device)
     {
         //
     }
@@ -63,9 +63,9 @@ class DevicesController extends Controller
      * @param  \App\Models\Devices  $record
      * @return \Illuminate\Http\Response
      */
-    public function edit(Devices $record)
+    public function edit(Devices $device)
     {
-        //
+        return view('devices.edit', ['device' => $device]);
     }
 
     /**
@@ -75,9 +75,15 @@ class DevicesController extends Controller
      * @param  \App\Models\Devices  $record
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Devices $record)
+    public function update(Request $request, Devices $device)
     {
-        //
+        $device = Devices::find($device->id);
+        $device->code = $request->code;
+        $device->name = $request->name;
+        $device->class = $request->class;
+        $device->date = $request->date;
+        $device->save();
+        return $this->index()->with('success');
     }
 
     /**
@@ -86,8 +92,9 @@ class DevicesController extends Controller
      * @param  \App\Models\Devices  $record
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Devices $record)
+    public function destroy(Devices $device)
     {
-        //
+        Devices::destroy($device->id);
+        return $this->index()->with('flash_message', 'Post deleted!');
     }
 }

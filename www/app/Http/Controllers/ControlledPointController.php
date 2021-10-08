@@ -62,9 +62,9 @@ class ControlledPointController extends Controller
      * @param  \App\Models\Devices  $record
      * @return \Illuminate\Http\Response
      */
-    public function edit(ControlledPoint $record)
+    public function edit(ControlledPoint $controlledPoint)
     {
-        //
+        return view('controlledPoints.edit', ['controlledPoint' => $controlledPoint]);
     }
 
     /**
@@ -74,9 +74,14 @@ class ControlledPointController extends Controller
      * @param  \App\Models\Devices  $record
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ControlledPoint $record)
+    public function update(Request $request, ControlledPoint $controlledPoint)
     {
-        //
+        $controlledPoint = ControlledPoint::find($controlledPoint->id);
+        $controlledPoint->code = $request->code;
+        $controlledPoint->name = $request->name;
+        $controlledPoint->type = $request->type;
+        $controlledPoint->save();
+        return $this->index()->with('success');
     }
 
     /**
@@ -85,8 +90,9 @@ class ControlledPointController extends Controller
      * @param  \App\Models\Devices  $record
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ControlledPoint $record)
+    public function destroy(ControlledPoint $controlledPoint)
     {
-        //
+        ControlledPoint::destroy($controlledPoint->id);
+        return $this->index()->with('flash_message', 'controlledPoint deleted!');
     }
 }
