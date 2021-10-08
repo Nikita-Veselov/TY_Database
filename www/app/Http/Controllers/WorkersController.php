@@ -6,7 +6,7 @@ use App\Exports\WorkersExport;
 use App\Http\Requests\CreateWorkerRequest;
 use App\Models\Workers;
 use Illuminate\Http\Request;
-use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\App;
 
 class WorkersController extends Controller
 {
