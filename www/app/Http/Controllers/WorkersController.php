@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\WorkersExport;
 use App\Http\Requests\CreateWorkerRequest;
 use App\Models\Workers;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class WorkersController extends Controller
 {
@@ -89,4 +91,6 @@ class WorkersController extends Controller
     {
         //
     }
+
+
 }

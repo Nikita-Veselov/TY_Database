@@ -41,4 +41,5 @@
         <div class="w-100"></div>
     </div>
 
+    <a type="button" class="btn btn-primary col-6" href="users/export/" role="button">Добавить</a>
 @endsection
