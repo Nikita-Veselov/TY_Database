@@ -3,8 +3,9 @@
 use App\Http\Controllers\ControlledPointController;
 use App\Http\Controllers\DevicesController;
 use App\Http\Controllers\RecordController;
+use App\Http\Controllers\TCController;
+use App\Http\Controllers\TYController;
 use App\Http\Controllers\WorkersController;
-use App\Models\TYController;
 use Illuminate\Support\Facades\Route;
 
 /*
