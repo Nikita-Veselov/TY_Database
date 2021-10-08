@@ -44,9 +44,16 @@ class RecordController extends Controller
      */
     public function store(CreateRecordRequest $request)
     {
+        // dd($request);
         Record::create([
-            '' => $request,
-            '' => $request
+            "number" => $request->number,
+            "type" => $request->type,
+            "date" => $request->date,
+            "controlledPoint" => $request->controlledPoint,
+            "device" => $request->device,
+            "UTY" => $request->UTY,
+            "UTC" => $request->UTC,
+            "worker" => $request->worker,
         ]);
         return $this->index()->with('success');
     }
@@ -59,7 +66,7 @@ class RecordController extends Controller
      */
     public function show(Record $record)
     {
-        //
+        return view('records.show', ['record' => $record]);
     }
 
     /**
@@ -70,7 +77,12 @@ class RecordController extends Controller
      */
     public function edit(Record $record)
     {
-        //
+        return view('records.edit', [
+            'record' => $record,
+            'workers' => Workers::all(),
+            'devices' => Devices::all(),
+            'controlledPoints' => ControlledPoint::all(),
+        ]);
     }
 
     /**
@@ -82,7 +94,18 @@ class RecordController extends Controller
      */
     public function update(Request $request, Record $record)
     {
-        //
+        // dd('updated', $record, $request);
+        $record = Record::find($record->id);
+        $record->number = $request->number;
+        $record->type = $request->type;
+        $record->date = $request->date;
+        $record->controlledPoint = $request->controlledPoint;
+        $record->device = $request->device;
+        $record->UTY = $request->UTY;
+        $record->UTC = $request->UTC;
+        $record->worker = $request->worker;
+        $record->save();
+        return $this->show($record)->with('success');
     }
 
     /**
@@ -93,6 +116,6 @@ class RecordController extends Controller
      */
     public function destroy(Record $record)
     {
-        //
+        dd('destroyed', $record);
     }
 }

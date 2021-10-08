@@ -24,10 +24,10 @@ class CreateRecordRequest extends FormRequest
     public function rules()
     {
         return [
-            '' => 'required|max:255',
-            '' => 'required|max:255',
-            '' => 'required|max:255',
-            '' => 'required|max:255',
+            // '' => 'required|max:255',
+            // '' => 'required|max:255',
+            // '' => 'required|max:255',
+            // '' => 'required|max:255',
         ];
     }
 }

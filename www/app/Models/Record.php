@@ -11,5 +11,14 @@ class Record extends Model
 
     protected $table = 'records';
 
-    protected $fillable = ['', '', ''];
+    protected $fillable = [
+        "number",
+        "type",
+        "date",
+        "controlledPoint",
+        "device",
+        "UTY",
+        "UTC",
+        "worker",
+    ];
 }
