@@ -4,6 +4,7 @@ use App\Http\Controllers\ControlledPointController;
 use App\Http\Controllers\DevicesController;
 use App\Http\Controllers\RecordController;
 use App\Http\Controllers\WorkersController;
+use App\Models\TYController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,5 +30,6 @@ Route::resource('/devices', DevicesController::class);
 
 Route::resource('/controlledPoints', ControlledPointController::class);
 
+Route::resource('/ty', TYController::class);
 
-
+Route::resource('/tc', TCController::class);

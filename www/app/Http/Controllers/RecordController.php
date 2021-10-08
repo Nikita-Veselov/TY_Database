@@ -65,7 +65,13 @@ class RecordController extends Controller
      */
     public function show(Record $record)
     {
-        return view('records.show', ['record' => $record]);
+        return view('records.show', [
+            'record' => $record,
+            'workers' => Workers::all(),
+            'devices' => Devices::all(),
+            'device' => Devices::where('name', $record->device)->first(),
+            'controlledPoints' => ControlledPoint::all()
+        ]);
     }
 
     /**

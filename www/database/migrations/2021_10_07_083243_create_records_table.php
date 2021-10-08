@@ -20,6 +20,10 @@ class CreateRecordsTable extends Migration
             $table->string('date');
             $table->string('controlledPoint');
             $table->timestamps();
+            $table->string('device');
+            $table->string('UTY');
+            $table->string('UTC');
+            $table->string('worker');
         });
     }
 
