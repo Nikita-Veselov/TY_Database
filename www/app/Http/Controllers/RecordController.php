@@ -44,7 +44,6 @@ class RecordController extends Controller
      */
     public function store(CreateRecordRequest $request)
     {
-        // dd($request);
         Record::create([
             "number" => $request->number,
             "type" => $request->type,
@@ -92,9 +91,8 @@ class RecordController extends Controller
      * @param  \App\Models\Record  $record
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Record $record)
+    public function update(CreateRecordRequest $request, Record $record)
     {
-        // dd('updated', $record, $request);
         $record = Record::find($record->id);
         $record->number = $request->number;
         $record->type = $request->type;
@@ -105,7 +103,7 @@ class RecordController extends Controller
         $record->UTC = $request->UTC;
         $record->worker = $request->worker;
         $record->save();
-        return $this->show($record)->with('success');
+        return $this->show($record)->with('success-added');
     }
 
     /**
@@ -116,6 +114,7 @@ class RecordController extends Controller
      */
     public function destroy(Record $record)
     {
-        dd('destroyed', $record);
+        Record::destroy($record->id);
+        return $this->index()->with('record-deleted');
     }
 }

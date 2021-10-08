@@ -53,7 +53,7 @@ class WorkersController extends Controller
      * @param  \App\Models\Workers  $record
      * @return \Illuminate\Http\Response
      */
-    public function show(Workers $record)
+    public function show(Workers $worker)
     {
         //
     }
@@ -64,9 +64,9 @@ class WorkersController extends Controller
      * @param  \App\Models\Workers  $record
      * @return \Illuminate\Http\Response
      */
-    public function edit(Workers $record)
+    public function edit(Workers $worker)
     {
-        //
+        return view('workers.edit', ['worker' => $worker]);
     }
 
     /**
@@ -76,9 +76,14 @@ class WorkersController extends Controller
      * @param  \App\Models\Workers  $record
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Workers $record)
+    public function update(CreateWorkerRequest $request, Workers $worker)
     {
-        //
+        $BIO = $request->name1 . " " . $request->name2 . " " . $request->name3;
+        $worker = Workers::find($worker->id);
+        $worker->position = $request->position;
+        $worker->BIO = $BIO;
+        $worker->save();
+        return $this->index()->with('success');
     }
 
     /**
@@ -87,9 +92,11 @@ class WorkersController extends Controller
      * @param  \App\Models\Workers  $record
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Workers $record)
+    public function destroy(Workers $worker)
     {
-        //
+        // dd('destroyed', $worker);
+        Workers::destroy($worker->id);
+        return $this->index()->with('flash_message', 'Post deleted!');
     }
 
 

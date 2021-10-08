@@ -5,7 +5,6 @@
 <table class="table table-striped">
     <thead>
       <tr>
-        <th scope="col">worker</th>
         <th scope="col">number</th>
         <th scope="col">type</th>
         <th scope="col">date</th>
@@ -14,10 +13,10 @@
         <th scope="col">UTY</th>
         <th scope="col">UTC</th>
         <th scope="col">worker</th>
+        <th scope="col">Action</th>
       </tr>
     </thead>
     <tbody>
-
         @foreach ($records as $record)
             <tr>
                 <th scope="row">{{ $record->number }}</th>
@@ -31,15 +30,16 @@
                 <td>
                     <a type="button" class="btn btn-primary col" href="{{ URL::to('records/' . $record->id) }}" role="button">Show</a>
                     <a type="button" class="btn btn-secondary col" href="{{ URL::to('records/' . $record->id . '/edit') }}" role="button">Edit</a>
-                    <a type="button" class="btn btn-danger col" href="{{ route('records.destroy', $record->id) }}" role="button">Del</a>
+                    {{-- CREATE MODAL WITH ALERT FOR THIS --}}
+                    <form action="{{ route('records.destroy', $record->id) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger">Del</button>
+                    </form>
                 </td>
             </tr>
         @endforeach
-
     </tbody>
-  </table>
-
-
-
+</table>
 
 @endsection
