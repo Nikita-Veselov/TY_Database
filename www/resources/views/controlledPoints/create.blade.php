@@ -18,10 +18,14 @@
     </div>
 
     <div class="row mb-3">
-        <label for="Тип" class="col-sm-2 col-form-label">Тип</label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control" id="Тип" name="type" value="{{ old('type') }}">
-        </div>
+        <select class="form-select" aria-label="Должность" name="type" value="{{ old('type') }}">
+            <option value="" selected disabled>Тип</option>
+            <option value="Станция">Станция</option>
+            <option value="ПС">ПС</option>
+            <option value="ТП">ТП</option>
+            <option value="ПГ">ПГ</option>
+            <option value="ЦРП">ЦРП</option>
+        </select>
     </div>
 
     <div class="row mb-3">

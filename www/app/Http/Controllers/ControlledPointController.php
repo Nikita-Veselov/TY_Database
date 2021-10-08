@@ -74,7 +74,7 @@ class ControlledPointController extends Controller
      * @param  \App\Models\Devices  $record
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ControlledPoint $controlledPoint)
+    public function update(CreateControlledPointRequest $request, ControlledPoint $controlledPoint)
     {
         $controlledPoint = ControlledPoint::find($controlledPoint->id);
         $controlledPoint->code = $request->code;

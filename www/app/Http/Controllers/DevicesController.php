@@ -75,7 +75,7 @@ class DevicesController extends Controller
      * @param  \App\Models\Devices  $record
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Devices $device)
+    public function update(CreateDeviceRequest $request, Devices $device)
     {
         $device = Devices::find($device->id);
         $device->code = $request->code;

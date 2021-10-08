@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\ControlledPoint;
 use Illuminate\Database\Seeder;
 
 class ControlledPointSeeder extends Seeder
@@ -13,6 +14,8 @@ class ControlledPointSeeder extends Seeder
      */
     public function run()
     {
-        //
+        ControlledPoint::factory()
+            ->count(20)
+            ->create();
     }
 }

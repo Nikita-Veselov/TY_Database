@@ -22,7 +22,10 @@ class DevicesFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'code' => $this->faker->word(),
+            'name' => $this->faker->word(),
+            'class' => $this->faker->word(),
+            'date' => $this->faker->date('Y_m'),
         ];
     }
 }

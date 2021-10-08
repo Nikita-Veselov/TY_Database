@@ -22,7 +22,8 @@ class WorkersFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'position' => $this->faker->word(),
+            'BIO' => $this->faker->name(),
         ];
     }
 }

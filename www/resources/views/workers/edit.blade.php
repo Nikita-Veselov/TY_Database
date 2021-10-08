@@ -41,10 +41,16 @@
     </div>
 
     <div class="row mb-3">
-        <select class="form-select" aria-label="Должность" name="position" value="{{ $worker->position }}">
-            <option value="" selected>Должность</option>
-            <option value="эл.мех.">Электромеханик</option>
-            <option value="ст.эл.мех.">Старший электромеханик</option>
+        <select class="form-select" aria-label="Должность" name="position">
+            <option value="" disabled>Должность</option>
+            <option value="{{ $key1 = 'эл.мех.' }}"
+                @if ($key1 == $worker->position ) selected @endif
+                >Электромеханик
+            </option>
+            <option value="{{ $key2 = 'ст.эл.мех.' }}"
+                @if ($key2 == $worker->position ) selected @endif
+                >Старший электромеханик
+            </option>
         </select>
     </div>
 

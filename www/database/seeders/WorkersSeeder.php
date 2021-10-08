@@ -2,7 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\Workers;
 use Illuminate\Database\Seeder;
+use Illuminate\Queue\Worker;
 
 class WorkersSeeder extends Seeder
 {
@@ -13,6 +15,8 @@ class WorkersSeeder extends Seeder
      */
     public function run()
     {
-        //
+        Workers::factory()
+            ->count(5)
+            ->create();
     }
 }

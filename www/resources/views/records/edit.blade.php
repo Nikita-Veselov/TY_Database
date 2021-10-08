@@ -33,16 +33,28 @@
     </div>
 
     <select class="form-select form-select-sm" name="controlledPoint" value="{{ $record->controlledPoint }}">
-        <option value="" selected disabled>CP</option>
+        <option value="" disabled>CP</option>
         @foreach ($controlledPoints as $CP)
-            <option value="{{ $CP->name }}">{{ $CP->name }}</option>
+            <option value="{{ $CP->name }}"
+                @if ($CP->name == $record->controlledPoint)
+                    selected
+                @endif
+            >
+                {{ $CP->name }}
+            </option>
         @endforeach
     </select>
 
     <select class="form-select form-select-sm" name="device" value="{{ $record->device }}">
-        <option value="" selected disabled>Devices</option>
+        <option value="" disabled>Devices</option>
         @foreach ($devices as $device)
-            <option value="{{ $device->name }}">{{ $device->name }}</option>
+            <option value="{{ $device->name }}"
+                @if ( $device->name == $record->device)
+                    selected
+                @endif
+            >
+                {{ $device->name }}
+            </option>
         @endforeach
     </select>
 
@@ -63,7 +75,13 @@
     <select class="form-select form-select-sm" name="worker" value="{{ $record->worker }}">
         <option value="" selected disabled>Workers</option>
         @foreach ($workers as $worker)
-            <option value="{{ $worker->BIO }}">{{ $worker->BIO }}</option>
+            <option value="{{ $worker->BIO }}"
+                @if ( $worker->BIO == $record->worker)
+                    selected
+                @endif
+            >
+                {{ $worker->BIO }}
+            </option>
         @endforeach
     </select>
 

@@ -33,7 +33,7 @@
 
     <div class="row mb-3">
         <select class="form-select" aria-label="Должность" name="position" value="{{ old('position') }}">
-            <option value="" selected>Должность</option>
+            <option value="" selected disabled>Должность</option>
             <option value="эл.мех.">Электромеханик</option>
             <option value="ст.эл.мех.">Старший электромеханик</option>
         </select>

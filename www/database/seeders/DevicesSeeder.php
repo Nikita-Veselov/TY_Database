@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Devices;
 use Illuminate\Database\Seeder;
 
 class DevicesSeeder extends Seeder
@@ -13,6 +14,8 @@ class DevicesSeeder extends Seeder
      */
     public function run()
     {
-        //
+        Devices::factory()
+            ->count(8)
+            ->create();
     }
 }

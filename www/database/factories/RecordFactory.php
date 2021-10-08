@@ -22,7 +22,14 @@ class RecordFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'number' => $this->faker->randomNumber(3, false),
+            'type' => $this->faker->word(),
+            'date' => $this->faker->date(),
+            'controlledPoint' => $this->faker->word(),
+            'device' => $this->faker->word(),
+            'UTY' => $this->faker->word(),
+            'UTC' => $this->faker->word(),
+            'worker' => $this->faker->name(),
         ];
     }
 }
