@@ -18,12 +18,30 @@
         </div>
     </div>
 
-    <div class="row mb-3">
-        <label for="Тип протокола" class="col-sm-2 col-form-label">Тип протокола</label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control" id="Тип протокола" name="type" value="{{ $record->type }}">
-        </div>
-    </div>
+    <select class="form-select form-select-sm" id="Тип протокола" name="type" value="{{ $record->type }}">
+        <option value="" disabled>Тип протокола</option>
+        <option value="Опробование"
+            @if ($record->type == "Опробование")
+                selected
+            @endif
+        >
+            Опробование
+        </option>
+        <option value="Профконтроль"
+            @if ($record->type == "Профконтроль")
+                selected
+            @endif
+        >
+            Профконтроль
+        </option>
+        <option value="Профвосстановление"
+            @if ($record->type == "Профвосстановление")
+                selected
+            @endif
+        >
+            Профвосстановление
+        </option>
+    </select>
 
     <div class="row mb-3">
       <label for="Дата" class="col-sm-2 col-form-label">Дата</label>
@@ -72,11 +90,32 @@
         </div>
     </div>
 
-    <select class="form-select form-select-sm" name="worker" value="{{ $record->worker }}">
-        <option value="" selected disabled>Workers</option>
+    <div class="row mb-3">
+        <label for="Дата" class="col-sm-2 col-form-label">Заключение</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="Заключение" name="conclusion" value="{{ $record->conclusion }}">
+        </div>
+      </div>
+
+    <select class="form-select form-select-sm" name="worker1" value="{{ $record->worker1 }}">
+        <option value="" disabled>Workers</option>
         @foreach ($workers as $worker)
             <option value="{{ $worker->BIO }}"
-                @if ( $worker->BIO == $record->worker)
+                @if ( $worker->BIO == $record->worker1)
+                    selected
+                @endif
+            >
+                {{ $worker->BIO }}
+            </option>
+        @endforeach
+    </select>
+
+    <select class="form-select form-select-sm" name="worker2" value="{{ $record->worker2 }}">
+        <option value="" disabled>Workers</option>
+        <option>Нет</option>
+        @foreach ($workers as $worker)
+            <option value="{{ $worker->BIO }}"
+                @if ( $worker->BIO == $record->worker2)
                     selected
                 @endif
             >

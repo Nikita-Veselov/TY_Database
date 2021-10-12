@@ -19,6 +19,8 @@ class Record extends Model
         "device",
         "UTY",
         "UTC",
-        "worker",
+        "worker1",
+        "worker2",
+        "conclusion",
     ];
 }

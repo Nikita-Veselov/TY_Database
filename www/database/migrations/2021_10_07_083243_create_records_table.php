@@ -19,11 +19,13 @@ class CreateRecordsTable extends Migration
             $table->string('type');
             $table->string('date');
             $table->string('controlledPoint');
-            $table->timestamps();
             $table->string('device');
             $table->string('UTY');
             $table->string('UTC');
-            $table->string('worker');
+            $table->string('worker1');
+            $table->string('worker2')->nullable();
+            $table->string('conclusion');
+            $table->timestamps();
         });
     }
 

@@ -29,7 +29,9 @@ class RecordFactory extends Factory
             'device' => $this->faker->word(),
             'UTY' => $this->faker->word(),
             'UTC' => $this->faker->word(),
-            'worker' => $this->faker->name(),
+            'conclusion' => $this->faker->word(),
+            'worker1' => $this->faker->name(),
+            'worker2' => $this->faker->name(),
         ];
     }
 }

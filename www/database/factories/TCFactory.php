@@ -28,8 +28,7 @@ class TCFactory extends Factory
             'invert' => $this->faker->boolean(),
             'oper' => $this->faker->word(),
             'DP' => $this->faker->word(),
-            'CP' => $this->faker->word(),
-            'cp-code' => '1',
+            'cp-code' => $this->faker->word(),
         ];
     }
 }

@@ -46,6 +46,7 @@ class RecordController extends Controller
      */
     public function store(CreateRecordRequest $request)
     {
+        // dd($request->worker1);
         Record::create([
             "number" => $request->number,
             "type" => $request->type,
@@ -54,7 +55,9 @@ class RecordController extends Controller
             "device" => $request->device,
             "UTY" => $request->UTY,
             "UTC" => $request->UTC,
-            "worker" => $request->worker,
+            "conclusion" => $request->conclusion,
+            "worker1" => $request->worker1,
+            "worker2" => $request->worker2,
         ]);
         return $this->index()->with('success');
     }
@@ -69,8 +72,8 @@ class RecordController extends Controller
     {
         return view('records.show', [
             'record' => $record,
-            'workers' => Workers::all(),
-            'devices' => Devices::all(),
+            'worker1' => Workers::where('BIO', $record->worker1)->first(),
+            'worker2' => Workers::where('BIO', $record->worker2)->first(),
             'device' => Devices::where('name', $record->device)->first(),
             'controlledPoints' => ControlledPoint::all(),
             'TC' => TC::all(),
@@ -103,6 +106,7 @@ class RecordController extends Controller
      */
     public function update(CreateRecordRequest $request, Record $record)
     {
+
         $record = Record::find($record->id);
         $record->number = $request->number;
         $record->type = $request->type;
@@ -111,7 +115,9 @@ class RecordController extends Controller
         $record->device = $request->device;
         $record->UTY = $request->UTY;
         $record->UTC = $request->UTC;
-        $record->worker = $request->worker;
+        $record->worker1 = $request->worker1;
+        $record->worker2 = $request->worker2;
+        $record->conclusion = $request->conclusion;
         $record->save();
         return $this->show($record)->with('success-added');
     }

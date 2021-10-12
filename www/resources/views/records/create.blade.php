@@ -17,12 +17,12 @@
         </div>
     </div>
 
-    <div class="row mb-3">
-        <label for="Тип протокола" class="col-sm-2 col-form-label">Тип протокола</label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control" id="Тип протокола" name="type" value="{{ old('type') }}">
-        </div>
-    </div>
+    <select class="form-select form-select-sm" id="Тип протокола" name="type" value="{{ old('type') }}">
+        <option value="" selected disabled>Тип протокола</option>
+        <option value="Опробование">Опробование</option>
+        <option value="Профконтроль">Профконтроль</option>
+        <option value="Профвосстановление">Профвосстановление</option>
+    </select>
 
     <div class="row mb-3">
       <label for="Дата" class="col-sm-2 col-form-label">Дата</label>
@@ -59,12 +59,27 @@
         </div>
     </div>
 
-    <select class="form-select form-select-sm" name="worker" value="{{ old('worker') }}">
-        <option value="" selected disabled>Workers</option>
+    <select class="form-select form-select-sm" name="worker1" value="{{ old('worker1') }}">
+        <option selected disabled>Worker 1</option>
         @foreach ($workers as $worker)
             <option value="{{ $worker->BIO }}">{{ $worker->BIO }}</option>
         @endforeach
     </select>
+
+    <select class="form-select form-select-sm" name="worker2" value="{{ old('worker2') }}">
+        <option selected disabled>Worker 2</option>
+        <option>Нет</option>
+        @foreach ($workers as $worker)
+            <option value="{{ $worker->BIO }}">{{ $worker->BIO }}</option>
+        @endforeach
+    </select>
+
+    <div class="row mb-3">
+        <label for="Дата" class="col-sm-2 col-form-label">Заключение</label>
+        <div class="col-sm-10 ">
+            <textarea type="text" class="form-control" id="Заключение" name="conclusion" value="{{ old('worker2') }}">По результатам технического обслуживания устройства ТУ и средства постоянного технического диагностирования, признано годным к дальнейшей эксплуатации и может быть введено в работу.</textarea>
+        </div>
+      </div>
 
     <button type="submit" class="btn btn-primary">Создать</button>
   </form>

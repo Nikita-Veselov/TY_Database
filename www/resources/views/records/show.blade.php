@@ -4,7 +4,9 @@
 
 
 <div class="container">
-    <div class="title col text-center">Протокол технического обсложивания стойки телемеханики КП-М (ПС) в объеме
+        {{-- Title --}}
+    <div class="col text-center">
+        Протокол технического обсложивания стойки телемеханики КП-М (ПС) в объеме
         @switch($record->type)
         @case("Профвосстановление")
             профвосстановления
@@ -16,13 +18,16 @@
             опробования
         @endswitch
     </div>
+        {{-- Station --}}
     <div class="col text-center">
         ст. {{ $record->controlledPoint }}
     </div>
+        {{-- Record number and date --}}
     <div class="col text-center">№{{ $record->number }}</div>
     <div class="col text-center">
         {{ $record->date }}
     </div>
+        {{-- Modem data --}}
     <div class="col-6">
         <div class="row text-start">
             <div class="col-12">для Модема-УКП</div>
@@ -44,13 +49,14 @@
             <div class="col-12">Уровень сигнала при нагрузке 600 Ом установлен - 13 дБ</div>
         </div>
     </div>
+        {{-- Evalueted data --}}
     <table class="table">
         <thead>
           <tr>
-            <th scope="col-4">Проверяемый показатель (характеристика)</th>
-            <th scope="col-2">Еденица измерения</th>
-            <th scope="col-2">Значение</th>
-            <th scope="col-4">Наименование средства измерения или оборудования</th>
+            <th scope="col">Проверяемый показатель (характеристика)</th>
+            <th scope="col">Еденица измерения</th>
+            <th scope="col">Значение</th>
+            <th scope="col">Наименование средства измерения или оборудования</th>
           </tr>
         </thead>
         <tbody>
@@ -131,7 +137,7 @@
           </tr>
           <tr>
             <td>
-                <div class="col">6. апряжение питания шкафа КП-М (ПС). Норма</div>
+                <div class="col">6. Напряжение питания шкафа КП-М (ПС). Норма</div>
                 <div class="col">Норма: 180-250 В</div>
             </td>
             <td>В</td>
@@ -144,29 +150,80 @@
           </tr>
         </tbody>
     </table>
-
+        {{-- controller file --}}
     <div class="col text-start">
         <div class="col">Для контроллера МКД</div>
         <div class="col">Имя файла прошивки - "ст.{{ $record->controlledPoint }}.mkd"</div>
     </div>
-    <div class="col">
-        <div class="row">
-            @foreach ($TC as $sig)
-                <div class="col">{{ $sig->name }}</div>
+        {{-- TC table --}}
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Название сигнала</th>
+            <th scope="col">Клемма КП-М (ПС)</th>
+            <th scope="col">№ ТС</th>
+            <th scope="col">Инверсия в настройке</th>
+            <th scope="col">Оперативное название сигнала</th>
+            <th scope="col">Соответствие сигнала с ДП</th>
+          </tr>
+        </thead>
+        <tbody>
+            @foreach ($TC as $tc)
+            <tr>
+                <td>{{ $tc->name }}</td>
+                <td>{{ $tc->klemm }}</td>
+                <td>{{ $tc->number }}</td>
+                <td>{{ $tc->invert }}</td>
+                <td>{{ $tc->oper }}</td>
+                <td>{{ $tc->DP }}</td>
+            </tr>
             @endforeach
+        </tbody>
+    </table>
+        {{-- TY table --}}
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Название сигнала</th>
+            <th scope="col">Клемма КП-М (ПС)</th>
+            <th scope="col">№ ТУ</th>
+            <th scope="col">Оперативное название сигнала</th>
+            <th scope="col">Соответствие сигнала с ДП</th>
+          </tr>
+        </thead>
+        <tbody>
+            @foreach ($TY as $ty)
+            <tr>
+                <td>{{ $ty->name }}</td>
+                <td>{{ $ty->klemm }}</td>
+                <td>{{ $ty->number }}</td>
+                <td>{{ $ty->oper }}</td>
+                <td>{{ $ty->DP }}</td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
+        {{-- Conclusion --}}
+    <div class="row">
+        <div class="col">Заключение:
+            {{ $record->conclusion }}
         </div>
     </div>
-    <div class="col">
-        <div class="row">
-            @foreach ($TY as $sig)
-                <div class="col">{{ $sig->name }}</div>
-            @endforeach
-        </div>
-    </div>
+        {{-- Workers --}}
+    <div class="row">
+        <div class="col-12">Проверку проводил:</div>
+        <div class="col-12"> {{ $worker1->position }} {{ $worker1->BIO }}</div>
+        @if ($worker2 != null)
+            <div class="col-12"> {{ $worker2->position }} {{ $worker2->BIO }}</div>
+        @endif
 
-    <div class="col text-center">{{ $record->worker }}</div>
+
+    </div>
+    <div class="row">
+        <div class="col-12">Протокол проверил:</div>
+        <div class="col-12"></div>
+        <div class="col-12">Начальник РРУ Акудович Е.В.</div>
+    </div>
 </div>
-
-
 
 @endsection
