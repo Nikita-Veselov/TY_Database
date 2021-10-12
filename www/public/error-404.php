@@ -6,7 +6,7 @@
 <h1>Error 404</h1>
 
 <p>
-    Cick the non-existing url below. If ["web_server"]["404_handler"]
+    Click the non-existing url below. If ["web_server"]["404_handler"]
     is set in settings.json file then clicking the link below
     will forward you to "/pretty-urls.php/foo.html". You can then
     access the "/foo.html" url using $_SERVER["PATH_INFO"] or

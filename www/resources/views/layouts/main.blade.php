@@ -7,8 +7,8 @@
     <title>Database</title>
 
         {{-- Mix CSS and JS --}}
-    <link href="assets/css/app.css" rel="stylesheet" type="text/css">
-    <script src="assets/js/app.js" type="text/javascript"></script>
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css">
+    <script src="{{ asset('js/app.js') }}" type="text/javascript"></script>
 
 </head>
 <body>
