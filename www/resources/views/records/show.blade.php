@@ -149,6 +149,20 @@
         <div class="col">Для контроллера МКД</div>
         <div class="col">Имя файла прошивки - "ст.{{ $record->controlledPoint }}.mkd"</div>
     </div>
+    <div class="col">
+        <div class="row">
+            @foreach ($TC as $sig)
+                <div class="col">{{ $sig->name }}</div>
+            @endforeach
+        </div>
+    </div>
+    <div class="col">
+        <div class="row">
+            @foreach ($TY as $sig)
+                <div class="col">{{ $sig->name }}</div>
+            @endforeach
+        </div>
+    </div>
 
     <div class="col text-center">{{ $record->worker }}</div>
 </div>

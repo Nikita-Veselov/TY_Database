@@ -6,6 +6,8 @@ use App\Http\Requests\CreateRecordRequest;
 use App\Models\ControlledPoint;
 use App\Models\Devices;
 use App\Models\Record;
+use App\Models\TC;
+use App\Models\TY;
 use App\Models\Workers;
 use Illuminate\Http\Request;
 
@@ -70,7 +72,9 @@ class RecordController extends Controller
             'workers' => Workers::all(),
             'devices' => Devices::all(),
             'device' => Devices::where('name', $record->device)->first(),
-            'controlledPoints' => ControlledPoint::all()
+            'controlledPoints' => ControlledPoint::all(),
+            'TC' => TC::all(),
+            'TY' => TY::all(),
         ]);
     }
 

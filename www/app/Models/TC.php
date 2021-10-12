@@ -11,6 +11,8 @@ class TC extends Model
 
     protected $table = 'TC';
 
+    public $timestamps = false;
+    
     public function controlledPoint()
     {
         return $this->belongsTo(ControlledPoint::class, 'cp-code', 'code');

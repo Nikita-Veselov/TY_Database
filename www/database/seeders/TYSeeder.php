@@ -2,9 +2,11 @@
 
 namespace Database\Seeders;
 
+use App\Models\ControlledPoint;
+use App\Models\TY;
 use Illuminate\Database\Seeder;
 
-class TYControllerSeeder extends Seeder
+class TYSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,6 +15,11 @@ class TYControllerSeeder extends Seeder
      */
     public function run()
     {
-        //
+        TY::factory()
+            ->count(10)
+            ->for(ControlledPoint::factory()->state([
+                'code' => 'test',
+            ]))
+            ->create();
     }
 }

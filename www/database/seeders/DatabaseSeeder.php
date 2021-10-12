@@ -17,7 +17,9 @@ class DatabaseSeeder extends Seeder
             ControlledPointSeeder::class,
             DevicesSeeder::class,
             RecordSeeder::class,
-            WorkersSeeder::class
+            WorkersSeeder::class,
+            TCSeeder::class,
+            TYSeeder::class
         ]);
     }
 }
