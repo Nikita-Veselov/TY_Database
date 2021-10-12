@@ -22,6 +22,7 @@ class CreateTCTable extends Migration
             $table->string('oper');
             $table->string('DP');
             $table->string('CP');
+            $table->string('cp-code');
         });
     }
 

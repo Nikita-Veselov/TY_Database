@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateControlledPointRequest;
 use App\Models\ControlledPoint;
+use App\Models\TC;
+use App\Models\TY;
 use Illuminate\Http\Request;
 
 class ControlledPointController extends Controller

@@ -10,4 +10,9 @@ class TY extends Model
     use HasFactory;
 
     protected $table = 'TY';
+
+    public function controlledPoint()
+    {
+        return $this->belongsTo(ControlledPoint::class, 'cp-code', 'code');
+    }
 }

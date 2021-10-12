@@ -10,4 +10,9 @@ class TC extends Model
     use HasFactory;
 
     protected $table = 'TC';
+
+    public function controlledPoint()
+    {
+        return $this->belongsTo(ControlledPoint::class, 'cp-code', 'code');
+    }
 }

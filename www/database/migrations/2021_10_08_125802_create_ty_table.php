@@ -20,7 +20,7 @@ class CreateTyTable extends Migration
             $table->string('number');
             $table->string('oper');
             $table->string('DP');
-            $table->string('CP');
+            $table->string('cp-code');
         });
     }
 

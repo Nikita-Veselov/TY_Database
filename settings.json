@@ -12,7 +12,7 @@
     "main_window": {
         "title": "PHP Desktop Chrome",
         "icon": "",
-        "default_size": [800, 600],
+        "default_size": [1024, 800],
         "minimum_size": [640, 480],
         "maximum_size": [0, 0],
         "disable_maximize_button": false,
@@ -30,7 +30,7 @@
         "default_size": [800, 600]
     },
     "web_server": {
-        "listen_on": ["127.0.0.1", 0],
+        "listen_on": ["127.0.0.1", 54321],
         "www_directory": "www/public/index.php",
         "index_files": ["index.php"],
         "cgi_interpreter": "php/php-cgi.exe",
