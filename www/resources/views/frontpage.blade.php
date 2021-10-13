@@ -2,11 +2,6 @@
 
 @section('content')
 
-@foreach ($errors->all() as $message)
-    <div class="alert alert-danger" role="alert">
-        {{ $message }}
-     </div>
-@endforeach
     <div class="row justify-content-center">
         <div class="col-6 my-2 btn-group-vertical px-0">
             <button class="btn btn-outline-secondary disabled" role="button" aria-disabled="true">Протоколы</button>

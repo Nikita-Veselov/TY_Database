@@ -12,9 +12,19 @@ class TC extends Model
     protected $table = 'TC';
 
     public $timestamps = false;
-    
+
     public function controlledPoint()
     {
         return $this->belongsTo(ControlledPoint::class, 'cp-code', 'code');
     }
+
+    protected $fillable = [
+        "name",
+        "klemm",
+        "number",
+        "invert",
+        "oper",
+        "DP",
+        "cp-code"
+    ];
 }

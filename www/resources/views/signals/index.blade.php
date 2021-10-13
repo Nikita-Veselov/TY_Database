@@ -2,21 +2,21 @@
 
 @section('content')
 
-
     @if ($TC->isEmpty())
+
         <div class="row text-center">
             <div class="col fs-3">{{ $CP->name }}</div>
             <div class="col-12">Сигналы не добавлены</div>
             <div class="col-12 text-center">
-                <a type="button" class="btn btn-primary col-6" href="{{ route('signals.create', ['signal' => $code]) }}" role="button">Создать</a>
+                <a type="button" class="btn btn-primary col-6" href="{{ route('signals.create', ['CP' => $CP->code]) }}" role="button">Создать</a>
             </div>
-
         </div>
 
     @else
+
         <div class="col-12 text-center pb-2">
             <div class="col fs-3">{{ $CP->name }}</div>
-            <a type="button" class="btn btn-primary col-6" href="{{ route('signals.edit', ['signal' => $code]) }}" role="button">Изменить</a>
+            <a type="button" class="btn btn-primary col-6" href="{{ route('signals.edit', ['signal'=> $CP->code, 'CP' => $CP->code]) }}" role="button">Изменить</a>
         </div>
 
         <table class="table table-bordered table-sm mb-5">
@@ -66,8 +66,6 @@
                 @endforeach
             </tbody>
         </table>
+
     @endif
-
-
-
 @endsection

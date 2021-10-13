@@ -17,4 +17,13 @@ class TY extends Model
     {
         return $this->belongsTo(ControlledPoint::class, 'cp-code', 'code');
     }
+
+    protected $fillable = [
+        "name",
+        "klemm",
+        "number",
+        "oper",
+        "DP",
+        "cp-code"
+    ];
 }
