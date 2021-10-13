@@ -2,6 +2,11 @@
 
 @section('content')
 
+@foreach ($errors->all() as $message)
+    <div class="alert alert-danger" role="alert">
+        {{ $message }}
+     </div>
+@endforeach
     <div class="row justify-content-center">
         <div class="col-6 my-2 btn-group-vertical px-0">
             <button class="btn btn-outline-secondary disabled" role="button" aria-disabled="true">Протоколы</button>
@@ -39,6 +44,23 @@
             </div>
         </div>
         <div class="w-100"></div>
+
+        <form class="text-center" method="GET" action="{{ url('signals') }}">
+            <div class="col-6 my-2 btn-group-vertical px-0">
+                <button class="btn btn-outline-secondary disabled" role="button" aria-disabled="true">Сигналы</button>
+                <select class="form-select" aria-label="КП" name="CP" value="{{ old('CP') }}">
+                    <option value="" selected disabled>КП</option>
+                    @foreach ($CP as $cp)
+                        <option value="{{ $cp->code }}">{{ $cp->type }} {{ $cp->name }}</option>
+                    @endforeach
+                </select>
+                <div class="btn-group" role="group" aria-label="signals">
+                    <button class="btn btn-primary" role="button">Просмотреть</button>
+                </div>
+            </div>
+        </form>
+        <div class="w-100"></div>
+
     </div>
 
 @endsection

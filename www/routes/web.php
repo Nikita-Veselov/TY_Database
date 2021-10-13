@@ -3,9 +3,11 @@
 use App\Http\Controllers\ControlledPointController;
 use App\Http\Controllers\DevicesController;
 use App\Http\Controllers\RecordController;
+use App\Http\Controllers\SignalController;
 use App\Http\Controllers\TCController;
 use App\Http\Controllers\TYController;
 use App\Http\Controllers\WorkersController;
+use App\Models\ControlledPoint;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,7 +22,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('frontpage');
+    return view('frontpage', ['CP' => ControlledPoint::all()]);
 });
 
 Route::resource('/records', RecordController::class);
@@ -31,6 +33,5 @@ Route::resource('/devices', DevicesController::class);
 
 Route::resource('/controlledPoints', ControlledPointController::class);
 
-Route::resource('/ty', TYController::class);
+Route::resource('/signals', SignalController::class);
 
-Route::resource('/tc', TCController::class);

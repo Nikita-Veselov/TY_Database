@@ -3,11 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateTCRequest;
+use App\Models\ControlledPoint;
 use App\Models\TC;
+use App\Models\TY;
 use Illuminate\Http\Request;
 
 class TCController extends Controller
 {
+
+
     /**
      * Show the form for creating a new resource.
      *
