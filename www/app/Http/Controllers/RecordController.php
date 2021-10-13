@@ -46,7 +46,6 @@ class RecordController extends Controller
      */
     public function store(CreateRecordRequest $request)
     {
-        // dd($request->worker1);
         Record::create([
             "number" => $request->number,
             "type" => $request->type,
@@ -55,6 +54,7 @@ class RecordController extends Controller
             "device" => $request->device,
             "UTY" => $request->UTY,
             "UTC" => $request->UTC,
+            "UTP" => $request->UTP,
             "conclusion" => $request->conclusion,
             "worker1" => $request->worker1,
             "worker2" => $request->worker2,
@@ -115,6 +115,7 @@ class RecordController extends Controller
         $record->device = $request->device;
         $record->UTY = $request->UTY;
         $record->UTC = $request->UTC;
+        $record->UTP = $request->UTP;
         $record->worker1 = $request->worker1;
         $record->worker2 = $request->worker2;
         $record->conclusion = $request->conclusion;

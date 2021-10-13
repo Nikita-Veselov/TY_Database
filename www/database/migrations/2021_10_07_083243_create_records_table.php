@@ -22,6 +22,7 @@ class CreateRecordsTable extends Migration
             $table->string('device');
             $table->string('UTY');
             $table->string('UTC');
+            $table->string('UTP');
             $table->string('worker1');
             $table->string('worker2')->nullable();
             $table->string('conclusion');

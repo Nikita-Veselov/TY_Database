@@ -19,6 +19,7 @@ class Record extends Model
         "device",
         "UTY",
         "UTC",
+        "UTP",
         "worker1",
         "worker2",
         "conclusion",

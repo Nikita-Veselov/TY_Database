@@ -91,6 +91,13 @@
     </div>
 
     <div class="row mb-3">
+        <label for="Напряжение питания" class="col-sm-2 col-form-label">Напряжение питания</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="Напряжение питания" name="UTP" value="{{ $record->UTP }}">
+        </div>
+    </div>
+
+    <div class="row mb-3">
         <label for="Дата" class="col-sm-2 col-form-label">Заключение</label>
         <div class="col-sm-10">
             <input type="text" class="form-control" id="Заключение" name="conclusion" value="{{ $record->conclusion }}">

@@ -59,6 +59,13 @@
         </div>
     </div>
 
+    <div class="row mb-3">
+        <label for="Напряжение питания" class="col-sm-2 col-form-label">Напряжение питания</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="Напряжение питания" name="UTP" value="{{ old('UTP') }}">
+        </div>
+    </div>
+
     <select class="form-select form-select-sm" name="worker1" value="{{ old('worker1') }}">
         <option selected disabled>Worker 1</option>
         @foreach ($workers as $worker)
