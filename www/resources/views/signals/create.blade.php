@@ -50,6 +50,7 @@
 
         $(document).on('click', '.removeTC', function(){
             $(this).parents('tr').remove();
+            $('#TCcount').val(--i);
         });
     </script>
 
@@ -65,7 +66,6 @@
         </tr>
         </thead>
         <tbody>
-
             <button type="button" name="addTY" id="addTY" class="btn btn-success">Add More</button>
             <tr class="text-center">
                 <td></td>
@@ -88,6 +88,7 @@
 
         $(document).on('click', '.removeTY', function(){
             $(this).parents('tr').remove();
+            $('#TYcount').val(--j);
         });
     </script>
 

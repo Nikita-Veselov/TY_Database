@@ -54,7 +54,6 @@ class SignalController extends Controller
 
     public function store(CreateSignalRequest $request)
     {
-
         do {
             $countTC = 1;
             $name = Str::of('name')->append($countTC)->append('TC');
@@ -117,51 +116,86 @@ class SignalController extends Controller
      */
     public function update(CreateSignalRequest $request)
     {
+
+        // dd($request);
         $TC = TC::where('cp-code', $request->CP)->get();
 
         foreach ($TC as $tc) {
             $name = Str::of('name')->append($tc->id)->append('TC');
-            $tc->name = $request->$name;
-
             $klemm = Str::of('klemm')->append($tc->id)->append('TC');
-            $tc->klemm = $request->$klemm;
-
             $number = Str::of('number')->append($tc->id)->append('TC');
-            $tc->number = $request->$number;
-
             $invert = Str::of('invert')->append($tc->id)->append('TC');
-            $tc->invert = $request->$invert;
-
             $oper = Str::of('oper')->append($tc->id)->append('TC');
-            $tc->oper = $request->$oper;
-
             $DP = Str::of('DP')->append($tc->id)->append('TC');
+
+            $tc->name = $request->$name;
+            $tc->klemm = $request->$klemm;
+            $tc->invert = $request->$invert;
+            $tc->number = $request->$number;
+            $tc->oper = $request->$oper;
             $tc->DP = $request->$DP;
 
             $tc->save();
+            $countTC = $tc->id;
+        }
 
+        if ($request->TCcount != $countTC) {
+            do {
+                $countTC++;
+                $name = Str::of('name')->append($countTC)->append('TC');
+                $klemm = Str::of('klemm')->append($countTC)->append('TC');
+                $number = Str::of('number')->append($countTC)->append('TC');
+                $invert = Str::of('invert')->append($countTC)->append('TC');
+                $oper = Str::of('oper')->append($countTC)->append('TC');
+                $DP = Str::of('DP')->append($countTC)->append('TC');
+                TC::create([
+                    "name" => $request->$name,
+                    "klemm" => $request->$klemm,
+                    "number" => $request->$number,
+                    "invert" => $request->$invert,
+                    "oper" => $request->$oper,
+                    "DP" => $request->$DP,
+                    "cp-code" => $request->CP,
+                ]);
+            } while ($countTC++ < $request->TCcount);
         }
 
         $TY = TY::where('cp-code', $request->CP)->get();
 
         foreach ($TY as $ty) {
             $name = Str::of('name')->append($ty->id)->append('TY');
-            $ty->name = $request->$name;
-
             $klemm = Str::of('klemm')->append($ty->id)->append('TY');
-            $ty->klemm = $request->$klemm;
-
             $number = Str::of('number')->append($ty->id)->append('TY');
-            $ty->number = $request->$number;
-
             $oper = Str::of('oper')->append($ty->id)->append('TY');
-            $ty->oper = $request->$oper;
-
             $DP = Str::of('DP')->append($ty->id)->append('TY');
+
+            $ty->name = $request->$name;
+            $ty->klemm = $request->$klemm;
+            $ty->number = $request->$number;
+            $ty->oper = $request->$oper;
             $ty->DP = $request->$DP;
 
             $ty->save();
+            $countTY = $ty->id;
+        }
 
+        if ($request->TYcount != $countTY) {
+            do {
+                $countTY++;
+                $name = Str::of('name')->append($countTY)->append('TY');
+                $klemm = Str::of('klemm')->append($countTY)->append('TY');
+                $number = Str::of('number')->append($countTY)->append('TY');
+                $oper = Str::of('oper')->append($countTY)->append('TY');
+                $DP = Str::of('DP')->append($countTY)->append('TY');
+                TY::create([
+                    "name" => $request->$name,
+                    "klemm" => $request->$klemm,
+                    "number" => $request->$number,
+                    "oper" => $request->$oper,
+                    "DP" => $request->$DP,
+                    "cp-code" => $request->CP,
+                ]);
+            } while ($countTY++ < $request->TYcount);
         }
 
         return $this->index($request)->with('success');
