@@ -2,14 +2,44 @@
 
 @section('content')
 
+<div class="row justify-content-start">
+    <div class="col-8">
+        <form class="form-control" action="{{ route('searchCp') }}">
+            <div class="row">
+                <div class="col">
+                    <label for="key" class="form-label">Столбец</label>
+                </div>
+                <div class="col">
+                    <label for="value" class="form-label">Значение</label>
+                </div>
+                <div class="col-3"></div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <select class="form-select" name="key">
+                        <option value="code">Код</option>
+                        <option value="name">Название</option>
+                        <option value="type">Тип</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <input class="form-control" type="text" name="value">
+                </div>
+                <div class="col-3 text-center">
+                    <button class="btn btn-primary" type="submit">Найти</button>
+                    <a role="button" type="button" href="{{ route('controlledPoints.index') }}" class="btn btn-secondary">Сброс</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 <table class="table table-striped">
     <thead>
       <tr>
-        <th scope="col">number</th>
-        <th scope="col">code</th>
-        <th scope="col">name</th>
-        <th scope="col">type</th>
-        <th scope="col">Action</th>
+        <th scope="col">Код</th>
+        <th scope="col">Название</th>
+        <th scope="col">Тип</th>
+        <th scope="col" style="width: 15%">Действия</th>
       </tr>
     </thead>
 
@@ -17,20 +47,19 @@
 
         @foreach ($controlledPoints as $controlledPoint)
             <tr>
-                <th scope="row">{{ $loop->index + 1 }}</th>
                 <td>{{ $controlledPoint->code }}</td>
                 <td>{{ $controlledPoint->name }}</td>
                 <td>{{ $controlledPoint->type }}</td>
-                <td>
+                <td class="w-15">
                     <div class="row btn-group" role="group" aria-label="Basic example">
                         <div class="col-6">
-                            <a type="button" class="btn btn-secondary" href="{{ URL::to('controlledPoints/' . $controlledPoint->id . '/edit') }}" role="button">Edit</a>
+                            <a type="button" class="btn btn-secondary btn-sm" href="{{ URL::to('controlledPoints/' . $controlledPoint->id . '/edit') }}" role="button">Изменит</a>
                         </div>
                         <div class="col-6">
                             <form class="delete" action="{{ route('controlledPoints.destroy', $controlledPoint->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger">Del</button>
+                                <button type="submit" class="btn btn-danger btn-sm">Удалить</button>
                             </form>
                         </div>
                     </div>

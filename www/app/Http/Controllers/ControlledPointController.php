@@ -17,7 +17,9 @@ class ControlledPointController extends Controller
      */
     public function index()
     {
-        return view('controlledPoints.index', ['controlledPoints' => ControlledPoint::all()]);
+        return view('controlledPoints.index', [
+            'controlledPoints' => ControlledPoint::all()->sortBy('name')
+        ]);
     }
 
     /**
@@ -96,5 +98,12 @@ class ControlledPointController extends Controller
     {
         ControlledPoint::destroy($controlledPoint->id);
         return $this->index()->with('flash_message', 'controlledPoint deleted!');
+    }
+
+    public function search(Request $request)
+    {
+        return view('controlledPoints.index', [
+            'controlledPoints' => ControlledPoint::where($request->key, $request->value)->get()->sortBy('id')
+        ]);
     }
 }

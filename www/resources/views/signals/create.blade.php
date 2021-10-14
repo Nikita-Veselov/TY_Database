@@ -15,7 +15,7 @@
     <table class="table table-bordered table-sm mb-5" id="TCtable">
         <thead class="text-center align-middle">
         <tr>
-            <th>Del</th>
+            <th>Удал.</th>
             <th scope="col">Название сигнала</th>
             <th scope="col">Клемма КП-М (ПС)</th>
             <th scope="col">№ ТС</th>
@@ -25,7 +25,7 @@
         </tr>
         </thead>
         <tbody>
-            <button type="button" name="addTC" id="addTC" class="btn btn-success">Add More</button>
+            <button type="button" name="addTC" id="addTC" class="btn btn-success">Добавить строку</button>
             <tr class="text-center">
                 <td></td>
                 <td><input type="text" name="{{ Str::of('name')->append(1)->append('TC') }}"></td>
@@ -55,7 +55,7 @@
     <table class="table table-bordered table-sm table-fixed" id="TYtable">
         <thead>
         <tr class="text-center align-middle">
-            <th>Del</th>
+            <th>Удал.</th>
             <th scope="col">Название сигнала</th>
             <th scope="col">Клемма КП-М (ПС)</th>
             <th scope="col">№ ТУ</th>
@@ -64,7 +64,7 @@
         </tr>
         </thead>
         <tbody>
-            <button type="button" name="addTY" id="addTY" class="btn btn-success">Add More</button>
+            <button type="button" name="addTY" id="addTY" class="btn btn-success">Добавить строку</button>
             <tr class="text-center">
                 <td></td>
                 <td><input type="text" name="{{ Str::of('name')->append(1)->append('TY') }}"></td>
@@ -86,7 +86,6 @@
 
         $(document).on('click', '.removeTY', function(){
             $(this).parents('tr').remove();
-            $('#TYcount').val(--j);
         });
     </script>
 

@@ -1,7 +1,18 @@
 <div>
     <div class="header row text-start">
         <div class="col-6 pt-4">
-            <a class="col-4 btn btn-success" href="javascript:history.back()" role="button">Назад</a>
+            @if (!Request::is('/'))
+                    <a class="col-2 btn btn-warning" href="/" role="button">Домой</a>
+                @if (Request::is('records'))
+                    <a class="col-2 btn btn-success" href="/" role="button">Назад</a>
+                    @else
+                        @if (Request::is('records/*'))
+                            <a class="col-2 btn btn-success" href="{{ route('records.index') }}" role="button">Назад</a>
+                        @else
+                        <a class="col-2 btn btn-success" href="javascript:history.back()" role="button">Назад</a>
+                    @endif
+                @endif
+            @endif
         </div>
         <div class="col-6 text-end">
             <div class="fs-3">Телемеханика</div>

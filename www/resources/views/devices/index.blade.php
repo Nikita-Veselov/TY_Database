@@ -5,19 +5,17 @@
 <table class="table table-striped">
     <thead>
       <tr>
-        <th scope="col">number</th>
-        <th scope="col">code</th>
-        <th scope="col">name</th>
-        <th scope="col">class</th>
-        <th scope="col">date</th>
-        <th scope="col">action</th>
+        <th scope="col">Код</th>
+        <th scope="col">Название</th>
+        <th scope="col">Класс точности</th>
+        <th scope="col">Дата поверки</th>
+        <th scope="col" style="width: 15%">Действия</th>
       </tr>
     </thead>
 
     <tbody>
         @foreach ($devices as $device)
             <tr>
-                <th scope="row">{{ $loop->index + 1 }}</th>
                 <td>{{ $device->code }}</td>
                 <td>{{ $device->name }}</td>
                 <td>{{ $device->class }}</td>
@@ -25,13 +23,13 @@
                 <td>
                     <div class="row btn-group" role="group" aria-label="Basic example">
                         <div class="col-6">
-                            <a type="button" class="btn btn-secondary" href="{{ URL::to('devices/' . $device->id . '/edit') }}" role="button">Edit</a>
+                            <a type="button" class="btn btn-secondary btn-sm" href="{{ URL::to('devices/' . $device->id . '/edit') }}" role="button">Изменить</a>
                         </div>
                         <div class="col-6">
                             <form class="delete" action="{{ route('devices.destroy', $device->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger">Del</button>
+                                <button type="submit" class="btn btn-danger btn-sm">Удалить</button>
                             </form>
                         </div>
                     </div>
@@ -40,5 +38,6 @@
         @endforeach
     </tbody>
 </table>
+
 
 @endsection

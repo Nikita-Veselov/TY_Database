@@ -26,13 +26,14 @@ Route::get('/', function () {
 });
 
 Route::resource('/records', RecordController::class);
-Route::get('/search', [RecordController::class, 'search'])->name('search');
+Route::get('/searchRec', [RecordController::class, 'search'])->name('searchRec');
+
+Route::resource('/controlledPoints', ControlledPointController::class);
+Route::get('/searchCp', [ControlledPointController::class, 'search'])->name('searchCp');
 
 Route::resource('/workers', WorkersController::class);
 
 Route::resource('/devices', DevicesController::class);
-
-Route::resource('/controlledPoints', ControlledPointController::class);
 
 Route::resource('/signals', SignalController::class);
 

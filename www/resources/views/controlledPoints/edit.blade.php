@@ -9,15 +9,33 @@
         <div class="row mb-3">
             <label for="Код" class="col-sm-2 col-form-label">Код</label>
             <div class="col-sm-10">
-            <input type="text" class="form-control" id="Код" name="code" value="{{ $controlledPoint->code }}">
+            <input type="text" class="form-control" name="code" value="{{ $controlledPoint->code }}">
             </div>
         </div>
 
         <div class="row mb-3">
-            <label for="Тип" class="col-sm-2 col-form-label">Тип</label>
-            <div class="col-sm-10">
-            <input type="text" class="form-control" id="Тип" name="type" value="{{ $controlledPoint->type }}">
-            </div>
+            <select class="form-select" aria-label="Должность" name="type" value="{{ $controlledPoint->type }}">
+                <option value="{{ $key1 = 'Станция' }}"
+                    @if ($key1 == $controlledPoint->type ) selected @endif
+                    >Станция
+                </option>
+                <option value="{{ $key2 = 'ПС' }}"
+                    @if ($key2 == $controlledPoint->type ) selected @endif
+                    >ПС
+                </option>
+                <option value="{{ $key3 = 'ТП' }}"
+                    @if ($key3 == $controlledPoint->type ) selected @endif
+                    >ТП
+                </option>
+                <option value="{{ $key4 = 'ПГ' }}"
+                    @if ($key4 == $controlledPoint->type ) selected @endif
+                    >ПГ
+                </option>
+                <option value="{{ $key5 = 'ЦРП' }}"
+                    @if ($key5 == $controlledPoint->type ) selected @endif
+                    >ЦРП
+                </option>
+            </select>
         </div>
 
         <div class="row mb-3">
@@ -27,7 +45,7 @@
         </div>
         </div>
 
-        <button type="submit" class="btn btn-primary">Создать</button>
+        <button type="submit" class="btn btn-primary">Изменить</button>
     </form>
 </div>
 @endsection

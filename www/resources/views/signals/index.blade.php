@@ -2,7 +2,7 @@
 
 @section('content')
 
-    @if ($TC->isEmpty())
+    @if ($TC->isEmpty() & $TY->isEmpty())
 
         <div class="row text-center">
             <div class="col fs-3">{{ $CP->name }}</div>

@@ -28,6 +28,9 @@
             $(".delete").on("submit", function(){
                 return confirm("Do you want to delete this item?");
             });
+            $(".alert").delay(4000).slideUp(200, function() {
+                $(this).alert('close');
+            });
         </script>
     </div>
 </body>

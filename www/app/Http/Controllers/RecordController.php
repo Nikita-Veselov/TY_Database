@@ -21,7 +21,7 @@ class RecordController extends Controller
     public function index()
     {
         return view('records.index', [
-            'records' => Record::all()->sortByDesc('date')
+            'records' => Record::simplePaginate(10)
         ]);
     }
 

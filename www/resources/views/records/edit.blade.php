@@ -125,7 +125,7 @@
         @endforeach
     </select>
 
-    <button type="submit" class="btn btn-primary">Создать</button>
+    <button type="submit" class="btn btn-primary">Изменить</button>
   </form>
 
 @endsection

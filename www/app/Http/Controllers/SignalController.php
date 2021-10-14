@@ -6,9 +6,12 @@ use App\Http\Requests\CreateSignalRequest;
 use App\Models\ControlledPoint;
 use App\Models\TC;
 use App\Models\TY;
+use Error;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
+
+use function PHPUnit\Framework\once;
 
 class SignalController extends Controller
 {
@@ -55,8 +58,9 @@ class SignalController extends Controller
 
     public function store(CreateSignalRequest $request)
     {
+        $countTC = 1;
+        $countTY = 1;
         do {
-            $countTC = 1;
             $name = Str::of('name')->append($countTC)->append('TC');
             $klemm = Str::of('klemm')->append($countTC)->append('TC');
             $number = Str::of('number')->append($countTC)->append('TC');
@@ -74,10 +78,9 @@ class SignalController extends Controller
             ]);
             $countTC++;
         }
-        while ($countTC++ < $request->TCcount);
+        while ($countTC <= $request->TCcount);
 
         do {
-            $countTY = 1;
             $name = Str::of('name')->append($countTY)->append('TY');
             $klemm = Str::of('klemm')->append($countTY)->append('TY');
             $number = Str::of('number')->append($countTY)->append('TY');
@@ -93,7 +96,7 @@ class SignalController extends Controller
             ]);
             $countTY++;
         }
-        while ($countTY++ < $request->TYcount);
+        while ($countTY <= $request->TYcount);
 
         return $this->index($request)->with('success');
     }

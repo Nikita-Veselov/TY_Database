@@ -4,7 +4,7 @@
 
 <div class="row justify-content-start">
     <div class="col-8">
-        <form class="form-control" action="{{ route('search') }}">
+        <form class="form-control" action="{{ route('searchRec') }}">
             <div class="row">
                 <div class="col">
                     <label for="key" class="form-label">Столбец</label>
@@ -42,7 +42,7 @@
         <th scope="col">Номер КП</th>
         <th scope="col">Работник 1</th>
         <th scope="col">Работник 2</th>
-        <th scope="col">Действия</th>
+        <th scope="col" style="width: 20%">Действия</th>
       </tr>
     </thead>
     <tbody>
@@ -75,5 +75,7 @@
         @endforeach
     </tbody>
 </table>
-
+<div class="d-flex justify-content-center">
+    {{  $records->render()  }}
+</div>
 @endsection

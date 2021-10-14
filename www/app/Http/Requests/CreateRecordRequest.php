@@ -24,10 +24,17 @@ class CreateRecordRequest extends FormRequest
     public function rules()
     {
         return [
-            // '' => 'required|max:255',
-            // '' => 'required|max:255',
-            // '' => 'required|max:255',
-            // '' => 'required|max:255',
+            "number" => 'required|max:255',
+            "type" => 'required|max:255',
+            "date" => 'required|max:255',
+            "controlledPoint" => 'required|max:255',
+            "device" => 'required|max:255',
+            "UTY" => 'required|max:255',
+            "UTC" => 'required|max:255',
+            "UTP" => 'required|max:255',
+            "conclusion" => 'required|max:255',
+            "worker1" => 'required|max:255',
+            "worker2" => 'required|max:255',
         ];
     }
 }
