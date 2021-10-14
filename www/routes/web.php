@@ -26,6 +26,7 @@ Route::get('/', function () {
 });
 
 Route::resource('/records', RecordController::class);
+Route::get('/search', [RecordController::class, 'search'])->name('search');
 
 Route::resource('/workers', WorkersController::class);
 

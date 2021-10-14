@@ -2,18 +2,47 @@
 
 @section('content')
 
+<div class="row justify-content-start">
+    <div class="col-8">
+        <form class="form-control" action="{{ route('search') }}">
+            <div class="row">
+                <div class="col">
+                    <label for="key" class="form-label">Столбец</label>
+                </div>
+                <div class="col">
+                    <label for="value" class="form-label">Значение</label>
+                </div>
+                <div class="col-3"></div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <select class="form-select" name="key">
+                        <option value="controlledPoint">КП</option>
+                        <option value="type">Тип</option>
+                        <option value="number">Номер</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <input class="form-control" type="text" name="value">
+                </div>
+                <div class="col-3 text-center">
+                    <button class="btn btn-primary" type="submit">Найти</button>
+                    <a role="button" type="button" href="{{ route('records.index') }}" class="btn btn-secondary">Сброс</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 <table class="table table-striped">
     <thead>
       <tr>
-        <th scope="col">number</th>
-        <th scope="col">type</th>
-        <th scope="col">date</th>
-        <th scope="col">CP</th>
-        <th scope="col">device</th>
-        <th scope="col">UTY</th>
-        <th scope="col">UTC</th>
-        <th scope="col">worker</th>
-        <th scope="col">Action</th>
+        <th scope="col">Номер</th>
+        <th scope="col">Тип</th>
+        <th scope="col">Дата</th>
+        <th scope="col">Номер КП</th>
+        <th scope="col">Работник 1</th>
+        <th scope="col">Работник 2</th>
+        <th scope="col">Действия</th>
       </tr>
     </thead>
     <tbody>
@@ -23,23 +52,21 @@
                 <td>{{ $record->type }}</td>
                 <td>{{ $record->date }}</td>
                 <td>{{ $record->controlledPoint }}</td>
-                <td>{{ $record->device }}</td>
-                <td>{{ $record->UTY }}</td>
-                <td>{{ $record->UTC }}</td>
-                <td>{{ $record->worker }}</td>
+                <td>{{ $record->worker1 }}</td>
+                <td>{{ $record->worker2 }}</td>
                 <td>
                     <div class="row btn-group" role="group" aria-label="Basic example">
-                        <div class="col-3">
-                            <a type="button" class="btn btn-primary" href="{{ URL::to('records/' . $record->id) }}" role="button">Show</a>
+                        <div class="col-4">
+                            <a type="button" class="btn btn-primary btn-sm" href="{{ URL::to('records/' . $record->id) }}" role="button">Показать</a>
                         </div>
                         <div class="col-3">
-                            <a type="button" class="btn btn-secondary" href="{{ URL::to('records/' . $record->id . '/edit') }}" role="button">Edit</a>
+                            <a type="button" class="btn btn-secondary btn-sm" href="{{ URL::to('records/' . $record->id . '/edit') }}" role="button">Редакт.</a>
                         </div>
-                        <div class="col-3">
+                        <div class="col-4">
                             <form class="delete" action="{{ route('records.destroy', $record->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger">Del</button>
+                                <button type="submit" class="btn btn-danger btn-sm">Удалить</button>
                             </form>
                         </div>
                     </div>

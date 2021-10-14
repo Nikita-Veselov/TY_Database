@@ -20,7 +20,9 @@ class RecordController extends Controller
      */
     public function index()
     {
-        return view('records.index', ['records' => Record::all()]);
+        return view('records.index', [
+            'records' => Record::all()->sortByDesc('date')
+        ]);
     }
 
     /**
@@ -70,8 +72,6 @@ class RecordController extends Controller
      */
     public function show(Record $record)
     {
-        // dd( $record);
-        // dd(TC::where('cp-code', $record->controlledPoint)->get());
         return view('records.show', [
             'record' => $record,
             'worker1' => Workers::where('BIO', $record->worker1)->first(),
@@ -135,5 +135,13 @@ class RecordController extends Controller
     {
         Record::destroy($record->id);
         return $this->index()->with('record-deleted');
+    }
+
+    public function search(Request $request)
+    {
+        // dd($request);
+        return view('records.index', [
+            'records' => Record::where($request->key, $request->value)->get()->sortBy('id')
+        ]);
     }
 }
