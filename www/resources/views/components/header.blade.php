@@ -1,7 +1,7 @@
 <div>
     <div class="header row text-start">
         <div class="col-6 pt-4">
-            <a class="col-4 btn btn-success" href="/" role="button">Назад</a>
+            <a class="col-4 btn btn-success" href="javascript:history.back()" role="button">Назад</a>
         </div>
         <div class="col-6 text-end">
             <div class="fs-3">Телемеханика</div>
@@ -20,11 +20,6 @@
                 @endif
             </div>
         </div>
-
-
-
-
-
 
     </div>
 </div>
