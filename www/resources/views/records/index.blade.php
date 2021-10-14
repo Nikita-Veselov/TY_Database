@@ -28,14 +28,21 @@
                 <td>{{ $record->UTC }}</td>
                 <td>{{ $record->worker }}</td>
                 <td>
-                    <a type="button" class="btn btn-primary col" href="{{ URL::to('records/' . $record->id) }}" role="button">Show</a>
-                    <a type="button" class="btn btn-secondary col" href="{{ URL::to('records/' . $record->id . '/edit') }}" role="button">Edit</a>
-                    {{-- CREATE MODAL WITH ALERT FOR THIS --}}
-                    <form action="{{ route('records.destroy', $record->id) }}" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger">Del</button>
-                    </form>
+                    <div class="row btn-group" role="group" aria-label="Basic example">
+                        <div class="col-3">
+                            <a type="button" class="btn btn-primary" href="{{ URL::to('records/' . $record->id) }}" role="button">Show</a>
+                        </div>
+                        <div class="col-3">
+                            <a type="button" class="btn btn-secondary" href="{{ URL::to('records/' . $record->id . '/edit') }}" role="button">Edit</a>
+                        </div>
+                        <div class="col-3">
+                            <form class="delete" action="{{ route('records.destroy', $record->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger">Del</button>
+                            </form>
+                        </div>
+                    </div>
                 </td>
             </tr>
         @endforeach

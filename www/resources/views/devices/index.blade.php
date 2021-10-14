@@ -23,12 +23,18 @@
                 <td>{{ $device->class }}</td>
                 <td>{{ $device->date }}</td>
                 <td>
-                    <a type="button" class="btn btn-secondary col" href="{{ URL::to('devices/' . $device->id . '/edit') }}" role="button">Edit</a>
-                    <form action="{{ route('devices.destroy', $device->id) }}" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger col">Del</button>
-                    </form>
+                    <div class="row btn-group" role="group" aria-label="Basic example">
+                        <div class="col-6">
+                            <a type="button" class="btn btn-secondary" href="{{ URL::to('devices/' . $device->id . '/edit') }}" role="button">Edit</a>
+                        </div>
+                        <div class="col-6">
+                            <form class="delete" action="{{ route('devices.destroy', $device->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger">Del</button>
+                            </form>
+                        </div>
+                    </div>
                 </td>
             </tr>
         @endforeach

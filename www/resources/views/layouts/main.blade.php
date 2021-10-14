@@ -13,31 +13,22 @@
 </head>
 <body>
     <div class="container d-flex flex-column mx-auto vh-100">
+
         <x-header />
 
         <div class="main flex-grow-1">
-
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
+            <div class="row justify-content-center">
+                @yield('content')
             </div>
-        @endif
-
-        @if (Session::has('success'))
-            <div class="alert alert-success text-center">
-                {{-- <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a> --}}
-                <p>{{ Session::get('success') }}</p>
-            </div>
-        @endif
-
-            @yield('content')
         </div>
 
         <x-footer />
+
+        <script>
+            $(".delete").on("submit", function(){
+                return confirm("Do you want to delete this item?");
+            });
+        </script>
     </div>
 </body>
 </html>
