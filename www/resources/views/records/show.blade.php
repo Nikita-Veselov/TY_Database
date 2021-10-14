@@ -20,7 +20,7 @@
     </div>
         {{-- Station --}}
     <div class="col text-center fs-4 fw-bold mb-2">
-        ст. {{ $record->controlledPoint }}
+        ст. {{ $CP->name }}
     </div>
         {{-- Record number and date --}}
     <div class="col text-center">№{{ $record->number }}</div>
@@ -154,7 +154,7 @@
         {{-- controller file --}}
     <div class="col text-start">
         <div class="col">Для контроллера МКД</div>
-        <div class="col">Имя файла прошивки - "ст.{{ $record->controlledPoint }}.mkd"</div>
+        <div class="col">Имя файла прошивки - "ст. {{ $CP->name }}.mkd"</div>
     </div>
         {{-- TC table --}}
     <table class="table table-bordered table-sm mb-5">

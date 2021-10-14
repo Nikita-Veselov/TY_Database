@@ -34,7 +34,7 @@
     <select class="form-select form-select-sm" name="controlledPoint" value="{{ old('controlledPoint') }}">
         <option value="" selected disabled>CP</option>
         @foreach ($controlledPoints as $CP)
-            <option value="{{ $CP->name }}">{{ $CP->name }}</option>
+            <option value="{{ $CP->code }}">{{ $CP->type }} {{ $CP->name }}</option>
         @endforeach
     </select>
 

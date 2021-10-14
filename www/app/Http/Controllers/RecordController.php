@@ -70,14 +70,16 @@ class RecordController extends Controller
      */
     public function show(Record $record)
     {
+        // dd( $record);
+        // dd(TC::where('cp-code', $record->controlledPoint)->get());
         return view('records.show', [
             'record' => $record,
             'worker1' => Workers::where('BIO', $record->worker1)->first(),
             'worker2' => Workers::where('BIO', $record->worker2)->first(),
             'device' => Devices::where('name', $record->device)->first(),
-            'controlledPoints' => ControlledPoint::all(),
-            'TC' => TC::all(),
-            'TY' => TY::all(),
+            'CP' => ControlledPoint::where('code', $record->controlledPoint)->first(),
+            'TC' => TC::where('cp-code', $record->controlledPoint)->get(),
+            'TY' => TY::where('cp-code', $record->controlledPoint)->get(),
         ]);
     }
 

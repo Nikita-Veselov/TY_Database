@@ -53,12 +53,12 @@
     <select class="form-select form-select-sm" name="controlledPoint" value="{{ $record->controlledPoint }}">
         <option value="" disabled>CP</option>
         @foreach ($controlledPoints as $CP)
-            <option value="{{ $CP->name }}"
-                @if ($CP->name == $record->controlledPoint)
+            <option value="{{ $CP->code }}"
+                @if ($CP->code == $record->controlledPoint)
                     selected
                 @endif
             >
-                {{ $CP->name }}
+                {{ $CP->type }} {{ $CP->name }}
             </option>
         @endforeach
     </select>
