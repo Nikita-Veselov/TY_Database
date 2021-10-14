@@ -39,7 +39,6 @@
         </tbody>
     </table>
 
-
     <script>
         let i = 1;
         $( '#addTC' ).click(function(){
@@ -50,7 +49,6 @@
 
         $(document).on('click', '.removeTC', function(){
             $(this).parents('tr').remove();
-            $('#TCcount').val(--i);
         });
     </script>
 

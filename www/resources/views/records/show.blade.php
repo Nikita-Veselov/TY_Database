@@ -151,7 +151,7 @@
           </tr>
         </tbody>
     </table>
-        {{-- controller file --}}
+        {{-- Controller file --}}
     <div class="col text-start">
         <div class="col">Для контроллера МКД</div>
         <div class="col">Имя файла прошивки - "ст. {{ $CP->name }}.mkd"</div>

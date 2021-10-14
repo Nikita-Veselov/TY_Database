@@ -22,6 +22,7 @@
         <table class="table table-bordered table-sm mb-5">
             <thead class="text-center align-middle">
               <tr>
+                <th>del</th>
                 <th scope="col">Название сигнала</th>
                 <th scope="col">Клемма КП-М (ПС)</th>
                 <th scope="col">№ ТС</th>
@@ -33,6 +34,16 @@
             <tbody>
                 @foreach ($TC as $tc)
                 <tr class="text-center">
+                    <td>
+                        <form action="{{ route('signals.destroy', $tc->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <input type="hidden" name="CP" value="{{ $CP->code }}">
+                            <input type="hidden" name="sig" value="TC">
+                            <input type="hidden" name="id" value="{{ $tc->id }}">
+                            <button type="submit" class="btn btn-danger col">Del</button>
+                        </form>
+                    </td>
                     <td class="text-start col-3">{{ $tc->name }}</td>
                     <td class="col-1">{{ $tc->klemm }}</td>
                     <td class="col-1">{{ $tc->number }}</td>
@@ -47,6 +58,7 @@
         <table class="table table-bordered table-sm table-fixed">
             <thead>
               <tr class="text-center align-middle">
+                <th>Del</th>
                 <th scope="col">Название сигнала</th>
                 <th scope="col">Клемма КП-М (ПС)</th>
                 <th scope="col">№ ТУ</th>
@@ -57,6 +69,16 @@
             <tbody>
                 @foreach ($TY as $ty)
                 <tr class="text-center">
+                    <td>
+                        <form action="{{ route('signals.destroy', $ty->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <input type="hidden" name="CP" value="{{ $CP->code }}">
+                            <input type="hidden" name="sig" value="TY">
+                            <input type="hidden" name="id" value="{{ $ty->id }}">
+                            <button type="submit" class="btn btn-danger col">Del</button>
+                        </form>
+                    </td>
                     <td class="text-start col-3">{{ $ty->name }}</td>
                     <td class="col-2">{{ $ty->klemm }}</td>
                     <td class="col-1">{{ $ty->number }}</td>

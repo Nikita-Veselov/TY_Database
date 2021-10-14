@@ -2,11 +2,6 @@
 
 @section('content')
 
-@foreach ($errors->all() as $message)
-    <div class="alert alert-danger" role="alert">
-        {{ $message }}
-     </div>
-@endforeach
 
 <form method="POST" action="{{ route('controlledPoints.update', ['controlledPoint' => $controlledPoint->id]) }}">
     @method('PUT')

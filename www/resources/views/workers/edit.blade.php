@@ -2,12 +2,6 @@
 
 @section('content')
 
-@foreach ($errors->all() as $message)
-    <div class="alert alert-danger" role="alert">
-        {{ $message }}
-     </div>
-@endforeach
-
 @php
     $arr = explode(' ', $worker->BIO);
     $worker->name1 = $arr[0];

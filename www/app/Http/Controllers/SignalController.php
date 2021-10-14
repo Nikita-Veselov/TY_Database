@@ -7,6 +7,7 @@ use App\Models\ControlledPoint;
 use App\Models\TC;
 use App\Models\TY;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 
 class SignalController extends Controller
@@ -18,7 +19,7 @@ class SignalController extends Controller
          *
          * @return \Illuminate\Http\Response
          */
-
+        // dd($request);
         if ($request->CP == null) {
             return back()->withErrors('Выберите КП');
         }
@@ -110,14 +111,10 @@ class SignalController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\TC  $record
-     * @param  \App\Models\TY  $record
      * @return \Illuminate\Http\Response
      */
     public function update(CreateSignalRequest $request)
     {
-
-        // dd($request);
         $TC = TC::where('cp-code', $request->CP)->get();
 
         foreach ($TC as $tc) {
@@ -199,5 +196,24 @@ class SignalController extends Controller
         }
 
         return $this->index($request)->with('success');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Request $request)
+    {
+        if ($request->sig === "TC") {
+            TC::destroy($request->id);
+            return $this->index($request)->with('success', 'TC instance deleted');
+        } elseif ($request->sig === "TY") {
+            TY::destroy($request->id);
+            return $this->index($request)->with('success', 'TY instance deleted');
+        } else {
+            return $this->index($request)->withErrors('Deletion aborted');
+        }
     }
 }

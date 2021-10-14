@@ -2,12 +2,6 @@
 
 @section('content')
 
-@foreach ($errors->all() as $message)
-    <div class="alert alert-danger" role="alert">
-        {{ $message }}
-     </div>
-@endforeach
-
 <form method="POST" action="{{ url('controlledPoints') }}">
     @csrf
     <div class="row mb-3">
