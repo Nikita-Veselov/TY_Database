@@ -38,7 +38,6 @@
                 @endphp
             @endif
 
-
             <div class="container">
                     {{-- Title --}}
                 <div class="title col text-center fs-2 fw-bold">
@@ -240,22 +239,20 @@
                 </table>
                     {{-- Conclusion --}}
                 <div class="row mb-4">
-                    <div class="col">Заключение:
-                        {{ $record->conclusion }}
-                    </div>
+                    <div class="col fw-bold">Заключение:</div>
+                    <div class="col">{{ $record->conclusion }}</div>
                 </div>
                     {{-- Workers --}}
-                <div class="row mb-2">
-                    <div class="col-12">Проверку проводил:</div>
-                    <div class="col-12"> {{ $worker1->position }} {{ $worker1->name1 }} {{ mb_substr($worker1->name2, 0, 1) }}. {{ mb_substr($worker1->name3, 0, 1); }}.</div>
+                <div class="row mb-3">
+                    <div class="col-12 mb-3 fw-bolder">Проверку проводил:</div>
+                    <div class="col-12 mb-3"> {{ $worker1->position }} {{ $worker1->name1 }} {{ mb_substr($worker1->name2, 0, 1) }}. {{ mb_substr($worker1->name3, 0, 1); }}.</div>
                     @if ($worker2 != null)
-                        <div class="col-12"> {{ $worker2->position }} {{  $worker2->name1 }} {{ mb_substr($worker2->name2, 0, 1) }}. {{ mb_substr($worker2->name3, 0, 1) }}.</div>
+                        <div class="col-12 mb-3"> {{ $worker2->position }} {{  $worker2->name1 }} {{ mb_substr($worker2->name2, 0, 1) }}. {{ mb_substr($worker2->name3, 0, 1) }}.</div>
                     @endif
                 </div>
-                <div class="row mb-2">
-                    <div class="col-12">Протокол проверил:</div>
-                    <div class="col-12"></div>
-                    <div class="col-12">Начальник РРУ Акудович Е.В.</div>
+                <div class="row mb-3">
+                    <div class="col-12 mb-3 fw-bolder">Протокол проверил:</div>
+                    <div class="col-12 mb-3">Начальник РРУ Акудович Е.В.</div>
                 </div>
             </div>
 
