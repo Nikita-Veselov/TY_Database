@@ -167,7 +167,7 @@ class RecordController extends Controller
 
         $record = Record::where('id', $request->record)->first();
 
-        $pdf = SnappyPdf::loadView('records.import', [
+        $pdf = SnappyPdf::loadView('records.export', [
             'record' => $record,
             'worker1' => Workers::where('BIO', $record->worker1)->first(),
             'worker2' => Workers::where('BIO', $record->worker2)->first(),
