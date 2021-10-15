@@ -16,9 +16,9 @@ class CreateTCTable extends Migration
         Schema::create('TC', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('klemm');
+            $table->string('klemm')->nullable();
             $table->string('number');
-            $table->string('invert');
+            $table->string('invert')->nullable();;
             $table->string('oper');
             $table->string('DP');
             $table->string('cp-code');

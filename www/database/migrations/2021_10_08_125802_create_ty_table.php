@@ -16,7 +16,7 @@ class CreateTyTable extends Migration
         Schema::create('TY', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('klemm');
+            $table->string('klemm')->nullable();;
             $table->string('number');
             $table->string('oper');
             $table->string('DP');
