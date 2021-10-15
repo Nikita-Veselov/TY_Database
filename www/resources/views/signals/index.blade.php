@@ -41,7 +41,7 @@
                             <input type="hidden" name="CP" value="{{ $CP->code }}">
                             <input type="hidden" name="sig" value="TC">
                             <input type="hidden" name="id" value="{{ $tc->id }}">
-                            <button type="submit" class="btn btn-danger col">Del</button>
+                            <button type="submit" class="btn btn-danger col">Уд.</button>
                         </form>
                     </td>
                     <td class="text-start col-3">{{ $tc->name }}</td>

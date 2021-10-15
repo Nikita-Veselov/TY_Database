@@ -2,6 +2,19 @@
 
 @section('content')
 
+@php
+    $arr1 = explode(' ', $worker1->BIO);
+    $worker1->name1 = $arr1[0];
+    $worker1->name2 = $arr1[1];
+    $worker1->name3 = $arr1[2];
+
+    $arr2 = explode(' ', $worker2->BIO);
+    $worker2->name1 = $arr2[0];
+    $worker2->name2 = $arr2[1];
+    $worker2->name3 = $arr2[2];
+@endphp
+
+
 <div class="container">
         {{-- Title --}}
     <div class="col text-center fs-4 fw-bold">
@@ -213,9 +226,9 @@
         {{-- Workers --}}
     <div class="row mb-2">
         <div class="col-12">Проверку проводил:</div>
-        <div class="col-12"> {{ $worker1->position }} {{ $worker1->BIO }}</div>
+        <div class="col-12"> {{ $worker1->position }} {{ $worker1->name1 }} {{ mb_substr($worker1->name2, 0, 1) }}. {{ mb_substr($worker1->name3, 0, 1); }}.</div>
         @if ($worker2 != null)
-            <div class="col-12"> {{ $worker2->position }} {{ $worker2->BIO }}</div>
+            <div class="col-12"> {{ $worker2->position }} {{  $worker2->name1 }} {{ mb_substr($worker2->name2, 0, 1) }}. {{ mb_substr($worker2->name3, 0, 1) }}.</div>
         @endif
 
 
