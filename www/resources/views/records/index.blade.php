@@ -62,6 +62,9 @@
                         <div class="col-3">
                             <a type="button" class="btn btn-secondary btn-sm" href="{{ URL::to('records/' . $record->id . '/edit') }}" role="button">Редакт.</a>
                         </div>
+                        <div class="col-3">
+                            <a type="button" class="btn btn-secondary btn-sm" href="{{ route('PDF', ['record' => $record->id]) }}" role="button">PDF</a>
+                        </div>
                         <div class="col-4">
                             <form class="delete" action="{{ route('records.destroy', $record->id) }}" method="POST">
                                 @csrf

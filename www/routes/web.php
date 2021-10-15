@@ -37,3 +37,6 @@ Route::resource('/devices', DevicesController::class);
 
 Route::resource('/signals', SignalController::class);
 
+// TESTING PDF
+Route::get('/PDF', [RecordController::class, 'publishPDF'])->name('PDF');
+

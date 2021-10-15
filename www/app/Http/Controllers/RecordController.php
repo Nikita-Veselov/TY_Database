@@ -9,7 +9,10 @@ use App\Models\Record;
 use App\Models\TC;
 use App\Models\TY;
 use App\Models\Workers;
+use Barryvdh\Snappy\Facades\SnappyPdf;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
+
 
 class RecordController extends Controller
 {
@@ -61,6 +64,9 @@ class RecordController extends Controller
             "worker1" => $request->worker1,
             "worker2" => $request->worker2,
         ]);
+
+        // $this->publishPDF();
+
         return $this->index()->with('success');
     }
 
@@ -137,11 +143,41 @@ class RecordController extends Controller
         return $this->index()->with('record-deleted');
     }
 
+    /**
+     * Seacrch for the specified record.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function search(Request $request)
     {
-        // dd($request);
         return view('records.index', [
             'records' => Record::where($request->key, $request->value)->get()->sortBy('id')
         ]);
+    }
+
+    /**
+     * PDF stuff.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+
+    public function publishPDF(Request $request) {
+
+        $record = Record::where('id', $request->record)->first();
+
+        $pdf = SnappyPdf::loadView('records.import', [
+            'record' => $record,
+            'worker1' => Workers::where('BIO', $record->worker1)->first(),
+            'worker2' => Workers::where('BIO', $record->worker2)->first(),
+            'device' => Devices::where('name', $record->device)->first(),
+            'CP' => ControlledPoint::where('code', $record->controlledPoint)->first(),
+            'TC' => TC::where('cp-code', $record->controlledPoint)->get(),
+            'TY' => TY::where('cp-code', $record->controlledPoint)->get(),
+        ]);
+
+        return $pdf->stream();
+
     }
 }

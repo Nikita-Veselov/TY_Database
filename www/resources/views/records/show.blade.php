@@ -7,18 +7,22 @@
     $worker1->name1 = $arr1[0];
     $worker1->name2 = $arr1[1];
     $worker1->name3 = $arr1[2];
-
-    $arr2 = explode(' ', $worker2->BIO);
-    $worker2->name1 = $arr2[0];
-    $worker2->name2 = $arr2[1];
-    $worker2->name3 = $arr2[2];
 @endphp
+@if ($worker2 != null)
+    @php
+        $arr2 = explode(' ', $worker2->BIO);
+        $worker2->name1 = $arr2[0];
+        $worker2->name2 = $arr2[1];
+        $worker2->name3 = $arr2[2];
+    @endphp
+@endif
+
 
 
 <div class="container">
         {{-- Title --}}
     <div class="col text-center fs-4 fw-bold">
-        Протокол технического обсложивания стойки телемеханики КП-М (ПС) в объеме
+        Протокол технического обслуживания стойки телемеханики КП-М (ПС) в объеме
         @switch($record->type)
         @case("Профвосстановление")
             профвосстановления
@@ -44,21 +48,21 @@
     <div class="col-6 mb-4">
         <div class="row text-start">
             <div class="col-12 fw-bold fst-italic text-decoration-underline">для Модема-УКП:</div>
-            <div class="col-8">Номер КП</div>
-            <div class="col-4">18</div>
-            <div class="col-8">Номер контроллера</div>
-            <div class="col-4">18</div>
-            <div class="col-8">Количество попыток автоопределения</div>
-            <div class="col-4">1</div>
+            <div class="col">Номер КП</div>
+            <div class="col">{{ $record->controlledPoint }}</div>
+            <div class="col">Номер контроллера</div>
+            <div class="col">{{ $record->controlledPoint }}</div>
+            <div class="col">Количество попыток автоопределения</div>
+            <div class="col">1</div>
 
             <div class="col-12 text-decoration-underline">Телеуправление</div>
-            <div class="col-8">Частота ТУ</div>
-            <div class="col-4">1300 Гц</div>
-            <div class="col-8">Аттеньюация сигнала</div>
-            <div class="col-4">0 дБ</div>
+            <div class="col">Частота ТУ</div>
+            <div class="col">1300 Гц</div>
+            <div class="col">Аттеньюация сигнала</div>
+            <div class="col">0 дБ</div>
             <div class="col-12 text-decoration-underline">Телесигнализация</div>
-            <div class="col-8">Частота ТС</div>
-            <div class="col-4">1300 Гц</div>
+            <div class="col">Частота ТС</div>
+            <div class="col">1300 Гц</div>
             <div class="col-12">Уровень сигнала при нагрузке 600 Ом установлен - 13 дБ</div>
         </div>
     </div>
@@ -230,8 +234,6 @@
         @if ($worker2 != null)
             <div class="col-12"> {{ $worker2->position }} {{  $worker2->name1 }} {{ mb_substr($worker2->name2, 0, 1) }}. {{ mb_substr($worker2->name3, 0, 1) }}.</div>
         @endif
-
-
     </div>
     <div class="row mb-2">
         <div class="col-12">Протокол проверил:</div>
