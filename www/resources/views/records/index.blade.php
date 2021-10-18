@@ -2,6 +2,7 @@
 
 @section('content')
 
+
     {{-- Search form --}}
 <div class="row justify-content-start">
     <div class="col-8">
@@ -57,23 +58,15 @@
                 <td>{{ $record->worker1 }}</td>
                 <td>{{ $record->worker2 }}</td>
                 <td>
-                    <div class="row btn-group" role="group" aria-label="Basic example">
-                        <div class="col-4">
-                            <a type="button" class="btn btn-primary btn-sm" href="{{ URL::to('records/' . $record->id) }}" role="button">Показать</a>
-                        </div>
-                        <div class="col-3">
-                            <a type="button" class="btn btn-secondary btn-sm" href="{{ URL::to('records/' . $record->id . '/edit') }}" role="button">Редакт.</a>
-                        </div>
-                        <div class="col-3">
-                            <a type="button" class="btn btn-secondary btn-sm" href="{{ route('PDF', ['record' => $record->id]) }}" role="button">PDF</a>
-                        </div>
-                        <div class="col-4">
-                            <form class="delete" action="{{ route('records.destroy', $record->id) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm">Удалить</button>
-                            </form>
-                        </div>
+                    <div class="row btn-group" role="group">
+                        <a type="button" class="col-3 btn btn-primary btn-sm m-0 px-2" href="{{ URL::to('records/' . $record->id) }}" role="button">Показ.</a>
+                        <a type="button" class="col-3 btn btn-success btn-sm m-0 px-3" href="{{ route('openPDF', ['record' => $record->id ]) }}" role="button">PDF</a>
+                        <a type="button" class="col-3 btn btn-secondary btn-sm m-0 px-3" href="{{ URL::to('records/' . $record->id . '/edit') }}" role="button">Ред.</a>
+                        <form class="col-3 btn btn-danger btn-sm delete m-0 p-0" action="{{ route('records.destroy', $record->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger btn-sm">Удал.</button>
+                        </form>
                     </div>
                 </td>
             </tr>

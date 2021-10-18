@@ -12,7 +12,8 @@ use App\Models\Workers;
 use Barryvdh\Snappy\Facades\SnappyPdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
-
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Response;
 
 class RecordController extends Controller
 {
@@ -24,7 +25,8 @@ class RecordController extends Controller
     public function index()
     {
         return view('records.index', [
-            'records' => Record::simplePaginate(10)
+            'records' => Record::simplePaginate(10),
+            'CP' => ControlledPoint::all()
         ]);
     }
 
@@ -51,7 +53,7 @@ class RecordController extends Controller
      */
     public function store(CreateRecordRequest $request)
     {
-        Record::create([
+        $record = Record::create([
             "number" => $request->number,
             "type" => $request->type,
             "date" => $request->date,
@@ -65,7 +67,7 @@ class RecordController extends Controller
             "worker2" => $request->worker2,
         ]);
 
-        // $this->publishPDF();
+        $this->publishPDF($record);
 
         return $this->index()->with('success');
     }
@@ -112,9 +114,17 @@ class RecordController extends Controller
      * @param  \App\Models\Record  $record
      * @return \Illuminate\Http\Response
      */
-    public function update(CreateRecordRequest $request, Record $record)
+    public function update(Request $request, Record $record)
     {
+            // Setting variables to generate path to file before updating the record
+        $CP = ControlledPoint::where('code', $request->controlledPoint)->first();
+        $record->type == "Опробование"
+            ? ($type = "Опр")
+            : ($record->type == "Профвосстановление" ? $type = "Профв" : $type = "Профк");
+        $route = "$CP->name";
+        $name = "$type " . "$CP->type " . "$CP->name " . "($record->date)";
 
+            // Updating the record
         $record = Record::find($record->id);
         $record->number = $request->number;
         $record->type = $request->type;
@@ -128,6 +138,13 @@ class RecordController extends Controller
         $record->worker2 = $request->worker2;
         $record->conclusion = $request->conclusion;
         $record->save();
+
+            //Deleting previous file to prevent doubling from changing name date or type etc.
+        File::delete("recordsPDF/$route/$name.pdf");
+
+            //Save new as PDF
+        $this->publishPDF($record);
+
         return $this->show($record)->with('success-added');
     }
 
@@ -159,13 +176,11 @@ class RecordController extends Controller
     /**
      * PDF stuff.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Record  $record
      * @return \Illuminate\Http\Response
      */
 
-    public function publishPDF(Request $request) {
-
-        $record = Record::where('id', $request->record)->first();
+    public function publishPDF(Record $record) {
 
         $CP = ControlledPoint::where('code', $record->controlledPoint)->first();
 
@@ -179,15 +194,36 @@ class RecordController extends Controller
             'TY' => TY::where('cp-code', $record->controlledPoint)->get(),
         ]);
 
+        $record->type == "Опробование"
+            ? ($type = "Опр")
+            : ($record->type == "Профвосстановление" ? $type = "Профв" : $type = "Профк");
+
+        $route = "recordsPDF/$CP->name";
+        $name = "$type " . "$CP->type " . "$CP->name " . "($record->date)";
+
+        $pdf->save("$route/$name.pdf", true);
+
+    }
+
+    public function openPDF(Record $record) {
+        $CP = ControlledPoint::where('code', $record->controlledPoint)->first();
 
         $record->type == "Опробование"
             ? ($type = "Опр")
             : ($record->type == "Профвосстановление" ? $type = "Профв" : $type = "Профк");
+
         $route = "recordsPDF/$CP->name";
         $name = "$type " . "$CP->type " . "$CP->name " . "($record->date)";
-        $pdf->save("$route/$name.pdf");
 
-        return back();
 
+        if (File::isFile("$route/$name.pdf"))
+        {
+            $file = File::get("$route/$name.pdf");
+            $response = Response::make($file, 200);
+            // using this will allow you to do some checks on it (if pdf/docx/doc/xls/xlsx)
+            $response->header('Content-Type', 'application/pdf');
+
+            return $response;
+        }
     }
 }

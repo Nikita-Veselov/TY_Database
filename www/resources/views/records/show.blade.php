@@ -17,7 +17,7 @@
     @endphp
 @endif
 
-<div class="container col-8">
+<div class="container col-7">
         {{-- Title --}}
     <div class="col text-center fs-4 fw-bold">
         Протокол технического обслуживания стойки телемеханики КП-М (ПС) в объеме

@@ -27,6 +27,7 @@ Route::get('/', function () {
 
 Route::resource('/records', RecordController::class);
 Route::get('/searchRec', [RecordController::class, 'search'])->name('searchRec');
+Route::get('/openPDF/{record}', [RecordController::class, 'openPDF'])->name('openPDF');
 
 Route::resource('/controlledPoints', ControlledPointController::class);
 Route::get('/searchCp', [ControlledPointController::class, 'search'])->name('searchCp');
@@ -36,7 +37,4 @@ Route::resource('/workers', WorkersController::class);
 Route::resource('/devices', DevicesController::class);
 
 Route::resource('/signals', SignalController::class);
-
-// TESTING PDF
-Route::get('/PDF', [RecordController::class, 'publishPDF'])->name('PDF');
 

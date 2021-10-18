@@ -24,7 +24,7 @@ class CreateRecordRequest extends FormRequest
     public function rules()
     {
         return [
-            "number" => 'required|max:255',
+            "number" => 'required|max:255|unique:records',
             "type" => 'required|max:255',
             "date" => 'required|max:255',
             "controlledPoint" => 'required|max:255',

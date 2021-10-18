@@ -11,11 +11,17 @@
         </div>
     </div>
 
-    <select class="form-select form-select-sm" id="Тип протокола" name="type" value="{{ old('type') }}">
+    <select class="form-select form-select-sm" id="Тип протокола" name="type">
         <option value="" selected disabled>Тип протокола</option>
-        <option value="Опробование">Опробование</option>
-        <option value="Профконтроль">Профконтроль</option>
-        <option value="Профвосстановление">Профвосстановление</option>
+        <option value="{{ $val = "Опробование" }}" @if ($val == old('type')) ? selected @endif>
+            Опробование
+        </option>
+        <option value="{{ $val = "Профконтроль" }}" @if ($val == old('type')) ? selected @endif>
+            Профконтроль
+        </option>
+        <option value="{{ $val = "Профвосстановление" }}" @if ($val == old('type')) ? selected @endif>
+            Профвосстановление
+        </option>
     </select>
 
     <div class="row mb-3">
@@ -25,17 +31,21 @@
       </div>
     </div>
 
-    <select class="form-select form-select-sm" name="controlledPoint" value="{{ old('controlledPoint') }}">
+    <select class="form-select form-select-sm" name="controlledPoint">
         <option value="" selected disabled>CP</option>
         @foreach ($controlledPoints as $CP)
-            <option value="{{ $CP->code }}">{{ $CP->type }} {{ $CP->name }}</option>
+            <option value="{{ $CP->code }}" @if ( $CP->code == old('controlledPoint')) ? selected @endif>
+                {{ $CP->type }} {{ $CP->name }}
+            </option>
         @endforeach
     </select>
 
-    <select class="form-select form-select-sm" name="device" value="{{ old('device') }}">
+    <select class="form-select form-select-sm" name="device">
         <option value="" selected disabled>Devices</option>
         @foreach ($devices as $device)
-            <option value="{{ $device->name }}">{{ $device->name }}</option>
+            <option value="{{ $device->name }}" @if ( $device->name == old('device')) ? selected @endif>
+                {{ $device->name }}
+            </option>
         @endforeach
     </select>
 
@@ -60,25 +70,28 @@
         </div>
     </div>
 
-    <select class="form-select form-select-sm" name="worker1" value="{{ old('worker1') }}">
+    <select class="form-select form-select-sm" name="worker1">
         <option selected disabled>Worker 1</option>
         @foreach ($workers as $worker)
-            <option value="{{ $worker->BIO }}">{{ $worker->BIO }}</option>
+            <option value="{{ $worker->BIO }}" @if ( $worker->BIO == old('worker1')) ? selected @endif>
+                {{ $worker->BIO }}
+            </option>
         @endforeach
     </select>
 
-    <select class="form-select form-select-sm" name="worker2" value="{{ old('worker2') }}">
-        <option selected disabled>Worker 2</option>
-        <option>Нет</option>
+    <select class="form-select form-select-sm" name="worker2">
+        <option value="" selected>Нет</option>
         @foreach ($workers as $worker)
-            <option value="{{ $worker->BIO }}">{{ $worker->BIO }}</option>
+            <option value="{{ $worker->BIO }}" @if ($worker->BIO == old('worker2')) ? selected @endif>
+                {{ $worker->BIO }}
+            </option>
         @endforeach
     </select>
 
     <div class="row mb-3">
         <label for="Дата" class="col-sm-2 col-form-label">Заключение</label>
         <div class="col-sm-10 ">
-            <textarea type="text" class="form-control" id="Заключение" name="conclusion" value="{{ old('worker2') }}">По результатам технического обслуживания устройства ТУ и средства постоянного технического диагностирования, признано годным к дальнейшей эксплуатации и может быть введено в работу.</textarea>
+            <textarea type="text" class="form-control" id="Заключение" name="conclusion">По результатам технического обслуживания устройства ТУ и средства постоянного технического диагностирования, признано годным к дальнейшей эксплуатации и может быть введено в работу.</textarea>
         </div>
       </div>
 

@@ -421,7 +421,7 @@
                                 {{ mb_substr($worker1->name2, 0, 1) }}.
                                 {{ mb_substr($worker1->name3, 0, 1); }}.
                             </div>
-                            <div class="col-3 position-absolute top-0 start-50"  style="z-index: -1;">
+                            <div class="col-2 position-absolute top-0 start-50"  style="z-index: -1;">
                                 <img class="img-fluid " style="margin-top: -2{{ rand(0,5) }}%; margin-left: -8{{ rand(0,5) }}%" src="{{ asset("img/$worker1->name1.png") }}" alt="">
                             </div>
                         </div>
@@ -433,7 +433,7 @@
                                 {{ mb_substr($worker2->name2, 0, 1) }}.
                                 {{ mb_substr($worker2->name3, 0, 1); }}.
                             </div>
-                            <div class="col-3 position-absolute top-0 start-50" style="z-index: -1;">
+                            <div class="col-2 position-absolute top-0 start-50" style="z-index: -1;">
                                 <img class="img-fluid " style="margin-top: -4{{ rand(0,5) }}%; margin-left: -4{{ rand(0,5) }}%" src="{{ asset("img/$worker2->name1.png") }}" alt="">
                             </div>
                         </div>
@@ -444,14 +444,14 @@
                         <div class="col-4 mt-3">
                             Начальник РРУ Акудович Е.В.
                         </div>
-                        <div class="col-3 position-absolute top-0 start-50">
+                        <div class="col-2 position-absolute top-0 start-50">
                             <img class="img-fluid " style="margin-top: -2{{ rand(0,5) }}%; margin-left: -10{{ rand(0,5) }}%" src="{{ asset("img/Акудович.png") }}" alt="">
                         </div>
                         <div class="wh-100"></div>
                         <div class="col-4 mt-3">
                             ст.эл.мех. Соколов Е.И.
                         </div>
-                        <div class="col-3 position-absolute top-0 start-50">
+                        <div class="col-2 position-absolute top-0 start-50">
                             <img class="img-fluid " style="margin-top: {{ rand(0,5) }}%; margin-left: -7{{ rand(0,5) }}%" src="{{ asset("img/Соколов.png") }}" alt="">
                         </div>
                     </div>
