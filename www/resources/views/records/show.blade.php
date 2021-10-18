@@ -38,10 +38,19 @@
         ст. {{ $CP->name }}
     </div>
         {{-- Record number and date --}}
-    <div class="col text-center">№{{ $record->number }}</div>
-    <div class="col text-center mb-4">
-        {{ $record->date }}
-    </div>
+        <div class="col text-center">
+            <div class="row">
+                <div class="col-5"></div>
+                <div class="col">№{{ $record->number }}</div>
+                <div class="col-5 position-relative" style="z-index: -1;">
+                    <div class="position-absolute col-7">
+                        <img class="img-fluid top-0 start-50" style="margin-top: -{{ rand(1,3) }}0%; margin-left: {{ rand(1,4) }}0%" src="{{ asset("img/ЭЧ.png") }}" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col text-center mb-4">{{ $record->date }}</div>
+
         {{-- Modem data --}}
     <div class="col-6 mb-4">
         <div class="row text-start">
@@ -63,105 +72,211 @@
         {{-- Evalueted data --}}
     @switch($record->type)
         @case("Профвосстановление")
-        <table class="table table-bordered align-middle text-center mb-5">
-            <thead>
-              <tr class="align-middle">
-                <th scope="col" class="col-4">Проверяемый показатель (характеристика)</th>
-                <th scope="col" class="col-2">Норма</th>
-                <th scope="col" class="col-2">Результат</th>
-                <th scope="col" class="col-4">Наименование средства измерения или оборудования</th>
-              </tr>
-            </thead>
-            <tbody>
+            <table class="table table-bordered align-middle text-center mb-5">
+                <thead>
+                <tr class="align-middle">
+                    <th scope="col" class="col-4">Проверяемый показатель (характеристика)</th>
+                    <th scope="col" class="col-2">Норма</th>
+                    <th scope="col" class="col-2">Результат</th>
+                    <th scope="col" class="col-4">Наименование средства измерения или оборудования</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="text-start">
+                            Контроль исправности встроенного блока питания в контрольных точках
+                        </td>
+                        <td>
+                            <div class="col">110 В</div>
+                            <div class="col">26,5 В</div>
+                            <div class="col">220 В</div>
+                        </td>
+                        <td>
+                            <div class="col">{{ $record->UTC }} В</div>
+                            <div class="col">{{ $record->UTY }} В</div>
+                            <div class="col">{{ $record->UTP }} В</div>
+                        </td>
+                        <td class="text-start">
+                            <div class="col">{{ $device->name }} №{{ $device->code }}</div>
+                            <div class="col">Класс точноcти {{ $device->class }}</div>
+                            <div class="col">Дата след. калибровки: {{ $device->date }}</div>
+                        </td>
+                    </tr>
                 <tr>
                     <td class="text-start">
-                        Контроль исправности встроенного блока питания в контрольных точках
+                        Контроль работоспособности схемы перехода с основного питания на резервное и обратно
                     </td>
-                    <td>
-                        <div class="col">110 В</div>
-                        <div class="col">26,5 В</div>
-                        <div class="col">220 В</div>
+                    <td>В соответствие со схемой</td>
+                    <td>Соответствует</td>
+                    <td> - </td>
+                </tr>
+                <tr>
+                    <td class="text-start">
+                    Проверка уровней сигналов в каналах связи
                     </td>
-                    <td>
-                        <div class="col">{{ $record->UTC }} В</div>
-                        <div class="col">{{ $record->UTY }} В</div>
-                        <div class="col">{{ $record->UTP }} В</div>
+                    <td>-20 дБ .. +5 дБ</td>
+                    <td>-13 дБ</td>
+                    <td class="text-start">
+                        <div class="col" >Персональная ЭВМ с платой Sound maker 3DX2 (Full duplex) и программами SpectraLab и МОДЕМ-СЕРВИС</div>
+                        <div class="col" >Штекер стерео 3,5 мм (тип кабеля - три провода в экране)</div>
                     </td>
+                </tr>
+                <tr>
+                    <td class="text-start">
+                        Контроль правильности программного задания конфигурации устройства в целом и отдельных его частей
+                    </td>
+                    <td>В соответствие с заданной программой</td>
+                    <td>Соответствует</td>
+                    <td class=""> - </td>
+                </tr>
+                <tr>
+                    <td class="text-start">
+                        Контроль правильности отображения значений контролируемых физических величин
+                    </td>
+                    <td>В соответствие с заданной программой</td>
+                    <td>Соответствует</td>
                     <td class="text-start">
                         <div class="col">{{ $device->name }} №{{ $device->code }}</div>
                         <div class="col">Класс точноcти {{ $device->class }}</div>
                         <div class="col">Дата след. калибровки: {{ $device->date }}</div>
                     </td>
-                  </tr>
-              <tr>
-                <td class="text-start">
-                    Контроль работоспособности схемы перехода с основного питания на резервное и обратно
-                </td>
-                <td>В соответствие со схемой</td>
-                <td>Соответствует</td>
-                <td> - </td>
-              </tr>
-              <tr>
-                <td class="text-start">
-                Проверка уровней сигналов в каналах связи
-                </td>
-                <td>-20 дБ .. +5 дБ</td>
-                <td>-13 дБ</td>
-                <td class="text-start">
-                    <div class="col" >Персональная ЭВМ с платой Sound maker 3DX2 (Full duplex) и программами SpectraLab и МОДЕМ-СЕРВИС</div>
-                    <div class="col" >Штекер стерео 3,5 мм (тип кабеля - три провода в экране)</div>
-                </td>
-              </tr>
-              <tr>
-                <td class="text-start">
-                    Контроль правильности программного задания конфигурации устройства в целом и отдельных его частей
-                </td>
-                <td>В соответствие с заданной программой</td>
-                <td>Соответствует</td>
-                <td class=""> - </td>
-              </tr>
-              <tr>
-                <td class="text-start">
-                    Контроль правильности отображения значений контролируемых физических величин
-                </td>
-                <td>В соответствие с заданной программой</td>
-                <td>Соответствует</td>
-                <td class="text-start">
-                    <div class="col">{{ $device->name }} №{{ $device->code }}</div>
-                    <div class="col">Класс точноcти {{ $device->class }}</div>
-                    <div class="col">Дата след. калибровки: {{ $device->date }}</div>
-                </td>
-              </tr>
-              <tr>
-                <td class="text-start">
-                    Контроль правильности исполнения функций телесигнализации, телеизмерений, регистрации сигналов, определения места повреждения
-                </td>
-                <td>В соответствие с заданной программой</td>
-                <td>Соответствует</td>
-                <td> - </td>
-              </tr>
-              <tr>
-                <td class="text-start">
-                    Контроль работоспособности встроенных функций самодиагностики и тестового контроля
-                </td>
-                <td> - </td>
-                <td>Норма</td>
-                <td> - </td>
-              </tr>
-            </tbody>
-        </table>
-    @break
+                </tr>
+                <tr>
+                    <td class="text-start">
+                        Контроль правильности исполнения функций телесигнализации, телеизмерений, регистрации сигналов, определения места повреждения
+                    </td>
+                    <td>В соответствие с заданной программой</td>
+                    <td>Соответствует</td>
+                    <td> - </td>
+                </tr>
+                <tr>
+                    <td class="text-start">
+                        Контроль работоспособности встроенных функций самодиагностики и тестового контроля
+                    </td>
+                    <td> - </td>
+                    <td>Норма</td>
+                    <td> - </td>
+                </tr>
+                </tbody>
+            </table>
+        @break
         @case("Профконтроль")
-        <table class="table table-bordered align-middle text-center mb-5">
-            <thead>
-              <tr class="align-middle">
-                <th scope="col" class="col-4">Проверяемый показатель (характеристика)</th>
-                <th scope="col" class="col-2">Норма</th>
-                <th scope="col" class="col-2">Результат</th>
-                <th scope="col" class="col-4">Наименование средства измерения или оборудования</th>
-              </tr>
-            </thead>
-            <tbody>
+            <table class="table table-bordered align-middle text-center mb-5">
+                <thead>
+                <tr class="align-middle">
+                    <th scope="col" class="col-4">Проверяемый показатель (характеристика)</th>
+                    <th scope="col" class="col-2">Норма</th>
+                    <th scope="col" class="col-2">Результат</th>
+                    <th scope="col" class="col-4">Наименование средства измерения или оборудования</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="text-start">
+                            Контроль исправности встроенного блока питания в контрольных точках
+                        </td>
+                        <td>
+                            <div class="col">110 В</div>
+                            <div class="col">26,5 В</div>
+                            <div class="col">220 В</div>
+                        </td>
+                        <td>
+                            <div class="col">{{ $record->UTC }} В</div>
+                            <div class="col">{{ $record->UTY }} В</div>
+                            <div class="col">{{ $record->UTP }} В</div>
+                        </td>
+                        <td class="text-start">
+                            <div class="col">{{ $device->name }} №{{ $device->code }}</div>
+                            <div class="col">Класс точноcти {{ $device->class }}</div>
+                            <div class="col">Дата след. калибровки: {{ $device->date }}</div>
+                        </td>
+                    </tr>
+                <tr>
+                    <td class="text-start">
+                        Контроль работоспособности схемы перехода с основного питания на резервное и обратно
+                    </td>
+                    <td>В соответствие со схемой</td>
+                    <td>Соответствует</td>
+                    <td> - </td>
+                </tr>
+                <tr>
+                    <td class="text-start">
+                    Проверка уровней сигналов в каналах связи
+                    </td>
+                    <td>-20 дБ .. +5 дБ</td>
+                    <td>-13 дБ</td>
+                    <td class="text-start">
+                        <div class="col" >Персональная ЭВМ с платой Sound maker 3DX2 (Full duplex) и программами SpectraLab и МОДЕМ-СЕРВИС</div>
+                        <div class="col" >Штекер стерео 3,5 мм (тип кабеля - три провода в экране)</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-start">
+                        Контроль правильности отображения значений контролируемых физических величин
+                    </td>
+                    <td>В соответствие с заданной программой</td>
+                    <td>Соответствует</td>
+                    <td class="text-start">
+                        <div class="col">{{ $device->name }} №{{ $device->code }}</div>
+                        <div class="col">Класс точноcти {{ $device->class }}</div>
+                        <div class="col">Дата след. калибровки: {{ $device->date }}</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-start">
+                        Контроль правильности исполнения функций телесигнализации, телеизмерений, регистрации сигналов, определения места повреждения
+                    </td>
+                    <td>В соответствие с заданной программой</td>
+                    <td>Соответствует</td>
+                    <td> - </td>
+                </tr>
+                <tr>
+                    <td class="text-start">
+                        Контроль работоспособности встроенных функций самодиагностики и тестового контроля
+                    </td>
+                    <td>В соответствие с заданной программой</td>
+                    <td>Соответствует</td>
+                    <td> - </td>
+                </tr>
+                </tbody>
+            </table>
+        @break
+        @default
+            <table class="table table-bordered align-middle text-center mb-5">
+                <thead>
+                <tr class="align-middle">
+                    <th scope="col" class="col-4">Проверяемый показатель (характеристика)</th>
+                    <th scope="col" class="col-2">Норма</th>
+                    <th scope="col" class="col-2">Результат</th>
+                    <th scope="col" class="col-4">Наименование средства измерения или оборудования</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td class="text-start">
+                        Внешний осмотр
+                    </td>
+                    <td> - </td>
+                    <td>Норма</td>
+                    <td> - </td>
+                </tr>
+                <tr>
+                    <td class="text-start">
+                        Проверка действия устройства на комутационные аппараты с помощью штатной функции самоконтроля
+                    </td>
+                    <td>В соответствие с заданной программой</td>
+                    <td>Соответствует</td>
+                    <td> - </td>
+                </tr>
+                <tr>
+                    <td class="text-start">
+                        Контроль взаимодействия проверяемого устройства с другими устройствами и действия устройства
+                        на коммутационные аппараты
+                    </td>
+                    <td>В соответствие с заданной программой</td>
+                    <td>Соответствует</td>
+                    <td> - </td>
+                </tr>
                 <tr>
                     <td class="text-start">
                         Контроль исправности встроенного блока питания в контрольных точках
@@ -181,115 +296,9 @@
                         <div class="col">Класс точноcти {{ $device->class }}</div>
                         <div class="col">Дата след. калибровки: {{ $device->date }}</div>
                     </td>
-                  </tr>
-              <tr>
-                <td class="text-start">
-                    Контроль работоспособности схемы перехода с основного питания на резервное и обратно
-                </td>
-                <td>В соответствие со схемой</td>
-                <td>Соответствует</td>
-                <td> - </td>
-              </tr>
-              <tr>
-                <td class="text-start">
-                Проверка уровней сигналов в каналах связи
-                </td>
-                <td>-20 дБ .. +5 дБ</td>
-                <td>-13 дБ</td>
-                <td class="text-start">
-                    <div class="col" >Персональная ЭВМ с платой Sound maker 3DX2 (Full duplex) и программами SpectraLab и МОДЕМ-СЕРВИС</div>
-                    <div class="col" >Штекер стерео 3,5 мм (тип кабеля - три провода в экране)</div>
-                </td>
-              </tr>
-              <tr>
-                <td class="text-start">
-                    Контроль правильности отображения значений контролируемых физических величин
-                </td>
-                <td>В соответствие с заданной программой</td>
-                <td>Соответствует</td>
-                <td class="text-start">
-                    <div class="col">{{ $device->name }} №{{ $device->code }}</div>
-                    <div class="col">Класс точноcти {{ $device->class }}</div>
-                    <div class="col">Дата след. калибровки: {{ $device->date }}</div>
-                </td>
-              </tr>
-              <tr>
-                <td class="text-start">
-                    Контроль правильности исполнения функций телесигнализации, телеизмерений, регистрации сигналов, определения места повреждения
-                </td>
-                <td>В соответствие с заданной программой</td>
-                <td>Соответствует</td>
-                <td> - </td>
-              </tr>
-              <tr>
-                <td class="text-start">
-                    Контроль работоспособности встроенных функций самодиагностики и тестового контроля
-                </td>
-                <td>В соответствие с заданной программой</td>
-                <td>Соответствует</td>
-                <td> - </td>
-              </tr>
-            </tbody>
-        </table>
-    @break
-        @default
-        <table class="table table-bordered align-middle text-center mb-5">
-            <thead>
-              <tr class="align-middle">
-                <th scope="col" class="col-4">Проверяемый показатель (характеристика)</th>
-                <th scope="col" class="col-2">Норма</th>
-                <th scope="col" class="col-2">Результат</th>
-                <th scope="col" class="col-4">Наименование средства измерения или оборудования</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="text-start">
-                    Внешний осмотр
-                </td>
-                <td> - </td>
-                <td>Норма</td>
-                <td> - </td>
-              </tr>
-              <tr>
-                <td class="text-start">
-                    Проверка действия устройства на комутационные аппараты с помощью штатной функции самоконтроля
-                </td>
-                <td>В соответствие с заданной программой</td>
-                <td>Соответствует</td>
-                <td> - </td>
-              </tr>
-              <tr>
-                <td class="text-start">
-                    Контроль взаимодействия проверяемого устройства с другими устройствами и действия устройства
-                    на коммутационные аппараты
-                </td>
-                <td>В соответствие с заданной программой</td>
-                <td>Соответствует</td>
-                <td> - </td>
-              </tr>
-              <tr>
-                <td class="text-start">
-                    Контроль исправности встроенного блока питания в контрольных точках
-                </td>
-                <td>
-                    <div class="col">110 В</div>
-                    <div class="col">26,5 В</div>
-                    <div class="col">220 В</div>
-                </td>
-                <td>
-                    <div class="col">{{ $record->UTC }} В</div>
-                    <div class="col">{{ $record->UTY }} В</div>
-                    <div class="col">{{ $record->UTP }} В</div>
-                </td>
-                <td class="text-start">
-                    <div class="col">{{ $device->name }} №{{ $device->code }}</div>
-                    <div class="col">Класс точноcти {{ $device->class }}</div>
-                    <div class="col">Дата след. калибровки: {{ $device->date }}</div>
-                </td>
-              </tr>
-            </tbody>
-        </table>
+                </tr>
+                </tbody>
+            </table>
     @endswitch
 
         {{-- Controller file --}}
@@ -297,6 +306,7 @@
         <div class="col">Для контроллера МКД</div>
         <div class="col">Имя файла прошивки - "ст. {{ $CP->name }}.mkd"</div>
     </div>
+
         {{-- TC table --}}
     <div class="col text-start mt-2">Таблица ТС</div>
     <table class="table table-bordered table-sm mb-4">
@@ -337,6 +347,7 @@
             @endforeach
         </tbody>
     </table>
+
         {{-- TY table --}}
     <div class="col text-start">Таблица ТУ</div>
     <table class="table table-bordered table-sm table-fixed">
@@ -371,11 +382,13 @@
             @endforeach
         </tbody>
     </table>
+
         {{-- Conclusion --}}
     <div class="row mb-4">
         <div class="col-12 fw-bolder">Заключение:</div>
         <div class="col">{{ $record->conclusion }}</div>
     </div>
+
         {{-- Workers --}}
     <div class="row mt-3">
         <div class="col-12 mt-3 fw-bolder">Проверку проводил:</div>
@@ -386,7 +399,9 @@
                 {{ mb_substr($worker1->name2, 0, 1) }}.
                 {{ mb_substr($worker1->name3, 0, 1); }}.
             </div>
-            <div class="col-3 position-absolute top-0 start-50"><img class="img-fluid " style="margin-top: -80px; margin-left: -100px" src="{{ asset('img/1.png') }}" alt=""></div>
+            <div class="col-3 position-absolute top-0 start-50"  style="z-index: -1;">
+                <img class="img-fluid " style="margin-top: -2{{ rand(0,5) }}%; margin-left: -8{{ rand(0,5) }}%" src="{{ asset("img/$worker1->name1.png") }}" alt="">
+            </div>
         </div>
         @if ($worker2 != null)
         <div class="row position-relative">
@@ -396,14 +411,32 @@
                 {{ mb_substr($worker2->name2, 0, 1) }}.
                 {{ mb_substr($worker2->name3, 0, 1); }}.
             </div>
-            <div class="col-3 position-absolute top-0 start-50"><img class="img-fluid " style="margin-top: -80px; margin-left: -100px" src="{{ asset('img/2.png') }}" alt=""></div>
+            <div class="col-3 position-absolute top-0 start-50" style="z-index: -1;">
+                <img class="img-fluid " style="margin-top: -4{{ rand(0,5) }}%; margin-left: -4{{ rand(0,5) }}%" src="{{ asset("img/$worker2->name1.png") }}" alt="">
+            </div>
         </div>
         @endif
     </div>
-    <div class="row mt-3">
+    <div class="row position-relative">
         <div class="col-12 mt-3 fw-bolder">Протокол проверил:</div>
-        <div class="col-12 mt-3">Начальник РРУ Акудович Е.В.</div>
+        <div class="col-4 mt-3">
+            Начальник РРУ Акудович Е.В.
+        </div>
+        <div class="col-3 position-absolute top-0 start-50">
+            <img class="img-fluid " style="margin-top: -2{{ rand(0,5) }}%; margin-left: -10{{ rand(0,5) }}%" src="{{ asset("img/Акудович.png") }}" alt="">
+        </div>
+        <div class="wh-100"></div>
+        <div class="col-4 mt-3">
+            {{ $worker2->position }}
+            {{ $worker2->name1 }}
+            {{ mb_substr($worker2->name2, 0, 1) }}.
+            {{ mb_substr($worker2->name3, 0, 1); }}.
+        </div>
+        <div class="col-3 position-absolute top-0 start-50">
+            <img class="img-fluid " style="margin-top: {{ rand(0,5) }}%; margin-left: -7{{ rand(0,5) }}%" src="{{ asset("img/$worker2->name1.png") }}" alt="">
+        </div>
     </div>
+
 </div>
 
 @endsection
