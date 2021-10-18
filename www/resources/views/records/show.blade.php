@@ -404,17 +404,17 @@
             </div>
         </div>
         @if ($worker2 != null)
-        <div class="row position-relative">
-            <div class="col-4 mt-3">
-                {{ $worker2->position }}
-                {{ $worker2->name1 }}
-                {{ mb_substr($worker2->name2, 0, 1) }}.
-                {{ mb_substr($worker2->name3, 0, 1); }}.
+            <div class="row position-relative">
+                <div class="col-4 mt-3">
+                    {{ $worker2->position }}
+                    {{ $worker2->name1 }}
+                    {{ mb_substr($worker2->name2, 0, 1) }}.
+                    {{ mb_substr($worker2->name3, 0, 1); }}.
+                </div>
+                <div class="col-3 position-absolute top-0 start-50" style="z-index: -1;">
+                    <img class="img-fluid " style="margin-top: -4{{ rand(0,5) }}%; margin-left: -4{{ rand(0,5) }}%" src="{{ asset("img/$worker2->name1.png") }}" alt="">
+                </div>
             </div>
-            <div class="col-3 position-absolute top-0 start-50" style="z-index: -1;">
-                <img class="img-fluid " style="margin-top: -4{{ rand(0,5) }}%; margin-left: -4{{ rand(0,5) }}%" src="{{ asset("img/$worker2->name1.png") }}" alt="">
-            </div>
-        </div>
         @endif
     </div>
     <div class="row position-relative">
@@ -427,13 +427,10 @@
         </div>
         <div class="wh-100"></div>
         <div class="col-4 mt-3">
-            {{ $worker2->position }}
-            {{ $worker2->name1 }}
-            {{ mb_substr($worker2->name2, 0, 1) }}.
-            {{ mb_substr($worker2->name3, 0, 1); }}.
+            ст.эл.мех. Соколов Е.И.
         </div>
         <div class="col-3 position-absolute top-0 start-50">
-            <img class="img-fluid " style="margin-top: {{ rand(0,5) }}%; margin-left: -7{{ rand(0,5) }}%" src="{{ asset("img/$worker2->name1.png") }}" alt="">
+            <img class="img-fluid " style="margin-top: {{ rand(0,5) }}%; margin-left: -7{{ rand(0,5) }}%" src="{{ asset("img/Соколов.png") }}" alt="">
         </div>
     </div>
 

@@ -167,17 +167,27 @@ class RecordController extends Controller
 
         $record = Record::where('id', $request->record)->first();
 
+        $CP = ControlledPoint::where('code', $record->controlledPoint)->first();
+
         $pdf = SnappyPdf::loadView('records.export', [
             'record' => $record,
             'worker1' => Workers::where('BIO', $record->worker1)->first(),
             'worker2' => Workers::where('BIO', $record->worker2)->first(),
             'device' => Devices::where('name', $record->device)->first(),
-            'CP' => ControlledPoint::where('code', $record->controlledPoint)->first(),
+            'CP' => $CP,
             'TC' => TC::where('cp-code', $record->controlledPoint)->get(),
             'TY' => TY::where('cp-code', $record->controlledPoint)->get(),
         ]);
 
-        return $pdf->stream();
+
+        $record->type == "Опробование"
+            ? ($type = "Опр")
+            : ($record->type == "Профвосстановление" ? $type = "Профв" : $type = "Профк");
+        $route = "recordsPDF/$CP->name";
+        $name = "$type " . "$CP->type " . "$CP->name " . "($record->date)";
+        $pdf->save("$route/$name.pdf");
+
+        return back();
 
     }
 }

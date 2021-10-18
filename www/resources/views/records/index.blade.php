@@ -2,6 +2,7 @@
 
 @section('content')
 
+    {{-- Search form --}}
 <div class="row justify-content-start">
     <div class="col-8">
         <form class="form-control" action="{{ route('searchRec') }}">
@@ -33,6 +34,7 @@
         </form>
     </div>
 </div>
+    {{-- Main table --}}
 <table class="table table-striped">
     <thead>
       <tr>

@@ -449,13 +449,10 @@
                         </div>
                         <div class="wh-100"></div>
                         <div class="col-4 mt-3">
-                            {{ $worker2->position }}
-                            {{ $worker2->name1 }}
-                            {{ mb_substr($worker2->name2, 0, 1) }}.
-                            {{ mb_substr($worker2->name3, 0, 1); }}.
+                            ст.эл.мех. Соколов Е.И.
                         </div>
                         <div class="col-3 position-absolute top-0 start-50">
-                            <img class="img-fluid " style="margin-top: {{ rand(0,5) }}%; margin-left: -7{{ rand(0,5) }}%" src="{{ asset("img/$worker2->name1.png") }}" alt="">
+                            <img class="img-fluid " style="margin-top: {{ rand(0,5) }}%; margin-left: -7{{ rand(0,5) }}%" src="{{ asset("img/Соколов.png") }}" alt="">
                         </div>
                     </div>
                 </div>
