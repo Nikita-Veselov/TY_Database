@@ -143,6 +143,7 @@ class RecordController extends Controller
 
             //Deleting previous file to prevent doubling from changing name date or type etc.
         File::delete("recordsPDF/$route/$name.pdf");
+        File::delete("recordsRecords/$route/$name.pdf");
 
             //Save new as PDF
         $this->publishPDF($record);
@@ -196,15 +197,27 @@ class RecordController extends Controller
             'TY' => TY::where('cp-code', $record->controlledPoint)->get(),
         ]);
 
+        $pdfPrint = SnappyPdf::loadView('records.exportPrint', [
+            'record' => $record,
+            'worker1' => Workers::where('BIO', $record->worker1)->first(),
+            'worker2' => Workers::where('BIO', $record->worker2)->first(),
+            'device' => Devices::where('name', $record->device)->first(),
+            'CP' => $CP,
+            'TC' => TC::where('cp-code', $record->controlledPoint)->get(),
+            'TY' => TY::where('cp-code', $record->controlledPoint)->get(),
+        ]);
+
         $record->type == "Опробование"
             ? ($type = "Опр")
             : ($record->type == "Профвосстановление" ? $type = "Профв" : $type = "Профк");
 
         $route = "recordsPDF/$CP->name";
+        $routePrint = "recordsPrint/$CP->name";
+
         $name = "$type " . "$CP->type " . "$CP->name " . "($record->date)";
 
         $pdf->save("$route/$name.pdf", true);
-
+        $pdfPrint->save("$routePrint/$name.pdf", true);
     }
 
     public function openPDF(Record $record) {

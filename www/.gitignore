@@ -2,6 +2,7 @@
 /public/hot
 /public/storage
 /public/recordsPDF
+/public/recordsPrint
 /storage/*.key
 /vendor
 .env

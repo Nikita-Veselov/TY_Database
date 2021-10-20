@@ -438,7 +438,7 @@
         $record->type == "Опробование"
             ? ($type = "Опр")
             : ($record->type == "Профвосстановление" ? $type = "Профв" : $type = "Профк");
-        $route = "recordsPDF/$CP->name";
+        $route = "recordsPrint/$CP->name";
         $name = "$type " . "$CP->type " . "$CP->name " . "($record->date)";
         $path = "$route/$name.pdf";
     @endphp
