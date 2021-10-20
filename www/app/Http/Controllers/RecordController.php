@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Response;
+use Rawilk\Printing\Facades\Printing;
 
 class RecordController extends Controller
 {
@@ -69,7 +70,7 @@ class RecordController extends Controller
 
         $this->publishPDF($record);
 
-        return $this->index()->with('success');
+        return $this->show($record, true);
     }
 
     /**
@@ -78,7 +79,7 @@ class RecordController extends Controller
      * @param  \App\Models\Record  $record
      * @return \Illuminate\Http\Response
      */
-    public function show(Record $record)
+    public function show(Record $record, bool $print = false)
     {
         return view('records.show', [
             'record' => $record,
@@ -88,6 +89,7 @@ class RecordController extends Controller
             'CP' => ControlledPoint::where('code', $record->controlledPoint)->first(),
             'TC' => TC::where('cp-code', $record->controlledPoint)->get(),
             'TY' => TY::where('cp-code', $record->controlledPoint)->get(),
+            'print' => $print,
         ]);
     }
 
@@ -145,7 +147,7 @@ class RecordController extends Controller
             //Save new as PDF
         $this->publishPDF($record);
 
-        return $this->show($record)->with('success-added');
+        return $this->show($record, true);
     }
 
     /**
@@ -215,12 +217,10 @@ class RecordController extends Controller
         $route = "recordsPDF/$CP->name";
         $name = "$type " . "$CP->type " . "$CP->name " . "($record->date)";
 
-
         if (File::isFile("$route/$name.pdf"))
         {
             $file = File::get("$route/$name.pdf");
             $response = Response::make($file, 200);
-            // using this will allow you to do some checks on it (if pdf/docx/doc/xls/xlsx)
             $response->header('Content-Type', 'application/pdf');
 
             return $response;

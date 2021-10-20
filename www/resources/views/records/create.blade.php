@@ -32,7 +32,7 @@
     </div>
 
     <select class="form-select form-select-sm" name="controlledPoint">
-        <option value="" selected disabled>CP</option>
+        <option value="" selected disabled>КП</option>
         @foreach ($controlledPoints as $CP)
             <option value="{{ $CP->code }}" @if ( $CP->code == old('controlledPoint')) ? selected @endif>
                 {{ $CP->type }} {{ $CP->name }}
@@ -41,7 +41,7 @@
     </select>
 
     <select class="form-select form-select-sm" name="device">
-        <option value="" selected disabled>Devices</option>
+        <option value="" selected disabled>Устройство</option>
         @foreach ($devices as $device)
             <option value="{{ $device->name }}" @if ( $device->name == old('device')) ? selected @endif>
                 {{ $device->name }}
@@ -71,7 +71,7 @@
     </div>
 
     <select class="form-select form-select-sm" name="worker1">
-        <option selected disabled>Worker 1</option>
+        <option selected disabled>Работник 1</option>
         @foreach ($workers as $worker)
             <option value="{{ $worker->BIO }}" @if ( $worker->BIO == old('worker1')) ? selected @endif>
                 {{ $worker->BIO }}
@@ -80,7 +80,8 @@
     </select>
 
     <select class="form-select form-select-sm" name="worker2">
-        <option value="" selected>Нет</option>
+        <option selected disabled>Работник 2</option>
+        <option >Нет</option>
         @foreach ($workers as $worker)
             <option value="{{ $worker->BIO }}" @if ($worker->BIO == old('worker2')) ? selected @endif>
                 {{ $worker->BIO }}

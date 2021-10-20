@@ -45,7 +45,7 @@
     </div>
 
     <select class="form-select form-select-sm" name="controlledPoint" value="{{ $record->controlledPoint }}">
-        <option value="" disabled>CP</option>
+        <option value="" disabled>КП</option>
         @foreach ($controlledPoints as $CP)
             <option value="{{ $CP->code }}"
                 @if ($CP->code == $record->controlledPoint)
@@ -58,7 +58,7 @@
     </select>
 
     <select class="form-select form-select-sm" name="device" value="{{ $record->device }}">
-        <option value="" disabled>Devices</option>
+        <option value="" disabled>Устройства</option>
         @foreach ($devices as $device)
             <option value="{{ $device->name }}"
                 @if ( $device->name == $record->device)
