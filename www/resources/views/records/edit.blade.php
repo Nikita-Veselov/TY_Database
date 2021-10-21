@@ -99,7 +99,7 @@
       </div>
 
     <select class="form-select form-select-sm" name="worker1" value="{{ $record->worker1 }}">
-        <option value="" disabled>Workers</option>
+        <option value="" disabled>Работник 1</option>
         @foreach ($workers as $worker)
             <option value="{{ $worker->BIO }}"
                 @if ( $worker->BIO == $record->worker1)
@@ -112,7 +112,7 @@
     </select>
 
     <select class="form-select form-select-sm" name="worker2" value="{{ $record->worker2 }}">
-        <option value="" disabled>Workers</option>
+        <option value="" disabled>Работник 2</option>
         <option>Нет</option>
         @foreach ($workers as $worker)
             <option value="{{ $worker->BIO }}"

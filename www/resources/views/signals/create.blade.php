@@ -28,12 +28,12 @@
             <button type="button" name="addTC" id="addTC" class="btn btn-success">Добавить строку</button>
             <tr class="text-center">
                 <td></td>
-                <td><input type="text" name="{{ Str::of('name')->append(1)->append('TC') }}"></td>
-                <td><input type="text" name="{{ Str::of('klemm')->append(1)->append('TC') }}"></td>
-                <td><input type="text" name="{{ Str::of('number')->append(1)->append('TC') }}"></td>
-                <td><input type="text" name="{{ Str::of('invert')->append(1)->append('TC') }}"></td>
-                <td><input type="text" name="{{ Str::of('oper')->append(1)->append('TC') }}"></td>
-                <td><input type="text" name="{{ Str::of('DP')->append(1)->append('TC') }}"></td>
+                <td><input class="w-100" type="text" name="{{ Str::of('name')->append(1)->append('TC') }}"></td>
+                <td><input class="w-100" type="text" name="{{ Str::of('klemm')->append(1)->append('TC') }}"></td>
+                <td><input class="w-100" type="text" name="{{ Str::of('number')->append(1)->append('TC') }}"></td>
+                <td><input class="w-100" type="text" name="{{ Str::of('invert')->append(1)->append('TC') }}"></td>
+                <td><input class="w-100" type="text" name="{{ Str::of('oper')->append(1)->append('TC') }}"></td>
+                <td><input class="w-100" type="text" name="{{ Str::of('DP')->append(1)->append('TC') }}"></td>
             </tr>
 
         </tbody>

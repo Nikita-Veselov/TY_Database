@@ -26,8 +26,7 @@
     <form class="col-6 my-2 px-0" method="GET" action="{{ url('signals') }}">
         <div class="col-12 btn-group-vertical">
             <button class="btn btn-outline-secondary disabled" role="button" aria-disabled="true">Сигналы</button>
-            <select class="form-select" aria-label="КП" name="CP" value="{{ old('CP') }}">
-                <option value="" selected disabled>КП</option>
+            <select class="form-select text-center" size="5" aria-label="КП" name="CP" value="{{ old('CP') }}" >
                 @foreach ($CP as $cp)
                     <option value="{{ $cp->code }}">{{ $cp->type }} {{ $cp->name }}</option>
                 @endforeach

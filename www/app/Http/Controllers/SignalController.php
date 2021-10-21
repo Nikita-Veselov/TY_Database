@@ -22,7 +22,7 @@ class SignalController extends Controller
          *
          * @return \Illuminate\Http\Response
          */
-        // dd($request);
+
         if ($request->CP == null) {
             return back()->withErrors('Выберите КП');
         }
@@ -103,10 +103,11 @@ class SignalController extends Controller
 
     public function edit(Request $request)
     {
+        $CP = ControlledPoint::where('code', $request->CP)->first();
         return view('signals.edit', [
             'TC' => TC::where('cp-code', $request->CP)->get(),
             'TY' => TY::where('cp-code', $request->CP)->get(),
-            'CP' => $request->CP
+            'CP' => $CP,
         ]);
     }
 

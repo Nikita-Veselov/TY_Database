@@ -22,18 +22,32 @@
         <table class="table table-bordered table-sm mb-5">
             <thead class="text-center align-middle">
               <tr>
-                <th>del</th>
                 <th scope="col">Название сигнала</th>
-                <th scope="col">Клемма КП-М (ПС)</th>
+                @if ($CP->type != "ТП")
+                    <th scope="col">Клемма КП-М (ПС)</th>
+                @endif
                 <th scope="col">№ ТС</th>
-                <th scope="col">Инверсия в настройке</th>
+                @if ($CP->type != "ТП")
+                    <th scope="col">Инверсия в настройке</th>
+                @endif
                 <th scope="col">Оперативное название сигнала</th>
                 <th scope="col">Соответствие сигнала с ДП</th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
                 @foreach ($TC as $tc)
                 <tr class="text-center">
+                    <td class="text-start col-3">{{ $tc->name }}</td>
+                    @if ($CP->type != "ТП")
+                        <td class="col-1">{{ $tc->klemm }}</td>
+                    @endif
+                    <td class="col-1">{{ $tc->number }}</td>
+                    @if ($CP->type != "ТП")
+                        <td class="col-1">{{ $tc->invert }}</td>
+                    @endif
+                    <td class="col-3">{{ $tc->oper }}</td>
+                    <td class="col-3">{{ $tc->DP }}</td>
                     <td>
                         <form action="{{ route('signals.destroy', $tc->id) }}" method="POST">
                             @csrf
@@ -44,12 +58,6 @@
                             <button type="submit" class="btn btn-danger col">Уд.</button>
                         </form>
                     </td>
-                    <td class="text-start col-3">{{ $tc->name }}</td>
-                    <td class="col-1">{{ $tc->klemm }}</td>
-                    <td class="col-1">{{ $tc->number }}</td>
-                    <td class="col-1">{{ $tc->invert }}</td>
-                    <td class="col-3">{{ $tc->oper }}</td>
-                    <td class="col-3">{{ $tc->DP }}</td>
                 </tr>
                 @endforeach
             </tbody>
@@ -58,17 +66,26 @@
         <table class="table table-bordered table-sm table-fixed">
             <thead>
               <tr class="text-center align-middle">
-                <th>Del</th>
                 <th scope="col">Название сигнала</th>
-                <th scope="col">Клемма КП-М (ПС)</th>
+                @if ($CP->type != "ТП")
+                    <th scope="col">Клемма КП-М (ПС)</th>
+                @endif
                 <th scope="col">№ ТУ</th>
                 <th scope="col">Оперативное название сигнала</th>
                 <th scope="col">Соответствие сигнала с ДП</th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
                 @foreach ($TY as $ty)
                 <tr class="text-center">
+                    <td class="text-start col-3">{{ $ty->name }}</td>
+                    @if ($CP->type != "ТП")
+                        <td class="col-2">{{ $ty->klemm }}</td>
+                    @endif
+                    <td class="col-1">{{ $ty->number }}</td>
+                    <td class="col-3">{{ $ty->oper }}</td>
+                    <td class="col-3">{{ $ty->DP }}</td>
                     <td>
                         <form action="{{ route('signals.destroy', $ty->id) }}" method="POST">
                             @csrf
@@ -79,11 +96,6 @@
                             <button type="submit" class="btn btn-danger col">Del</button>
                         </form>
                     </td>
-                    <td class="text-start col-3">{{ $ty->name }}</td>
-                    <td class="col-2">{{ $ty->klemm }}</td>
-                    <td class="col-1">{{ $ty->number }}</td>
-                    <td class="col-3">{{ $ty->oper }}</td>
-                    <td class="col-3">{{ $ty->DP }}</td>
                 </tr>
                 @endforeach
             </tbody>

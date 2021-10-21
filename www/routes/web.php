@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('frontpage', ['CP' => ControlledPoint::all()]);
+    return view('frontpage', ['CP' => ControlledPoint::all()->sortBy('name')]);
 });
 
 Route::resource('/records', RecordController::class);
