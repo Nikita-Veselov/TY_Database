@@ -25,7 +25,7 @@
         </tr>
         </thead>
         <tbody>
-            <button type="button" name="addTC" id="addTC" class="btn btn-success">Добавить строку</button>
+            <button type="button" name="addTC" id="addTC" class="btn btn-warning">Добавить строку</button>
             @foreach ($TC as $tc)
             <tr class="text-center">
                 <td></td>
@@ -65,7 +65,7 @@
             <th></th>
             <th scope="col" class="col-4">Название сигнала</th>
             @if ($CP->type != "ТП")
-                <th scope="col" class="col-1">Клемма КП-М (ПС)</th>
+                <th scope="col" class="col-2">Клемма КП-М (ПС)</th>
             @endif
             <th scope="col" @if ($CP->type != "ТП") class="col-1" @else class="col-2" @endif>№ ТУ</th>
             <th scope="col" class="col-4">Оперативное название сигнала</th>
@@ -73,7 +73,7 @@
         </tr>
         </thead>
         <tbody>
-            <button type="button" name="addTY" id="addTY" class="btn btn-success">Добавить строку</button>
+            <button type="button" name="addTY" id="addTY" class="btn btn-warning">Добавить строку</button>
             @foreach ($TY as $ty)
             <tr class="text-center">
                 <td></td>
@@ -103,6 +103,6 @@
             $('#TYCount').val(--j);
         });
     </script>
-    <button type="submit" class="btn btn-primary">Изменить</button>
+    <button type="submit" class="btn btn-lg btn-success">Сохранить изменения</button>
 </form>
 @endsection

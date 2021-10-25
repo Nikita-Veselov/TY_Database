@@ -15,6 +15,8 @@
     <div class="container d-flex flex-column mx-auto vh-100">
         <div class="main flex-grow-1">
             <div class="row justify-content-center">
+                <h3 class="text-center mb-5">КП №{{ $CP->code }} - {{ $CP->type }} {{ $CP->name }}</h3>
+
                 <div class="text-start fs-4">Таблица ТС</div>
                 <table class="table table-bordered table-sm mb-5">
                     <thead class="text-center align-middle">
@@ -64,8 +66,8 @@
                     </thead>
                     <tbody>
                         @foreach ($TY as $ty)
-                        <tr>
-                            <td class="text-start">{{ $ty->name }}</td>
+                        <tr class="text-center">
+                            <td>{{ $ty->name }}</td>
                             @if ($CP->type != "ТП")
                                 <td>{{ $ty->klemm }}</td>
                             @endif

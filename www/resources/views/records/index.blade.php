@@ -60,7 +60,7 @@
                 <td>
                     <div class="row btn-group" role="group">
                         <a type="button" class="col-3 btn btn-primary btn-sm m-0 px-2" href="{{ URL::to('records/' . $record->id) }}" role="button">Показ.</a>
-                        <a type="button" class="col-3 btn btn-success btn-sm m-0 px-3" href="{{ route('openPDF', ['record' => $record->id ]) }}" role="button">PDF</a>
+                        <a type="button" class="col-3 btn btn-success btn-sm m-0 px-3" href="{{ route('openPDF', ['record' => $record->id ]) }}" role="button" target="_blank">PDF</a>
                         <a type="button" class="col-3 btn btn-secondary btn-sm m-0 px-3" href="{{ URL::to('records/' . $record->id . '/edit') }}" role="button">Ред.</a>
                         <form class="col-3 btn btn-danger btn-sm delete m-0 p-0" action="{{ route('records.destroy', $record->id) }}" method="POST">
                             @csrf

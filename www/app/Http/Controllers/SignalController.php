@@ -16,7 +16,7 @@ use function PHPUnit\Framework\once;
 
 class SignalController extends Controller
 {
-    public function index(Request $request)
+    public function index(Request $request, bool $print = false)
     {
 
         /**
@@ -32,7 +32,8 @@ class SignalController extends Controller
             'code' => $request->CP,
             'TC' => TC::where('cp-code', $request->CP)->get(),
             'TY' => TY::where('cp-code', $request->CP)->get(),
-            'CP' => ControlledPoint::where('code', $request->CP)->first()
+            'CP' => ControlledPoint::where('code', $request->CP)->first(),
+            'print' => $print,
         ]);
     }
 
@@ -99,7 +100,7 @@ class SignalController extends Controller
         }
         while ($countTY <= $request->TYcount);
 
-        return $this->index($request)->with('success');
+        return $this->index($request);
     }
 
     public function edit(Request $request)
@@ -200,7 +201,7 @@ class SignalController extends Controller
             } while ($countTY++ < $request->TYcount);
         }
 
-        return $this->index($request)->with('success');
+        return $this->index($request);
     }
 
     /**
@@ -230,6 +231,7 @@ class SignalController extends Controller
             'CP' => ControlledPoint::where('code', $request->CP)->first()
         ]);
 
-        $pdf->save("tmp/печать сигналов.pdf", true);
+        $pdf->save("tmp/print.pdf", true);
+        return $this->index($request, true);
     }
 }

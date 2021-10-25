@@ -105,4 +105,11 @@
     @endif
 </div>
 
+@if ($print)
+    <script>
+        w = window.open( '../tmp/print.pdf' );
+        w.print();
+    </script>
+@endif
+
 @endsection
