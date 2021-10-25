@@ -37,4 +37,4 @@ Route::resource('/workers', WorkersController::class);
 Route::resource('/devices', DevicesController::class);
 
 Route::resource('/signals', SignalController::class);
-
+Route::get('/print/{CP}', [SignalController::class, 'print'])->name('print');

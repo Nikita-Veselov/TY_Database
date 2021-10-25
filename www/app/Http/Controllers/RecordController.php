@@ -143,7 +143,7 @@ class RecordController extends Controller
 
             //Deleting previous file to prevent doubling from changing name date or type etc.
         File::delete("recordsPDF/$route/$name.pdf");
-        File::delete("recordsRecords/$route/$name.pdf");
+        File::delete("recordsPrint/$route/$name.pdf");
 
             //Save new as PDF
         $this->publishPDF($record);
@@ -186,6 +186,14 @@ class RecordController extends Controller
     public function publishPDF(Record $record) {
 
         $CP = ControlledPoint::where('code', $record->controlledPoint)->first();
+        $record->type == "Опробование"
+            ? ($type = "Опр")
+            : ($record->type == "Профвосстановление" ? $type = "Профв" : $type = "Профк");
+
+        $route = "recordsPDF/$CP->name";
+        $routePrint = "recordsPrint/$CP->name";
+
+        $name = "$type " . "$CP->type " . "$CP->name " . "($record->date)";
 
         $pdf = SnappyPdf::loadView('records.export', [
             'record' => $record,
@@ -196,6 +204,7 @@ class RecordController extends Controller
             'TC' => TC::where('cp-code', $record->controlledPoint)->get(),
             'TY' => TY::where('cp-code', $record->controlledPoint)->get(),
         ]);
+        $pdf->save("$route/$name.pdf", true);
 
         $pdfPrint = SnappyPdf::loadView('records.exportPrint', [
             'record' => $record,
@@ -206,17 +215,6 @@ class RecordController extends Controller
             'TC' => TC::where('cp-code', $record->controlledPoint)->get(),
             'TY' => TY::where('cp-code', $record->controlledPoint)->get(),
         ]);
-
-        $record->type == "Опробование"
-            ? ($type = "Опр")
-            : ($record->type == "Профвосстановление" ? $type = "Профв" : $type = "Профк");
-
-        $route = "recordsPDF/$CP->name";
-        $routePrint = "recordsPrint/$CP->name";
-
-        $name = "$type " . "$CP->type " . "$CP->name " . "($record->date)";
-
-        $pdf->save("$route/$name.pdf", true);
         $pdfPrint->save("$routePrint/$name.pdf", true);
     }
 

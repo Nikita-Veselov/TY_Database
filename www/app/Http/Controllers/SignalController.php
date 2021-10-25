@@ -6,6 +6,7 @@ use App\Http\Requests\CreateSignalRequest;
 use App\Models\ControlledPoint;
 use App\Models\TC;
 use App\Models\TY;
+use Barryvdh\Snappy\Facades\SnappyPdf;
 use Error;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -17,6 +18,7 @@ class SignalController extends Controller
 {
     public function index(Request $request)
     {
+
         /**
          * Display a listing of the resource.
          *
@@ -26,7 +28,6 @@ class SignalController extends Controller
         if ($request->CP == null) {
             return back()->withErrors('Выберите КП');
         }
-
         return view('signals.index', [
             'code' => $request->CP,
             'TC' => TC::where('cp-code', $request->CP)->get(),
@@ -219,5 +220,16 @@ class SignalController extends Controller
         } else {
             return $this->index($request)->withErrors('Deletion aborted');
         }
+    }
+
+    public function print(Request $request) {
+        $pdf = SnappyPdf::loadView('signals.export', [
+            'code' => $request->CP,
+            'TC' => TC::where('cp-code', $request->CP)->get(),
+            'TY' => TY::where('cp-code', $request->CP)->get(),
+            'CP' => ControlledPoint::where('code', $request->CP)->first()
+        ]);
+
+        $pdf->save("tmp/печать сигналов.pdf", true);
     }
 }

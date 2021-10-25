@@ -2,9 +2,9 @@
     <div class="header row text-start">
         <div class="col-6 pt-4">
             @if (!Request::is('/'))
-                    <a class="col-2 btn btn-warning" href="/" role="button">Домой</a>
+                    <a class="col-2 btn btn-outline-warning" href="/" role="button">Домой</a>
                 @if (Request::is('records'))
-                    <a class="col-2 btn btn-success" href="/" role="button">Назад</a>
+                    <a class="col-2 btn btn-outline-success" href="/" role="button">Назад</a>
                     @else
                         @if (Request::is('records/*'))
                             <a class="col-2 btn btn-success" href="{{ route('records.index') }}" role="button">Назад</a>

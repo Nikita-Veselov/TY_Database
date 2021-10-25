@@ -3,6 +3,7 @@
 /public/storage
 /public/recordsPDF
 /public/recordsPrint
+/public/tmp
 /storage/*.key
 /vendor
 .env
