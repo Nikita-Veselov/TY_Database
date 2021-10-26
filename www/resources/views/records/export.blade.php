@@ -66,7 +66,7 @@
                             <div class="col">№{{ $record->number }}</div>
                             <div class="col-5 position-relative" style="z-index: -1;">
                                 <div class="position-absolute col-7">
-                                    <img class="img-fluid top-0 start-50" style="margin-top: -{{ rand(1,3) }}0%; margin-left: 2{{ rand(1,4) }}0%" src="{{ asset("img/ЭЧ.png") }}" alt="">
+                                    <img class="img-fluid top-0 start-50" style="margin-top: -{{ rand(1,3) }}0%; margin-left: 2{{ rand(1,4) }}0%; transform: rotate( {{ rand(-1,2) }}0deg); " src="{{ asset("img/ЭЧ.png") }}" alt="">
                                 </div>
                             </div>
                         </div>

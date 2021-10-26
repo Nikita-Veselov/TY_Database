@@ -26,7 +26,8 @@
     <form class="col-6 my-2 px-0" method="GET" action="{{ url('signals') }}">
         <div class="col-12 btn-group-vertical">
             <button class="btn btn-primary disabled" role="button" aria-disabled="true">Сигналы</button>
-            <select class="form-select text-center" size="5" aria-label="КП" name="CP" value="{{ old('CP') }}" >
+            <input class="w-100" type="text" id="search" name="search" onkeyup="filter()">
+            <select id="select" class="form-select text-center" size="5" aria-label="КП" name="CP" value="{{ old('CP') }}" >
                 @foreach ($CP as $cp)
                     <option value="{{ $cp->code }}">{{ $cp->type }} {{ $cp->name }}</option>
                 @endforeach
@@ -56,4 +57,19 @@
     </div>
     <div class="w-100"></div>
 
+
+    <script>
+        function filter() {
+            var keyword = document.getElementById("search").value.toLowerCase();
+            var select = document.getElementById("select");
+            for (var i = 0; i < select.length; i++) {
+                var txt = select.options[i].text.toLowerCase();
+                if (!txt.match(keyword)) {
+                    $(select.options[i]).attr('disabled', 'disabled').hide();
+                } else {
+                    $(select.options[i]).removeAttr('disabled').show();
+                }
+            }
+        }
+    </script>
 @endsection

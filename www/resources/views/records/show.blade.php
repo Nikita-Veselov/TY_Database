@@ -33,10 +33,12 @@
         @endswitch
         на
     </div>
+
         {{-- Station --}}
     <div class="col text-center fs-4 fw-bold mb-2">
         ст. {{ $CP->name }}
     </div>
+
         {{-- Record number and date --}}
         <div class="col text-center">
             <div class="row">
@@ -44,7 +46,7 @@
                 <div class="col">№{{ $record->number }}</div>
                 <div class="col-5 position-relative" style="z-index: -1;">
                     <div class="position-absolute col-7">
-                        <img class="img-fluid top-0 start-50" style="margin-top: -{{ rand(1,3) }}0%; margin-left: {{ rand(1,4) }}0%" src="{{ asset("img/ЭЧ.png") }}" alt="">
+                        <img class="img-fluid top-0 start-50" style="margin-top: -30%; margin-left: 0%; transform: rotate(-10deg);" src="{{ asset("img/ЭЧ.png") }}" alt="">
                     </div>
                 </div>
             </div>
@@ -400,7 +402,7 @@
                 {{ mb_substr($worker1->name3, 0, 1); }}.
             </div>
             <div class="col-3 position-absolute top-0 start-50"  style="z-index: -1;">
-                <img class="img-fluid w-75" style="margin-top: -2{{ rand(0,5) }}%; margin-left: -9{{ rand(0,5) }}%" src="{{ asset("img/$worker1->name1.png") }}" alt="">
+                <img class="img-fluid w-75" style="margin-top: -20%; margin-left: -90%" src="{{ asset("img/$worker1->name1.png") }}" alt="">
             </div>
         </div>
         @if ($worker2 != null)
@@ -412,7 +414,7 @@
                     {{ mb_substr($worker2->name3, 0, 1); }}.
                 </div>
                 <div class="col-3 position-absolute top-0 start-50" style="z-index: -1;">
-                    <img class="img-fluid w-75" style="margin-top: -4{{ rand(0,5) }}%; margin-left: -4{{ rand(0,5) }}%" src="{{ asset("img/$worker2->name1.png") }}" alt="">
+                    <img class="img-fluid w-75" style="margin-top: 0%; margin-left: -80%" src="{{ asset("img/$worker2->name1.png") }}" alt="">
                 </div>
             </div>
         @endif
@@ -423,17 +425,18 @@
             Начальник РРУ Акудович Е.В.
         </div>
         <div class="col-3 position-absolute top-0 start-50">
-            <img class="img-fluid w-75" style="margin-top: -1{{ rand(0,5) }}%; margin-left: -8{{ rand(0,5) }}%" src="{{ asset("img/Акудович.png") }}" alt="">
+            <img class="img-fluid w-75" style="margin-top: -10%; margin-left: -80%" src="{{ asset("img/Акудович.png") }}" alt="">
         </div>
         <div class="wh-100"></div>
         <div class="col-4 mt-3">
             ст.эл.мех. Соколов Е.И.
         </div>
         <div class="col-3 position-absolute top-0 start-50">
-            <img class="img-fluid w-75" style="margin-top: 3{{ rand(0,5) }}%; margin-left: -10{{ rand(0,5) }}%" src="{{ asset("img/Соколов.png") }}" alt="">
+            <img class="img-fluid w-75" style="margin-top: 30%; margin-left: -100%" src="{{ asset("img/Соколов.png") }}" alt="">
         </div>
     </div>
 
+        {{-- calling for print if rendred after saving or editing --}}
     @php
         $record->type == "Опробование"
             ? ($type = "Опр")

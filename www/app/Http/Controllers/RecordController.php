@@ -11,6 +11,7 @@ use App\Models\TY;
 use App\Models\Workers;
 use Barryvdh\Snappy\Facades\SnappyPdf;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Response;
@@ -171,8 +172,20 @@ class RecordController extends Controller
      */
     public function search(Request $request)
     {
+        if ($request->key === 'CPname') {
+            $key = ControlledPoint::where('name', 'like', '%'.$request->value.'%')->get();
+            $arr = [];
+            foreach ($key as $code) {
+                array_push($arr, $code->code);
+            };
+            return view('records.index', [
+                'records' => Record::whereIn('controlledPoint', $arr)->orderBy('id')->simplePaginate(10),
+                'CP' => ControlledPoint::all(),
+            ]);
+        }
         return view('records.index', [
-            'records' => Record::where($request->key, $request->value)->get()->sortBy('id')
+            'records' => Record::where($request->key, '%'.$request->value.'%')->orderBy('id')->simplePaginate(10),
+            'CP' => ControlledPoint::all(),
         ]);
     }
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateControlledPointRequest;
 use App\Models\ControlledPoint;
+use App\Models\Record;
 use App\Models\TC;
 use App\Models\TY;
 use Illuminate\Http\Request;
@@ -80,6 +81,13 @@ class ControlledPointController extends Controller
      */
     public function update(Request $request, ControlledPoint $controlledPoint)
     {
+        // Update all codes in all records contining this CP
+        $records = Record::where('controlledPoint', $controlledPoint->code)->get();
+        foreach ($records as $record) {
+            $record->controlledPoint = $request->code;
+            $record->save();
+        }
+
         $controlledPoint = ControlledPoint::find($controlledPoint->id);
         $controlledPoint->code = $request->code;
         $controlledPoint->name = $request->name;

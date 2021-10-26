@@ -26,6 +26,7 @@ Route::get('/', function () {
 });
 
 Route::resource('/records', RecordController::class);
+Route::get('/print/{CP}', [RecordController::class, 'print'])->name('print');
 Route::get('/searchRec', [RecordController::class, 'search'])->name('searchRec');
 Route::get('/openPDF/{record}', [RecordController::class, 'openPDF'])->name('openPDF');
 
