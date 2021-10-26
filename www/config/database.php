@@ -39,7 +39,7 @@ return [
             'driver' => 'sqlite',
             'url' => env('DATABASE_URL'),
             // 'database' => database_path(env('DB_DATABASE', 'dbfilename')),
-            'database' => '\\\192.168.1.2/db/database.sqlite',
+            'database' => '\\\Home-pc/db/database.sqlite',
             'prefix' => '',
             'foreign_key_constraints' => env('DB_FOREIGN_KEYS', true),
         ],
