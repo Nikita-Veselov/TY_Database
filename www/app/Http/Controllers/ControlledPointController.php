@@ -8,6 +8,11 @@ use App\Models\Record;
 use App\Models\TC;
 use App\Models\TY;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Storage;
+use League\Flysystem\Adapter\Ftp;
+use League\Flysystem\Filesystem;
 
 class ControlledPointController extends Controller
 {

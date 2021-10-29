@@ -61,8 +61,8 @@
                     <div class="row btn-group" role="group">
                         <a type="button" class="col-2 btn btn-primary btn-sm m-0 py-1 px-0" href="{{ URL::to('records/' . $record->id) }}" role="button"><img class="img-fluid w-50" src="{{ asset('/img/icons/Show.png') }}" alt=""></a>
                         <a type="button" class="col-2 btn btn-secondary btn-sm m-0 py-1 px-0" href="{{ URL::to('records/' . $record->id . '/edit') }}" role="button"><img class="img-fluid w-50" src="{{ asset('/img/icons/Edit.png') }}" alt=""></a>
-                        <a type="button" class="col-2 btn btn-success btn-sm m-0 py-1 px-0" href="{{ route('openPDF', ['record' => $record->id ]) }}" role="button" target="_blank"><img class="img-fluid w-50" src="{{ asset('/img/icons/PDF.png') }}" alt=""></a>
-                        <a type="button" class="col-2 btn btn-warning btn-sm m-0 py-1 px-0" href="{{ URL::to('records/' . $record->id . '/edit') }}" role="button"><img class="img-fluid w-50" src="{{ asset('/img/icons/Printer.png') }}" alt=""></a>
+                        <a type="button" class="col-2 btn btn-success btn-sm m-0 py-1 px-0" href="{{ route('openPDF', ['record' => $record->id, 'opt' => 'PDF' ]) }}" role="button" target="_blank"><img class="img-fluid w-50" src="{{ asset('/img/icons/PDF.png') }}" alt=""></a>
+                        <a type="button" class="col-2 btn btn-warning btn-sm m-0 py-1 px-0" href="{{ route('openPDF', ['record' => $record->id, 'opt' => 'Print' ]) }}" role="button" target="_blank"><img class="img-fluid w-50" src="{{ asset('/img/icons/Printer.png') }}" alt=""></a>
                         <form class="col-2 btn btn-danger btn-sm delete m-0 py-1 px-0" action="{{ route('records.destroy', $record->id) }}" method="POST">
                             @csrf
                             @method('DELETE')

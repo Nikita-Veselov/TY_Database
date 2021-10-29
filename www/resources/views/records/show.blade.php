@@ -437,18 +437,9 @@
     </div>
 
         {{-- calling for print if rendred after saving or editing --}}
-    @php
-        $record->type == "Опробование"
-            ? ($type = "Опр")
-            : ($record->type == "Профвосстановление" ? $type = "Профв" : $type = "Профк");
-        $route = "recordsPrint/$CP->name";
-        $name = "$type " . "$CP->type " . "$CP->name " . "($record->date)";
-        $path = "$route/$name.pdf";
-    @endphp
-
     @if ($print)
         <script>
-            file = "/" + {!! json_encode($path) !!};
+            file = '../tmp/tmp.pdf';
             w = window.open( file );
             w.print();
         </script>

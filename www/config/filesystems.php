@@ -58,6 +58,35 @@ return [
             'root' => storage_path('app/public/recordsPDF'),
             'visibility' => 'public',
         ],
+
+        'ftp' => [
+            'driver' => 'ftp',
+            'host' => '192.168.137.82',
+            'username' => 'newftpuser',
+            'password' => 'server',
+
+            // Optional FTP Settings...
+            // 'port' => 21,
+            // 'root' => '',
+            // 'passive' => true,
+            // 'ssl' => true,
+            // 'timeout' => 30,
+        ],
+
+        'sftp' => [
+            'driver' => 'sftp',
+            'host' => env('FTP_HOST'),
+            'username' => env('FTP_USERNAME'),
+            'password' => env('FTP_PASSWORD'),
+
+            // Settings for SSH key based authentication...
+            'privateKey' => '',
+
+            // Optional SFTP Settings...
+            // 'port' => 22,
+            // 'root' => '',
+            // 'timeout' => 30,
+        ],
     ],
 
     /*

@@ -57,7 +57,6 @@
     </div>
     <div class="w-100"></div>
 
-
     <script>
         function filter() {
             var keyword = document.getElementById("search").value.toLowerCase();

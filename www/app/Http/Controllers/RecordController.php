@@ -10,6 +10,7 @@ use App\Models\TC;
 use App\Models\TY;
 use App\Models\Workers;
 use Barryvdh\Snappy\Facades\SnappyPdf;
+use Dotenv\Util\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\App;
@@ -143,8 +144,22 @@ class RecordController extends Controller
         $record->save();
 
             //Deleting previous file to prevent doubling from changing name date or type etc.
-        File::delete("recordsPDF/$route/$name.pdf");
-        File::delete("recordsPrint/$route/$name.pdf");
+
+        $ftp = ftp_ssl_connect(env('FTP_HOST'));
+        ftp_login($ftp, env('FTP_USERNAME'), env('FTP_PASSWORD'));
+        ftp_pasv($ftp, true);
+
+        @ftp_delete($ftp, "upload/recordsPDF/$route/$name.pdf");
+
+        ftp_close($ftp);
+
+        $ftp = ftp_ssl_connect(env('FTP_HOST'));
+        ftp_login($ftp, env('FTP_USERNAME'), env('FTP_PASSWORD'));
+        ftp_pasv($ftp, true);
+
+        @ftp_delete($ftp, "upload/recordsPrint/$route/$name.pdf");
+
+        ftp_close($ftp);
 
             //Save new as PDF
         $this->publishPDF($record);
@@ -197,17 +212,19 @@ class RecordController extends Controller
      */
 
     public function publishPDF(Record $record) {
-
+        //формирование имени файла
         $CP = ControlledPoint::where('code', $record->controlledPoint)->first();
         $record->type == "Опробование"
             ? ($type = "Опр")
             : ($record->type == "Профвосстановление" ? $type = "Профв" : $type = "Профк");
-
-        $route = "recordsPDF/$CP->name";
-        $routePrint = "recordsPrint/$CP->name";
-
         $name = "$type " . "$CP->type " . "$CP->name " . "($record->date)";
 
+        //подключение к серверу
+        $ftp = ftp_ssl_connect(env('FTP_HOST'));
+        ftp_login($ftp, env('FTP_USERNAME'), env('FTP_PASSWORD'));
+        ftp_pasv($ftp, true);
+
+        //создание и сохранение пдф
         $pdf = SnappyPdf::loadView('records.export', [
             'record' => $record,
             'worker1' => Workers::where('BIO', $record->worker1)->first(),
@@ -217,8 +234,33 @@ class RecordController extends Controller
             'TC' => TC::where('cp-code', $record->controlledPoint)->get(),
             'TY' => TY::where('cp-code', $record->controlledPoint)->get(),
         ]);
-        $pdf->save("$route/$name.pdf", true);
+        $pdf->save("tmp/tmp.pdf", true);
 
+        //формирование путей
+        $path = "recordsPDF/$CP->name";
+        $local_file = 'tmp/tmp.pdf';
+        $server_file = "/upload/$path/$name.pdf";
+
+        //создание поддиректорий
+        if (!@ftp_chdir($ftp, $path)) {
+            $ftppath = 'upload/' . $path;
+            $this->ftp_mksubdir($ftp, $ftppath);
+        }
+
+        //загрузка на сервер
+        if (!ftp_put($ftp, $server_file, $local_file, FTP_BINARY)) {
+            return back()->withErrors('Сохранение не удалось');
+        }
+
+        //закрытие сессии
+        ftp_close($ftp);
+
+        //подключение к серверу
+        $ftp = ftp_ssl_connect(env('FTP_HOST'));
+        ftp_login($ftp, env('FTP_USERNAME'), env('FTP_PASSWORD'));
+        ftp_pasv($ftp, true);
+
+        //создание и сохранение пдф для печати
         $pdfPrint = SnappyPdf::loadView('records.exportPrint', [
             'record' => $record,
             'worker1' => Workers::where('BIO', $record->worker1)->first(),
@@ -228,26 +270,71 @@ class RecordController extends Controller
             'TC' => TC::where('cp-code', $record->controlledPoint)->get(),
             'TY' => TY::where('cp-code', $record->controlledPoint)->get(),
         ]);
-        $pdfPrint->save("$routePrint/$name.pdf", true);
+        $pdfPrint->save("tmp/tmp.pdf", true);
+
+        //формирование путей
+        $path = "recordsPrint/$CP->name";
+        $local_file = 'tmp/tmp.pdf';
+        $server_file = "/upload/$path/$name.pdf";
+
+        //создание поддиректорий
+        if (!@ftp_chdir($ftp, $path)) {
+            $ftppath = 'upload/' . $path;
+            $this->ftp_mksubdir($ftp, $ftppath);
+        }
+
+        //загрузка на сервер
+        if (!ftp_put($ftp, $server_file, $local_file, FTP_BINARY)) {
+            return back()->withErrors('Сохранение не удалось');
+        }
+        //закрытие сессии
+        ftp_close($ftp);
     }
 
-    public function openPDF(Record $record) {
+    public function openPDF(Request $request, Record $record) {
         $CP = ControlledPoint::where('code', $record->controlledPoint)->first();
-
+        // dd($request->opt);
         $record->type == "Опробование"
             ? ($type = "Опр")
             : ($record->type == "Профвосстановление" ? $type = "Профв" : $type = "Профк");
 
-        $route = "recordsPDF/$CP->name";
+        if ($request->opt == 'Print') {
+            $route = "recordsPrint/$CP->name";
+        } elseif ($request->opt == 'PDF') {
+            $route = "recordsPDF/$CP->name";
+        }
         $name = "$type " . "$CP->type " . "$CP->name " . "($record->date)";
 
-        if (File::isFile("$route/$name.pdf"))
-        {
-            $file = File::get("$route/$name.pdf");
-            $response = Response::make($file, 200);
-            $response->header('Content-Type', 'application/pdf');
+        $local_file = 'tmp/tmp.pdf';
+        $server_file = "upload/$route/$name.pdf";
 
-            return $response;
+        $ftp = ftp_ssl_connect(env('FTP_HOST'));
+        ftp_login($ftp, env('FTP_USERNAME'), env('FTP_PASSWORD'));
+
+        // попытка скачать $server_file и сохранить в $local_file
+        if (ftp_get($ftp, $local_file, $server_file, FTP_BINARY)) {
+            if (File::isFile("tmp/tmp.pdf")) {
+                $file = File::get("tmp/tmp.pdf");
+                $response = Response::make($file, 200);
+                $response->header('Content-Type', 'application/pdf');
+
+                return $response;
+            }
+        } else {
+            return back()->withErrors('Не удалось открыть файл');
+        }
+
+        // закрытие соединения
+        ftp_close($ftp);
+    }
+
+    protected function ftp_mksubdir($ftp, $ftppath){
+        $parts = explode('/', $ftppath);
+        foreach($parts as $part){
+        if(!@ftp_chdir($ftp, $part)){
+            ftp_mkdir($ftp, $part);
+            ftp_chdir($ftp, $part);
+            }
         }
     }
 }
