@@ -14,10 +14,10 @@
 <body>
     <div class="container d-flex flex-column mx-auto vh-100">
 
-        <x-header />
+        <x-header  />
 
         <div class="main flex-grow-1">
-            <div class="row justify-content-center">
+            <div class="row justify-content-center" style="padding-top: 100px">
                 @yield('content')
             </div>
         </div>
