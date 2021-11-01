@@ -4,19 +4,19 @@
 
     {{-- Search form --}}
 <div class="row justify-content-start">
-    <div class="col-8">
+    <div class="col-6 p-0">
         <form class="form-control" action="{{ route('searchRec') }}">
             <div class="row">
-                <div class="col">
+                <div class="col-8">
                     <label for="value" class="form-label">Значение</label>
                 </div>
-
+                <div class="col-4"></div>
             </div>
             <div class="row">
-                <div class="col">
+                <div class="col-8">
                     <input class="form-control" type="text" name="value" value="{{ isset($value) ? $value : '' }}">
                 </div>
-                <div class="col-3 text-center">
+                <div class="col-4 text-center">
                     <button class="btn btn-primary" type="submit">Найти</button>
                     <a role="button" type="button" href="{{ route('records.index') }}" class="btn btn-secondary">Сброс</a>
                 </div>

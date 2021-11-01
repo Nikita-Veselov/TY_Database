@@ -5,14 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateControlledPointRequest;
 use App\Models\ControlledPoint;
 use App\Models\Record;
-use App\Models\TC;
-use App\Models\TY;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Response;
-use Illuminate\Support\Facades\Storage;
-use League\Flysystem\Adapter\Ftp;
-use League\Flysystem\Filesystem;
+
 
 class ControlledPointController extends Controller
 {
@@ -116,7 +110,11 @@ class ControlledPointController extends Controller
     public function search(Request $request)
     {
         return view('controlledPoints.index', [
-            'controlledPoints' => ControlledPoint::where($request->key, $request->value)->get()->sortBy('id')
+            'controlledPoints' => ControlledPoint::where('code', 'like', '%' . $request->value . '%')
+            ->orWhere('name', 'like', '%' . $request->value . '%')
+            ->orWhere('type', 'like', '%' . $request->value . '%')
+            ->orderBy('id')
+            ->get()
         ]);
     }
 }

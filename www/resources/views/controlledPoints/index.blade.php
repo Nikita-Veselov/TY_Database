@@ -3,29 +3,19 @@
 @section('content')
 
 <div class="row justify-content-start">
-    <div class="col-8">
+    <div class="col-6 p-0">
         <form class="form-control" action="{{ route('searchCp') }}">
             <div class="row">
-                <div class="col">
-                    <label for="key" class="form-label">Столбец</label>
-                </div>
-                <div class="col">
+                <div class="col-8">
                     <label for="value" class="form-label">Значение</label>
                 </div>
-                <div class="col-3"></div>
+                <div class="col-4"></div>
             </div>
             <div class="row">
-                <div class="col">
-                    <select class="form-select" name="key">
-                        <option value="code">Код</option>
-                        <option value="name">Название</option>
-                        <option value="type">Тип</option>
-                    </select>
-                </div>
-                <div class="col">
+                <div class="col-8">
                     <input class="form-control" type="text" name="value">
                 </div>
-                <div class="col-3 text-center">
+                <div class="col-4 text-center">
                     <button class="btn btn-primary" type="submit">Найти</button>
                     <a role="button" type="button" href="{{ route('controlledPoints.index') }}" class="btn btn-secondary">Сброс</a>
                 </div>
