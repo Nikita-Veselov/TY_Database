@@ -8,23 +8,13 @@
         <form class="form-control" action="{{ route('searchRec') }}">
             <div class="row">
                 <div class="col">
-                    <label for="key" class="form-label">Столбец</label>
-                </div>
-                <div class="col">
                     <label for="value" class="form-label">Значение</label>
                 </div>
-                <div class="col-3"></div>
+
             </div>
             <div class="row">
                 <div class="col">
-                    <select class="form-select" name="key">
-                        <option value="CPname">КП</option>
-                        <option value="type">Тип</option>
-                        <option value="number">Номер</option>
-                    </select>
-                </div>
-                <div class="col">
-                    <input class="form-control" type="text" name="value">
+                    <input class="form-control" type="text" name="value" value="{{ isset($value) ? $value : '' }}">
                 </div>
                 <div class="col-3 text-center">
                     <button class="btn btn-primary" type="submit">Найти</button>
@@ -35,7 +25,7 @@
     </div>
 </div>
     {{-- Main table --}}
-<table class="table align-middle">
+<table class="table align-middle table-sm" id='data'>
     <thead>
       <tr>
         <th scope="col" class="sort">Номер</th>
@@ -75,37 +65,35 @@
     </tbody>
 </table>
 <div class="d-flex justify-content-center">
-    {{  $records->render()  }}
+    <nav id="pag">
+        {{-- js pagination here --}}
+    </nav>
 </div>
 
 <script>
-    // sorting main table on cell value comparisson
-    $('document').ready(function(){
-        const getCellValue = (tr, idx) => tr.children[idx].innerText || tr.children[idx].textContent;
-
-        // comparing logic
-        const comparer = (idx, asc) => (a, b) => ((v1, v2) =>
-            v1 !== '' && v2 !== '' && !isNaN(v1) && !isNaN(v2) ? v1 - v2 : v1.toString().localeCompare(v2)
-            )(getCellValue(asc ? a : b, idx), getCellValue(asc ? b : a, idx));
-
-
-        document.querySelectorAll('th').forEach(th => th.addEventListener('click', (() => {
-            // adding sorting symbol
-        document.querySelectorAll('th').forEach(th => th.classList.remove('headerSorted'));
-        th.classList.add('headerSorted');
-
-            // reordering table
-        const table = th.closest('table');
-        const tbody = table.querySelector('tbody');
-        Array.from(tbody.querySelectorAll('tr'))
-            .sort(comparer(Array.from(th.parentNode.children).indexOf(th), this.asc = !this.asc))
-            .forEach(tr => tbody.appendChild(tr) );
-        })));
+    // pagination
+    $(document).ready(function(){
+        $('#pag').append('<ul class="pagination" id="nav"></ul>');
+        var rowsShown = 10;
+        var rowsTotal = $('#data tbody tr').length;
+        var numPages = rowsTotal/rowsShown;
+        for(i = 0; i < numPages; i++) {
+            var pageNum = i + 1;
+            $('#nav').append('<li class="page-item"><a href="#" rel="'+i+'" class="page-link">'+pageNum+'</a></li>');
+        }
+        $('#data tbody tr').hide();
+        $('#data tbody tr').slice(0, rowsShown).show();
+        $('#nav li:first').addClass('active');
+        $('#nav li').bind('click', function(){
+            $('#nav li').removeClass('active');
+            $(this).addClass('active');
+            var currPage = $(this).children().attr('rel');
+            var startItem = currPage * rowsShown;
+            var endItem = startItem + rowsShown;
+            $('#data tbody tr').css('opacity','0.0').hide().slice(startItem, endItem).
+            css('display','table-row').animate({opacity:1}, 300);
+        });
     });
 </script>
 
-<style>
-
-
-</style>
 @endsection

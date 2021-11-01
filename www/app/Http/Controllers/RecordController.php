@@ -27,8 +27,9 @@ class RecordController extends Controller
      */
     public function index()
     {
+        // dd(ControlledPoint::all());
         return view('records.index', [
-            'records' => Record::simplePaginate(10),
+            'records' => Record::all(),
             'CP' => ControlledPoint::all()
         ]);
     }
@@ -187,20 +188,23 @@ class RecordController extends Controller
      */
     public function search(Request $request)
     {
-        if ($request->key === 'CPname') {
-            $key = ControlledPoint::where('name', 'like', '%'.$request->value.'%')->get();
-            $arr = [];
-            foreach ($key as $code) {
-                array_push($arr, $code->code);
-            };
-            return view('records.index', [
-                'records' => Record::whereIn('controlledPoint', $arr)->orderBy('id')->simplePaginate(10),
-                'CP' => ControlledPoint::all(),
-            ]);
+        $cp = ControlledPoint::where('name', 'like', '%' . $request->value . '%')->get();
+        $arr = [];
+        foreach( $cp as $c) {
+            array_push($arr, $c->code);
         }
+
+        $records = Record::where('number', 'like', '%' . $request->value . '%')
+            ->orWhere('type', 'like', '%' . $request->value . '%')
+            ->orWhere('controlledPoint', 'like', '%' . $request->value . '%')
+            ->orWhere('date', 'like', '%' . $request->value . '%')
+            ->orWhere('date', 'like', '%' . $request->value . '%')
+            ->orWhereIn('controlledPoint', $arr);
+
         return view('records.index', [
-            'records' => Record::where($request->key, '%'.$request->value.'%')->orderBy('id')->simplePaginate(10),
             'CP' => ControlledPoint::all(),
+            'records' => $records->orderBy('id')
+                                ->get(),
         ]);
     }
 
@@ -293,11 +297,12 @@ class RecordController extends Controller
 
     public function openPDF(Request $request, Record $record) {
         $CP = ControlledPoint::where('code', $record->controlledPoint)->first();
-        // dd($request->opt);
+
         $record->type == "Опробование"
             ? ($type = "Опр")
             : ($record->type == "Профвосстановление" ? $type = "Профв" : $type = "Профк");
 
+        // выбор версии с печатями или без по параметру из запроса
         if ($request->opt == 'Print') {
             $route = "recordsPrint/$CP->name";
         } elseif ($request->opt == 'PDF') {
@@ -329,6 +334,7 @@ class RecordController extends Controller
     }
 
     protected function ftp_mksubdir($ftp, $ftppath){
+        // вспомогательная функция создания поддиректорий на FTP сервере
         $parts = explode('/', $ftppath);
         foreach($parts as $part){
         if(!@ftp_chdir($ftp, $part)){
