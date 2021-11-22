@@ -14,8 +14,16 @@ class DevicesSeeder extends Seeder
      */
     public function run()
     {
+        Devices::factory(1)
+            ->state([
+                'code' => 'test',
+                'name' => 'test-device',
+                'class' => 'test-device-class',
+                'date' => 'test-device-date'
+            ])
+            ->create();
         Devices::factory()
-            ->count(8)
+            ->count(14)
             ->create();
     }
 }

@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Exports\WorkersExport;
 use App\Http\Requests\CreateWorkerRequest;
 use App\Models\Workers;
+use Illuminate\Http\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Storage;
 
 class WorkersController extends Controller
 {
@@ -17,7 +18,16 @@ class WorkersController extends Controller
      */
     public function index()
     {
-        return view('workers.index', ['workers' => Workers::all()]);
+        $workers = Workers::all();
+        foreach ($workers as $worker) {
+            if ($worker->signature) {
+                $arr = [];
+                $arr = explode(' ', $worker->BIO);
+                $worker->name = $arr[0];
+                Storage::download('public/signature', "$worker->name.png");
+            }
+        }
+        return view('workers.index', ['workers' => $workers]);
     }
 
     /**
@@ -39,11 +49,16 @@ class WorkersController extends Controller
      */
     public function store(CreateWorkerRequest $request)
     {
+        $request->file('signature') ? $signature = 1 : $signature = 0;
         $BIO = $request->name1 . " " . $request->name2 . " " . $request->name3;
         Workers::create([
             'position' => $request->position,
-            'BIO' => $BIO
+            'BIO' => $BIO,
+            'signature' => $signature
         ]);
+
+        $this->saveSignature($request, $request->name1);
+
         return $this->index()->with('success');
     }
 
@@ -79,10 +94,28 @@ class WorkersController extends Controller
     public function update(CreateWorkerRequest $request, Workers $worker)
     {
         $BIO = $request->name1 . " " . $request->name2 . " " . $request->name3;
+
         $worker = Workers::find($worker->id);
         $worker->position = $request->position;
         $worker->BIO = $BIO;
+
+        //если была добавлена новая подпись
+        if ($request->file('signature')) {
+
+            //удаление старой подписи на случай изменения имени (избежать появления дубликатов)
+            $arr = explode(' ', $worker->BIO);
+            $workerName = $arr[0];
+            $this->deleteSignature($workerName);
+
+            //сохранение новой
+            $this->saveSignature($request);
+
+            //пометка в БД
+            $worker->signature = 1;
+        }
+
         $worker->save();
+
         return $this->index()->with('success');
     }
 
@@ -94,10 +127,58 @@ class WorkersController extends Controller
      */
     public function destroy(Workers $worker)
     {
-        // dd('destroyed', $worker);
         Workers::destroy($worker->id);
         return $this->index()->with('flash_message', 'Post deleted!');
     }
 
 
+    public function saveSignature(Request $request) {
+
+        //сохранение в ларавел хранилище
+        Storage::putFileAs('public/signature', $request->file('signature'), "$request->name1.png");
+
+        //подключение к серверу
+        $ftp = ftp_ssl_connect(env('FTP_HOST'));
+        ftp_login($ftp, env('FTP_USERNAME'), env('FTP_PASSWORD'));
+        ftp_pasv($ftp, true);
+
+        //формирование путей
+        $path = "signature";
+        $local_file = Storage::path("public/$path/$request->name1.png");
+        $server_file = "/upload/$path/$request->name1.png";
+
+        //создание поддиректорий
+        if (!@ftp_chdir($ftp, $path)) {
+            $ftppath = 'upload/' . $path;
+            $this->ftp_mksubdir($ftp, $ftppath);
+        }
+
+        //загрузка на сервер
+        if (!ftp_put($ftp, $server_file, $local_file, FTP_BINARY)) {
+            return back()->withErrors('Сохранение не удалось');
+        }
+
+        //закрытие сессии
+        ftp_close($ftp);
+    }
+
+    public function deleteSignature($workerName) {
+        $ftp = ftp_ssl_connect(env('FTP_HOST'));
+        ftp_login($ftp, env('FTP_USERNAME'), env('FTP_PASSWORD'));
+        ftp_pasv($ftp, true);
+
+        @ftp_delete($ftp, "upload/signature/$workerName.png");
+
+        ftp_close($ftp);
+    }
+    protected function ftp_mksubdir($ftp, $ftppath){
+        // вспомогательная функция создания поддиректорий на FTP сервере
+        $parts = explode('/', $ftppath);
+        foreach($parts as $part){
+        if(!@ftp_chdir($ftp, $part)){
+            ftp_mkdir($ftp, $part);
+            ftp_chdir($ftp, $part);
+            }
+        }
+    }
 }

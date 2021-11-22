@@ -15,8 +15,32 @@ class WorkersSeeder extends Seeder
      */
     public function run()
     {
+        Workers::factory(1)
+            ->state([
+                'position' => 'Начальник РРУ',
+                'BIO' => 'Акудович Евгений Викторович',
+                'signature' => 1,
+            ])
+            ->create();
+
+        Workers::factory(1)
+            ->state([
+                'position' => 'ст.эл.мех.',
+                'BIO' => 'Соколов Евгений Игоревич',
+                'signature' => 1,
+            ])
+            ->create();
+
+        Workers::factory(1)
+            ->state([
+                'position' => 'эл.мех.',
+                'BIO' => 'Веселов Никита Вадимович',
+                'signature' => 1,
+            ])
+            ->create();
+
         Workers::factory()
-            ->count(5)
+            ->count(12)
             ->create();
     }
 }

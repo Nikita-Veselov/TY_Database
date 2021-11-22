@@ -10,7 +10,7 @@
 @endphp
 
 <div class="col-6">
-    <form method="POST" action="{{ route('workers.update', ['worker' => $worker->id]) }}">
+    <form method="POST" action="{{ route('workers.update', ['worker' => $worker->id]) }}" enctype="multipart/form-data">
         @method('PUT')
         @csrf
         <div class="row mb-3">
@@ -45,7 +45,18 @@
                     @if ($key2 == $worker->position ) selected @endif
                     >Старший электромеханик
                 </option>
+                <option value="{{ $key2 = 'Начальник РРУ' }}"
+                    @if ($key2 == $worker->position ) selected @endif
+                    >Начальник РРУ
+                </option>
             </select>
+        </div>
+
+        <div class="row mb-3">
+            <label for="signature" class="col-sm-2 col-form-label">Подпись</label>
+            <div class="col-sm-10">
+                <input type="file" class="form-control" id="signature" name="signature" accept="*.jpg *.jpeg *.png">
+            </div>
         </div>
 
         <button type="submit" class="btn btn-primary">Создать</button>

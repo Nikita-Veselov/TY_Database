@@ -15,6 +15,11 @@ class ControlledPoint extends Model
 
     protected $fillable = ['code', 'name', 'type'];
 
+    public function record()
+    {
+        return $this->hasMany(Record::class, 'controlledPoint', 'code');
+    }
+
     public function ty()
     {
         return $this->hasMany(TY::class, 'cp-code', 'code');

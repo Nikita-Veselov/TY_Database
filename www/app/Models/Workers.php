@@ -13,5 +13,5 @@ class Workers extends Model
 
     public $timestamps = false;
 
-    protected $fillable = ['position', 'BIO'];
+    protected $fillable = ['position', 'BIO', 'signature'];
 }

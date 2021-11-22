@@ -16,10 +16,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             ControlledPointSeeder::class,
             DevicesSeeder::class,
-            RecordSeeder::class,
             WorkersSeeder::class,
-            TCSeeder::class,
-            TYSeeder::class
         ]);
     }
 }

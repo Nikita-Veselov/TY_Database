@@ -11,6 +11,11 @@ class Record extends Model
 
     protected $table = 'records';
 
+    public function controlledPoint()
+    {
+        return $this->belongsTo(ControlledPoint::class, 'controlledPoint', 'code');
+    }
+
     protected $fillable = [
         "number",
         "type",

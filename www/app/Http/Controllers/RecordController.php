@@ -10,13 +10,11 @@ use App\Models\TC;
 use App\Models\TY;
 use App\Models\Workers;
 use Barryvdh\Snappy\Facades\SnappyPdf;
-use Dotenv\Util\Str;
 use Illuminate\Http\Request;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Response;
-use Rawilk\Printing\Facades\Printing;
+use Illuminate\Support\Facades\Storage;
 
 class RecordController extends Controller
 {
@@ -27,7 +25,16 @@ class RecordController extends Controller
      */
     public function index()
     {
-        // dd(ControlledPoint::all());
+        $workers = Workers::all();
+        foreach ($workers as $worker) {
+            if ($worker->signature) {
+                $arr = [];
+                $arr = explode(' ', $worker->BIO);
+                $worker->name = $arr[0];
+                Storage::download('public/signature', "$worker->name.png");
+            }
+        }
+
         return view('records.index', [
             'records' => Record::all(),
             'CP' => ControlledPoint::all()
@@ -121,7 +128,7 @@ class RecordController extends Controller
      */
     public function update(Request $request, Record $record)
     {
-            // Setting variables to generate path to file before updating the record
+            //формирование пути по типу записи
         $CP = ControlledPoint::where('code', $request->controlledPoint)->first();
         $record->type == "Опробование"
             ? ($type = "Опр")
@@ -129,7 +136,7 @@ class RecordController extends Controller
         $route = "$CP->name";
         $name = "$type " . "$CP->type " . "$CP->name " . "($record->date)";
 
-            // Updating the record
+            //сохранение изменений
         $record = Record::find($record->id);
         $record->number = $request->number;
         $record->type = $request->type;
@@ -144,8 +151,7 @@ class RecordController extends Controller
         $record->conclusion = $request->conclusion;
         $record->save();
 
-            //Deleting previous file to prevent doubling from changing name date or type etc.
-
+            //удаление предидущего файла для предотвращения повторяющихся записей
         $ftp = ftp_ssl_connect(env('FTP_HOST'));
         ftp_login($ftp, env('FTP_USERNAME'), env('FTP_PASSWORD'));
         ftp_pasv($ftp, true);
@@ -162,7 +168,7 @@ class RecordController extends Controller
 
         ftp_close($ftp);
 
-            //Save new as PDF
+            //сохранение нового
         $this->publishPDF($record);
 
         return $this->show($record, true);
@@ -313,18 +319,20 @@ class RecordController extends Controller
         $local_file = 'tmp/tmp.pdf';
         $server_file = "upload/$route/$name.pdf";
 
+        if (!file_exists("$local_file")) {
+            touch("$local_file");
+        };
+
         $ftp = ftp_ssl_connect(env('FTP_HOST'));
         ftp_login($ftp, env('FTP_USERNAME'), env('FTP_PASSWORD'));
 
         // попытка скачать $server_file и сохранить в $local_file
         if (ftp_get($ftp, $local_file, $server_file, FTP_BINARY)) {
-            if (File::isFile("tmp/tmp.pdf")) {
-                $file = File::get("tmp/tmp.pdf");
-                $response = Response::make($file, 200);
-                $response->header('Content-Type', 'application/pdf');
+            $file = File::get($local_file);
+            $response = Response::make($file, 200);
+            $response->header('Content-Type', 'application/pdf');
 
-                return $response;
-            }
+            return $response;
         } else {
             return back()->withErrors('Не удалось открыть файл');
         }

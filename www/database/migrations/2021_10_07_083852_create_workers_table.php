@@ -17,6 +17,7 @@ class CreateWorkersTable extends Migration
             $table->id();
             $table->string('position');
             $table->string('BIO');
+            $table->boolean('signature');
         });
     }
 

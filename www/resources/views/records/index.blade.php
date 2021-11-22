@@ -66,7 +66,7 @@
 </table>
 <div class="d-flex justify-content-center">
     <nav id="pag">
-        {{-- js pagination here --}}
+        {{-- js pagination --}}
     </nav>
 </div>
 

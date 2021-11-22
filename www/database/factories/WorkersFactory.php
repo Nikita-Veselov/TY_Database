@@ -24,6 +24,7 @@ class WorkersFactory extends Factory
         return [
             'position' => $this->faker->word(),
             'BIO' => $this->faker->name(),
+            'signature' => 0,
         ];
     }
 }

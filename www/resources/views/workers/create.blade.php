@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="col-6">
-    <form method="POST" action="{{ url('workers') }}">
+    <form method="POST" action="{{ url('workers') }}" enctype="multipart/form-data">
         @csrf
         <div class="row mb-3">
             <label for="Фамилия" class="col-sm-2 col-form-label">Фамилия</label>
@@ -30,7 +30,15 @@
                 <option value="" selected disabled>Должность</option>
                 <option value="эл.мех.">Электромеханик</option>
                 <option value="ст.эл.мех.">Старший электромеханик</option>
+                <option value="Начальник РРУ">Начальник РРУ</option>
             </select>
+        </div>
+
+        <div class="row mb-3">
+            <label for="signature" class="col-sm-2 col-form-label">Подпись</label>
+            <div class="col-sm-10">
+                <input type="file" class="form-control" id="signature" name="signature" accept="*.jpg *.jpeg *.png">
+            </div>
         </div>
 
         <button type="submit" class="btn btn-primary">Создать</button>
