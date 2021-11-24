@@ -26,7 +26,12 @@
     <form class="col-6 my-2 px-0" method="GET" action="{{ url('signals') }}">
         <div class="col-12 btn-group-vertical">
             <button class="btn btn-primary disabled" role="button" aria-disabled="true">Сигналы</button>
-            <input class="w-100" type="text" id="search" name="search" onkeyup="filter()">
+
+            <div class="input-group">
+                <span class="input-group-text">Поиск КП:</span>
+                <input type="text" class="form-control" aria-label="search" id="search" name="search" onkeyup="filter()">
+            </div>
+
             <select id="select" class="form-select text-center" size="5" aria-label="КП" name="CP" value="{{ old('CP') }}" >
                 @foreach ($CP as $cp)
                     <option value="{{ $cp->code }}">{{ $cp->type }} {{ $cp->name }}</option>
@@ -56,7 +61,7 @@
         </div>
     </div>
     <div class="w-100"></div>
-
+    {{-- Search bar --}}
     <script>
         function filter() {
             var keyword = document.getElementById("search").value.toLowerCase();

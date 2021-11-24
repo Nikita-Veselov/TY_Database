@@ -14,8 +14,18 @@
         @endif
     </div>
 
-    <div class="col-4 px-5 align-self-center">
-        <div class="row justify-content-center fixed-top mt-5">
+    <div class="col-4 text-center px-5 align-self-center">
+        <div class="fs-3">Телемеханика</div>
+        <div class="fs-6">База данных</div>
+    </div>
+
+    <div class="col-4 text-center px-5 align-self-center">
+        <a class="col-2 btn btn-outline-secondary" href="/" role="button">Вход</a>
+        <a class="col-2 btn btn-outline-dark" href="JavaScript:window.close()" role="button">Выход</a>
+    </div>
+
+    <div class="px-5 align-self-center">
+        <div class="row justify-content-center fixed-top">
             @if ($errors->any())
                 @foreach ($errors->all() as $error)
                     <div class="alert alert-danger text-center col-3">{{ $error }}</div>
@@ -27,9 +37,7 @@
             @endif
         </div>
     </div>
-    <div class="col-4 text-end px-5 align-self-center">
-        <div class="fs-3">Телемеханика</div>
-        <div class="fs-6">База данных</div>
-    </div>
+
+
 </div>
 
