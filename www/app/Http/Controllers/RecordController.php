@@ -31,7 +31,24 @@ class RecordController extends Controller
                 $arr = [];
                 $arr = explode(' ', $worker->BIO);
                 $worker->name = $arr[0];
-                Storage::download('public/signature', "$worker->name.png");
+
+                //соединение с фтп
+                $ftp = ftp_ssl_connect(env('FTP_HOST'));
+                ftp_login($ftp, env('FTP_USERNAME'), env('FTP_PASSWORD'));
+                ftp_pasv($ftp, true);
+
+                //формирование путей
+                $path = Storage::path("public/signature");
+                $local_file = "$path/$worker->name.png";
+                $server_file = "/upload/signature/$worker->name.png";
+
+                //создание папки
+                if (!@chdir($path)) {
+                    mkdir($path);
+                }
+                if (!file_exists($local_file)) {
+                    ftp_get($ftp, $local_file, $server_file, FTP_BINARY);
+                }
             }
         }
 
