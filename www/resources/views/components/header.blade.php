@@ -28,7 +28,7 @@
     </div>
 
     <div class="col-4 text-center px-5 align-self-center">
-        <a class="col-2 btn btn-outline-secondary" href="/" role="button">Вход</a>
+        <a class="col-2 btn btn-outline-secondary" href="{{ route('login') }}" role="button">Вход</a>
         <a class="col-2 btn btn-outline-dark" href="JavaScript:window.close()" role="button">Выход</a>
     </div>
 

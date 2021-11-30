@@ -3,6 +3,7 @@
 use App\Http\Controllers\ControlledPointController;
 use App\Http\Controllers\DevicesController;
 use App\Http\Controllers\FtpController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RecordController;
 use App\Http\Controllers\SignalController;
 use App\Http\Controllers\TCController;
@@ -41,3 +42,5 @@ Route::resource('/devices', DevicesController::class);
 Route::resource('/signals', SignalController::class);
 Route::get('/print/{CP}', [SignalController::class, 'print'])->name('print');
 
+Route::get('/login', [LoginController::class, 'index'])->name('login');
+Route::post('/login', [LoginController::class, 'auth'])->name('auth');
