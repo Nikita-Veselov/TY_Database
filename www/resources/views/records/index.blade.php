@@ -24,6 +24,7 @@
         </form>
     </div>
 </div>
+
     {{-- Main table --}}
 <table class="table align-middle table-sm" id='data'>
     <thead>

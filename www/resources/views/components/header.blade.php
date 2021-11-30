@@ -1,16 +1,24 @@
 <div class="header row text-start fixed-top bg-light shadow rounded">
     <div class="col-4 px-5 align-self-center">
         @if (!Request::is('/'))
-                <a class="col-2 btn btn-outline-warning" href="/" role="button">Домой</a>
-            @if (Request::is('records'))
-                <a class="col-2 btn btn-outline-success" href="/" role="button">Назад</a>
-                @else
-                    @if (Request::is('records/*'))
-                        <a class="col-2 btn btn-success" href="{{ route('records.index') }}" role="button">Назад</a>
-                    @else
-                    <a class="col-2 btn btn-success" href="javascript:history.back()" role="button">Назад</a>
-                @endif
+                <a class="col-4 btn btn-outline-warning" href="/" role="button">На главную</a>
+
+            @if (Request::is('records/*'))
+                <a class="col-2 btn btn-outline-success" href="{{ route('records.index') }}" role="button">Назад</a>
             @endif
+
+            @if (Request::is('workers/*'))
+                <a class="col-2 btn btn-outline-success" href="{{ route('workers.index') }}" role="button">Назад</a>
+            @endif
+
+            @if (Request::is('devices/*'))
+                <a class="col-2 btn btn-outline-success" href="{{ route('devices.index') }}" role="button">Назад</a>
+            @endif
+
+            @if (Request::is('controlledPoints/*'))
+                <a class="col-2 btn btn-outline-success" href="{{ route('controlledPoints.index') }}" role="button">Назад</a>
+            @endif
+
         @endif
     </div>
 

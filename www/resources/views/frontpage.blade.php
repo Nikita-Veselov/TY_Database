@@ -61,6 +61,7 @@
         </div>
     </div>
     <div class="w-100"></div>
+    
     {{-- Search bar --}}
     <script>
         function filter() {
