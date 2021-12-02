@@ -4,38 +4,7 @@
 
 
     {{-- Search form --}}
-<div class="row justify-content-start" >
-    <div class="col-6 p-0">
-        <form class="form-control" action="{{ route('searchRec') }}">
-            <div class="row">
-                <div class="col-8">
-                    <label for="value" class="form-label">Значение</label>
-                </div>
-                <div class="col-4"></div>
-            </div>
-            <div class="row">
-                <div class="col-8">
-                    <input class="form-control" type="text" name="value" value="{{ isset($value) ? $value : '' }}">
-                </div>
-                <div class="col-4 text-center">
-                    <button class="btn btn-primary" type="submit">Найти</button>
-                    <a role="button" type="button" href="{{ route('records.index') }}" class="btn btn-secondary">Сброс</a>
-                </div>
-            </div>
-        </form>
-    </div>
-</div>
-
-    {{-- Changeable number of rows in tables --}}
-{{-- <div class="col">
-    Отображаемое количество строк:
-    <select name="rowsShown" id="rowsShown">
-        <option value="10" selected>10</option>
-        <option value="25">25</option>
-        <option value="50">50</option>
-        <option value="100">100</option>
-    </select>
-</div> --}}
+<x-search-bar></x-search-bar>
 
     {{-- Main table --}}
 <table class="table align-middle table-sm" id='data'>
@@ -87,50 +56,8 @@
     </nav>
 </div>
 
-<script>
-    $('#rowsShown').change(function() {
-        var rowsShown = $('#rowsShown option:selected').val();
-        paginate(rowsShown);
-    });
-
-    $(document).ready(function(){
-        var rowsShown = $('#rowsShown option:selected').val();
-        paginate(rowsShown);
-    });
-
-    function paginate (rowsShown) {
-        $('#pag').append('<ul class="pagination" id="nav"></ul>');
-        if (rowsShown === undefined) {
-            rowsShown = 10;
-        }
-        // count pages
-        var rowsTotal = $('#data tbody tr').length;
-        var numPages = rowsTotal/rowsShown;
-
-        // nav creation
-        $('#nav').empty();
-        if (numPages > 1) {
-            for(i = 0; i < numPages; i++) {
-                var pageNum = i + 1;
-                $('#nav').append('<li class="page-item"><a href="#" rel="'+i+'" class="page-link">'+pageNum+'</a></li>');
-            }
-        }
-        $('#nav li:first').addClass('active');
-
-        // hide excess rows
-        $('#data tbody tr').hide();
-        $('#data tbody tr').slice(0, rowsShown).show();
-
-        $('#nav li').bind('click', function(){
-            $('#nav li').removeClass('active');
-            $(this).addClass('active');
-            var currPage = $(this).children().attr('rel');
-            var startItem = currPage * rowsShown;
-            var endItem = startItem + rowsShown;
-            $('#data tbody tr').css('opacity','0.0').hide().slice(startItem, endItem).
-            css('display','table-row').animate({opacity:1}, 300);
-        });
-    }
-</script>
+{{-- scriptst moved to views/components/scripts for easy include in all views--}}
+<x-scripts.paginate-script></x-scripts.paginate-script>
+<x-scripts.search-script></x-scripts.search-script>
 
 @endsection
