@@ -17,7 +17,7 @@
         <x-header  />
 
         <div class="main flex-grow-1">
-            <div class="row justify-content-center" style="padding-top: 100px">
+            <div class="row justify-content-center" style="padding-top: 8rem">
                 @yield('content')
             </div>
         </div>

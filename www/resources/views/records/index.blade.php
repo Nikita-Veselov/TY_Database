@@ -2,7 +2,6 @@
 
 @section('content')
 
-
     {{-- Search form --}}
 <x-search-bar></x-search-bar>
 
@@ -50,10 +49,9 @@
         @endforeach
     </tbody>
 </table>
+    {{-- js pagination --}}
 <div class="d-flex justify-content-center">
-    <nav id="pag">
-        {{-- js pagination --}}
-    </nav>
+    <nav id="pag"></nav>
 </div>
 
 {{-- scriptst moved to views/components/scripts for easy include in all views--}}

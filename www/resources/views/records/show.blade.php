@@ -401,8 +401,8 @@
                 {{ mb_substr($worker1->name2, 0, 1) }}.
                 {{ mb_substr($worker1->name3, 0, 1); }}.
             </div>
-            <div class="col-3 position-absolute top-0 start-50"  style="z-index: -1;">
-                <img class="img-fluid w-75" style="margin-top: -20%; margin-left: -90%" src="{{ Storage::url("signature/$worker1->name1.png") }}" alt="">
+            <div class="col-3 position-absolute top-0 start-50 translate-middle-x"  style="z-index: -1;">
+                <img class="img-fluid w-75" style="" src="{{ Storage::url("signature/$worker1->name1.png") }}" alt="">
             </div>
         </div>
         @if ($worker2 != null)
@@ -413,29 +413,31 @@
                     {{ mb_substr($worker2->name2, 0, 1) }}.
                     {{ mb_substr($worker2->name3, 0, 1); }}.
                 </div>
-                <div class="col-3 position-absolute top-0 start-50" style="z-index: -1;">
-                    <img class="img-fluid w-75" style="margin-top: 0%; margin-left: -80%" src="{{ Storage::url("signature/$worker2->name1.png") }}" alt="">
+                <div class="col-3 position-absolute top-0 start-50 translate-middle-x" style="z-index: -1;">
+                    <img class="img-fluid w-75" style="" src="{{ Storage::url("signature/$worker2->name1.png") }}" alt="">
                 </div>
             </div>
         @endif
     </div>
-    <div class="row position-relative">
+    <div class="row mt-3">
         <div class="col-12 mt-3 fw-bolder">Протокол проверил:</div>
-        <div class="col-4 mt-3">
-            Начальник РРУ Акудович Е.В.
+        <div class="row position-relative">
+            <div class="col-4 mt-3">
+                Начальник РРУ Акудович Е.В.
+            </div>
+            <div class="col-3 position-absolute top-0 start-50 translate-middle">
+                <img class="img-fluid w-75" style="" src="{{ Storage::url("signature/Акудович.png") }}" alt="">
+            </div>
         </div>
-        <div class="col-3 position-absolute top-0 start-50">
-            <img class="img-fluid w-75" style="margin-top: -10%; margin-left: -80%" src="{{ Storage::url("signature/Акудович.png") }}" alt="">
-        </div>
-        <div class="wh-100"></div>
-        <div class="col-4 mt-3">
-            ст.эл.мех. Соколов Е.И.
-        </div>
-        <div class="col-3 position-absolute top-0 start-50">
-            <img class="img-fluid w-75" style="margin-top: 30%; margin-left: -100%" src="{{ Storage::url("signature/Соколов.png")}}" alt="">
+        <div class="row position-relative">
+            <div class="col-4 mt-3">
+                ст.эл.мех. Соколов Е.И.
+            </div>
+            <div class="col-3 position-absolute top-0 start-50 translate-middle">
+                <img class="img-fluid w-75" style="" src="{{ Storage::url("signature/Соколов.png")}}" alt="">
+            </div>
         </div>
     </div>
-
         {{-- calling for print if rendred after saving or editing --}}
     @if ($print)
         <script>

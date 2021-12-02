@@ -422,7 +422,7 @@
                                 {{ mb_substr($worker1->name3, 0, 1); }}.
                             </div>
                             <div class="col-2 position-absolute top-0 start-50"  style="z-index: -1;">
-                                <img class="img-fluid w-75" style="margin-top: -3{{ rand(0,5) }}%; margin-left: -8{{ rand(0,5) }}%" src="{{ Storage::url("signature/$worker1->name1.png") }}" alt="">
+                                <img class="img-fluid w-75" style="margin-top: -3{{ rand(0,5) }}%; margin-left: -8{{ rand(0,5) }}%" src="{{ asset("../storage/signature/$worker1->name1.png") }}" alt="">
                             </div>
                         </div>
                         @if ($worker2 != null)
@@ -434,7 +434,7 @@
                                 {{ mb_substr($worker2->name3, 0, 1); }}.
                             </div>
                             <div class="col-2 position-absolute top-0 start-50" style="z-index: -1;">
-                                <img class="img-fluid w-75" style="margin-top: -1{{ rand(0,5) }}%; margin-left: -13{{ rand(0,5) }}%" src="{{ Storage::url("signature/$worker2->name1.png") }}" alt="">
+                                <img class="img-fluid w-75" style="margin-top: -1{{ rand(0,5) }}%; margin-left: -13{{ rand(0,5) }}%" src="{{ asset("../storage/signature/$worker2->name1.png") }}" alt="">
                             </div>
                         </div>
                         @endif
@@ -445,14 +445,14 @@
                             Начальник РРУ Акудович Е.В.
                         </div>
                         <div class="col-2 position-absolute top-0 start-50">
-                            <img class="img-fluid w-75" style="margin-top: -1{{ rand(0,5) }}%; margin-left: -10{{ rand(0,5) }}%" src="{{ Storage::url("signature/Акудович.png") }}" alt="">
+                            <img class="img-fluid w-75" style="margin-top: -1{{ rand(0,5) }}%; margin-left: -10{{ rand(0,5) }}%" src="{{ asset("../storage/signature/Акудович.png") }}" alt="">
                         </div>
                         <div class="wh-100"></div>
                         <div class="col-4 mt-3">
                             ст.эл.мех. Соколов Е.И.
                         </div>
                         <div class="col-2 position-absolute top-0 start-50">
-                            <img class="img-fluid w-75" style="margin-top: 1{{ rand(0,5) }}%; margin-left: -9{{ rand(0,5) }}%" src="{{ Storage::url("signature/Соколов.png")}}" alt="">
+                            <img class="img-fluid w-75" style="margin-top: 1{{ rand(0,5) }}%; margin-left: -9{{ rand(0,5) }}%" src="{{ asset("../storage/signature/Соколов.png") }}" alt="">
                         </div>
                     </div>
                 </div>

@@ -204,34 +204,6 @@ class RecordController extends Controller
     }
 
     /**
-     * Seacrch for the specified record.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function search(Request $request)
-    {
-        $cp = ControlledPoint::where('name', 'like', '%' . $request->value . '%')->get();
-        $arr = [];
-        foreach( $cp as $c) {
-            array_push($arr, $c->code);
-        }
-
-        $records = Record::where('number', 'like', '%' . $request->value . '%')
-            ->orWhere('type', 'like', '%' . $request->value . '%')
-            ->orWhere('controlledPoint', 'like', '%' . $request->value . '%')
-            ->orWhere('date', 'like', '%' . $request->value . '%')
-            ->orWhere('date', 'like', '%' . $request->value . '%')
-            ->orWhereIn('controlledPoint', $arr);
-
-        return view('records.index', [
-            'CP' => ControlledPoint::all(),
-            'records' => $records->orderBy('id')
-                                ->get(),
-        ]);
-    }
-
-    /**
      * PDF stuff.
      *
      * @param  \App\Models\Record  $record
