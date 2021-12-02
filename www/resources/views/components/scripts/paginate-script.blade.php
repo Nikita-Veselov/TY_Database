@@ -40,7 +40,7 @@
             var currPage = $(this).children().attr('rel');
             var startItem = currPage * rowsShown;
             var endItem = startItem + rowsShown;
-            $('#data tbody tr').css('opacity','0.0').hide().slice(startItem, endItem).
+            $('#data tbody tr').hide().slice(startItem, endItem).
             css('display','table-row').animate({opacity:1}, 300);
         });
     }

@@ -5,7 +5,8 @@ $(document).ready(function(){
 
 // Search all columns
     $('#txt_searchall').keyup(function(){
-        // hide nav
+        // Hide nav
+        $('#nav').hide();
 
         // Search Text
         var search = $(this).val();
@@ -21,6 +22,12 @@ $(document).ready(function(){
             $('#data tbody tr:not(.notfound) td:contains("'+search+'")').each(function(){
                 $(this).closest('tr').show();
             });
+        }
+
+        // paginate if deleted search text
+        if (!$(this).val()) {
+            $('#nav').show();
+            paginate();
         }
     });
 
