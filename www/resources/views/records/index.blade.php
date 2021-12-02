@@ -2,8 +2,9 @@
 
 @section('content')
 
+
     {{-- Search form --}}
-<div class="row justify-content-start">
+<div class="row justify-content-start" >
     <div class="col-6 p-0">
         <form class="form-control" action="{{ route('searchRec') }}">
             <div class="row">
@@ -24,6 +25,17 @@
         </form>
     </div>
 </div>
+
+    {{-- Changeable number of rows in tables --}}
+{{-- <div class="col">
+    Отображаемое количество строк:
+    <select name="rowsShown" id="rowsShown">
+        <option value="10" selected>10</option>
+        <option value="25">25</option>
+        <option value="50">50</option>
+        <option value="100">100</option>
+    </select>
+</div> --}}
 
     {{-- Main table --}}
 <table class="table align-middle table-sm" id='data'>
@@ -51,14 +63,18 @@
                 <td>
                     <div class="row btn-group" role="group">
                         <a type="button" class="col-2 btn btn-primary btn-sm m-0 py-1 px-0" href="{{ URL::to('records/' . $record->id) }}" role="button"><img class="img-fluid w-50" src="{{ asset('/img/icons/Show.png') }}" alt=""></a>
-                        <a type="button" class="col-2 btn btn-secondary btn-sm m-0 py-1 px-0" href="{{ URL::to('records/' . $record->id . '/edit') }}" role="button"><img class="img-fluid w-50" src="{{ asset('/img/icons/Edit.png') }}" alt=""></a>
                         <a type="button" class="col-2 btn btn-success btn-sm m-0 py-1 px-0" href="{{ route('openPDF', ['record' => $record->id, 'opt' => 'PDF' ]) }}" role="button" target="_blank"><img class="img-fluid w-50" src="{{ asset('/img/icons/PDF.png') }}" alt=""></a>
                         <a type="button" class="col-2 btn btn-warning btn-sm m-0 py-1 px-0" href="{{ route('openPDF', ['record' => $record->id, 'opt' => 'Print' ]) }}" role="button" target="_blank"><img class="img-fluid w-50" src="{{ asset('/img/icons/Printer.png') }}" alt=""></a>
-                        <form class="col-2 btn btn-danger btn-sm delete m-0 py-1 px-0" action="{{ route('records.destroy', $record->id) }}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm m-0 p-0"><img class="img-fluid w-50" src="{{ asset('/img/icons/Delete.png') }}" alt=""></button>
-                        </form>
+                        @if (Auth::check())
+                            <a type="button" class="col-2 btn btn-secondary btn-sm m-0 py-1 px-0" href="{{ URL::to('records/' . $record->id . '/edit') }}" role="button"><img class="img-fluid w-50" src="{{ asset('/img/icons/Edit.png') }}" alt=""></a>
+                            <form class="col-2 btn btn-danger btn-sm delete m-0 py-1 px-0" action="{{ route('records.destroy', $record->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger btn-sm m-0 p-0"><img class="img-fluid w-50" src="{{ asset('/img/icons/Delete.png') }}" alt=""></button>
+                            </form>
+                        @else
+                            <div class="col-4"></div>
+                        @endif
                     </div>
                 </td>
             </tr>
@@ -72,19 +88,39 @@
 </div>
 
 <script>
-    // pagination
+    $('#rowsShown').change(function() {
+        var rowsShown = $('#rowsShown option:selected').val();
+        paginate(rowsShown);
+    });
+
     $(document).ready(function(){
+        var rowsShown = $('#rowsShown option:selected').val();
+        paginate(rowsShown);
+    });
+
+    function paginate (rowsShown) {
         $('#pag').append('<ul class="pagination" id="nav"></ul>');
-        var rowsShown = 10;
+        if (rowsShown === undefined) {
+            rowsShown = 10;
+        }
+        // count pages
         var rowsTotal = $('#data tbody tr').length;
         var numPages = rowsTotal/rowsShown;
-        for(i = 0; i < numPages; i++) {
-            var pageNum = i + 1;
-            $('#nav').append('<li class="page-item"><a href="#" rel="'+i+'" class="page-link">'+pageNum+'</a></li>');
+
+        // nav creation
+        $('#nav').empty();
+        if (numPages > 1) {
+            for(i = 0; i < numPages; i++) {
+                var pageNum = i + 1;
+                $('#nav').append('<li class="page-item"><a href="#" rel="'+i+'" class="page-link">'+pageNum+'</a></li>');
+            }
         }
+        $('#nav li:first').addClass('active');
+
+        // hide excess rows
         $('#data tbody tr').hide();
         $('#data tbody tr').slice(0, rowsShown).show();
-        $('#nav li:first').addClass('active');
+
         $('#nav li').bind('click', function(){
             $('#nav li').removeClass('active');
             $(this).addClass('active');
@@ -94,7 +130,7 @@
             $('#data tbody tr').css('opacity','0.0').hide().slice(startItem, endItem).
             css('display','table-row').animate({opacity:1}, 300);
         });
-    });
+    }
 </script>
 
 @endsection

@@ -17,7 +17,9 @@
         <button class="btn btn-primary disabled" role="button" aria-disabled="true">КП</button>
         <div class="btn-group" role="group" aria-label="controlledPoints">
             <a class="btn btn-outline-success col-6" href="{{ route('controlledPoints.index') }}" role="button">Записи</a>
-            <a class="btn btn-outline-warning col-6" href="{{ route('controlledPoints.create') }}" role="button">Добавить</a>
+            @if (Auth::check())
+                <a class="btn btn-outline-warning col-6" href="{{ route('controlledPoints.create') }}" role="button">Добавить</a>
+            @endif
         </div>
     </div>
     <div class="w-100"></div>
@@ -47,7 +49,10 @@
         <button class="btn btn-primary disabled" role="button" aria-disabled="true">Работники</button>
         <div class="btn-group" role="group" aria-label="workers">
             <a class="btn btn-outline-success col-6" href="{{ route('workers.index') }}" role="button">Записи</a>
-            <a class="btn btn-outline-warning col-6" href="{{ route('workers.create') }}" role="button">Добавить</a>
+
+            @if (Auth::check())
+                <a class="btn btn-outline-warning col-6" href="{{ route('workers.create') }}" role="button">Добавить</a>
+            @endif
         </div>
     </div>
     <div class="w-100"></div>
@@ -57,11 +62,13 @@
         <button class="btn btn-primary disabled" role="button" aria-disabled="true">Приборы</button>
         <div class="btn-group" role="group" aria-label="devices">
             <a class="btn btn-outline-success col-6" href="{{ route('devices.index') }}" role="button">Записи</a>
-            <a class="btn btn-outline-warning col-6" href="{{ route('devices.create') }}" role="button">Добавить</a>
+            @if (Auth::check())
+                <a class="btn btn-outline-warning col-6" href="{{ route('devices.create') }}" role="button">Добавить</a>
+            @endif
         </div>
     </div>
     <div class="w-100"></div>
-    
+
     {{-- Search bar --}}
     <script>
         function filter() {

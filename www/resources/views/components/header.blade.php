@@ -28,8 +28,13 @@
     </div>
 
     <div class="col-4 text-center px-5 align-self-center">
-        <a class="col-2 btn btn-outline-secondary" href="{{ route('login') }}" role="button">Вход</a>
-        <a class="col-2 btn btn-outline-dark" href="JavaScript:window.close()" role="button">Выход</a>
+        @if (Auth::check())
+            <a class="col-2 btn btn-outline-secondary" href="{{ route('logout') }}" role="button">Выход</a>
+        @else
+            <a class="col-2 btn btn-outline-secondary" href="{{ route('login') }}" role="button">Вход</a>
+        @endif
+
+        <a class="col-3 btn btn-outline-danger" href="JavaScript:window.close()" role="button">Закрыть</a>
     </div>
 
     <div class="px-5 align-self-center">
