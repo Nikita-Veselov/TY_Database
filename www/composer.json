@@ -7,7 +7,7 @@
     "require": {
         "php": "^7.3|^8.0",
         "barryvdh/laravel-snappy": "^0.4.8",
-        "doctrine/dbal": "^3.1",
+        "doctrine/dbal": "^3.1.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "h4cc/wkhtmltoimage-amd64": "0.12.x",
@@ -17,7 +17,6 @@
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
         "laravelcollective/html": "^6.2",
-        "maatwebsite/excel": "^3.1",
         "phpoffice/phpspreadsheet": "^1.18"
     },
     "require-dev": {
