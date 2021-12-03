@@ -6,6 +6,7 @@ use App\Models\ControlledPoint;
 use App\Models\Record;
 use App\Models\TC;
 use App\Models\TY;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class ControlledPointSeeder extends Seeder
@@ -42,7 +43,9 @@ class ControlledPointSeeder extends Seeder
                         'device' => 'test-device'
                     ])
                     ->count(1))
-            ->count(14)
+            ->count(24)
             ->create();
+
+        User::factory(1)->create();
     }
 }

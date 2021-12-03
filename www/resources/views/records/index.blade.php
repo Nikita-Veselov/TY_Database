@@ -9,11 +9,11 @@
 <table class="table align-middle table-sm" id='data'>
     <thead>
       <tr>
-        <th scope="col" class="sort">Номер</th>
-        <th scope="col" class="sort">КП</th>
-        <th scope="col" class="sort">Номер КП</th>
-        <th scope="col" class="sort">Тип</th>
-        <th scope="col" class="sort">Дата</th>
+        <th scope="col" class="col-1">Номер</th>
+        <th scope="col" class="col-1">Номер КП</th>
+        <th scope="col" class="col-4">КП</th>
+        <th scope="col" class="col-2">Тип</th>
+        <th scope="col" class="col-2">Дата</th>
         <th scope="col" class="col-2">Действия</th>
       </tr>
     </thead>
@@ -21,11 +21,11 @@
         @foreach ($records as $record)
             <tr>
                 <td>{{ $record->number }}</td>
+                <td>{{ $record->controlledPoint}}</td>
                 <td>
                     {{ $CP->where('code', $record->controlledPoint)->first()->name }}
                     ({{ $CP->where('code', $record->controlledPoint)->first()->type }})
                 </td>
-                <td>{{ $record->controlledPoint}}</td>
                 <td>{{ $record->type }}</td>
                 <td>{{ $record->date }}</td>
                 <td>
@@ -49,10 +49,10 @@
         @endforeach
     </tbody>
 </table>
+
     {{-- js pagination --}}
-<div class="d-flex justify-content-center">
-    <nav id="pag"></nav>
-</div>
+<div id="pag"></div>
+
 
 {{-- scriptst moved to views/components/scripts for easy include in all views--}}
 <x-scripts.paginate-script></x-scripts.paginate-script>

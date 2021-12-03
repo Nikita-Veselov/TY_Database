@@ -2,7 +2,7 @@
 
 @section('content')
         {{-- Records --}}
-    <div class="col-5 my-2 btn-group-vertical px-0">
+    <div class="col-5 my-2 btn-group-vertical pt-5">
         <button class="btn btn-primary disabled" role="button" aria-disabled="true">Протоколы</button>
         <div class="btn-group" role="group" aria-label="records">
             <a class="btn btn-outline-success col-6" href="{{ route('records.index') }}" role="button">Записи</a>
@@ -12,7 +12,7 @@
     <div class="w-100"></div>
 
         {{-- CP --}}
-    <div class="col-5 my-2 btn-group-vertical px-0">
+    <div class="col-5 my-2 btn-group-vertical">
         <button class="btn btn-primary disabled" role="button" aria-disabled="true">КП</button>
         <div class="btn-group" role="group" aria-label="controlledPoints">
             <a class="btn btn-outline-success col-6" href="{{ route('controlledPoints.index') }}" role="button">Записи</a>
@@ -24,7 +24,7 @@
     <div class="w-100"></div>
 
         {{-- Signals --}}
-    <form class="col-5 my-2 px-0" method="GET" action="{{ url('signals') }}">
+    <form class="col-5 my-2" method="GET" action="{{ url('signals') }}">
         <div class="col-12 btn-group-vertical">
             <button class="btn btn-primary disabled" role="button" aria-disabled="true">Сигналы</button>
 
@@ -44,7 +44,7 @@
     <div class="w-100"></div>
 
         {{-- Workers --}}
-    <div class="col-5 my-2 btn-group-vertical px-0">
+    <div class="col-5 my-2 btn-group-vertical">
         <button class="btn btn-primary disabled" role="button" aria-disabled="true">Работники</button>
         <div class="btn-group" role="group" aria-label="workers">
             <a class="btn btn-outline-success col-6" href="{{ route('workers.index') }}" role="button">Записи</a>
@@ -57,7 +57,7 @@
     <div class="w-100"></div>
 
         {{-- Devices --}}
-    <div class="col-5 my-2 btn-group-vertical px-0">
+    <div class="col-5 my-2 btn-group-vertical pb-5">
         <button class="btn btn-primary disabled" role="button" aria-disabled="true">Приборы</button>
         <div class="btn-group" role="group" aria-label="devices">
             <a class="btn btn-outline-success col-6" href="{{ route('devices.index') }}" role="button">Записи</a>

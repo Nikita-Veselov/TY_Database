@@ -5,6 +5,7 @@ $(document).ready(function(){
 
 // Search all columns
     $('#txt_searchall').keyup(function(){
+        $('.header').addClass('pb-3')
         // Hide nav
         $('#nav').hide();
 
@@ -15,19 +16,19 @@ $(document).ready(function(){
         $('#data tbody tr').hide();
 
         // Count total search result
-        var len = $('#data tbody tr:not(.notfound) td:contains("'+search+'")').length;
+        var len = $('#data tbody td:contains("'+search+'")').length;
 
         if(len > 0){
             // Searching text in columns and show match row
-            $('#data tbody tr:not(.notfound) td:contains("'+search+'")').each(function(){
+            $('#data tbody td:contains("'+search+'")').each(function(){
                 $(this).closest('tr').show();
             });
         }
 
-        // paginate if deleted search text
+        // Paginate if deleted search text
         if (!$(this).val()) {
-            $('#nav').show();
             paginate();
+            $('.header').removeClass('pb-3')
         }
     });
 
