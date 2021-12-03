@@ -66,15 +66,19 @@ class WorkersController extends Controller
      */
     public function store(CreateWorkerRequest $request)
     {
-        $request->file('signature') ? $signature = 1 : $signature = 0;
+        if ($request->file('signature')) {
+            $signature = 1;
+            $this->saveSignature($request, $request->name1);
+        } else {
+            $signature = 0;
+        }
+
         $BIO = $request->name1 . " " . $request->name2 . " " . $request->name3;
         Workers::create([
             'position' => $request->position,
             'BIO' => $BIO,
             'signature' => $signature
         ]);
-
-        $this->saveSignature($request, $request->name1);
 
         return $this->index()->with('success');
     }
@@ -115,6 +119,7 @@ class WorkersController extends Controller
         $worker = Workers::find($worker->id);
         $worker->position = $request->position;
         $worker->BIO = $BIO;
+
 
         //если была добавлена новая подпись
         if ($request->file('signature')) {

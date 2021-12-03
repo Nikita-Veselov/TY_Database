@@ -92,6 +92,7 @@ class ControlledPointController extends Controller
         $controlledPoint->name = $request->name;
         $controlledPoint->type = $request->type;
         $controlledPoint->save();
+        
         return $this->index()->with('success');
     }
 

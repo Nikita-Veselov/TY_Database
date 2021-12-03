@@ -1,35 +1,46 @@
 @extends('layouts.main')
 
 @section('content')
-<div class="col-6">
+
+<div class="col-8 mt-5">
     <form method="POST" action="{{ url('controlledPoints') }}">
         @csrf
-        <div class="row mb-3">
-            <label for="Код" class="col-sm-2 col-form-label">Код</label>
-            <div class="col-sm-10">
-            <input type="text" class="form-control" id="Код" name="code" value="{{ old('code') }}">
+        <div class="row justify-content-center">
+
+            <div class="col text-center fs-4">Добавление КП:</div>
+
+            <div class="w-100"></div>
+
+            <div class="col-6 my-4 form-floating ">
+                <input type="text" class="form-control" id="Код" name="code" value="{{ old('code') }}" placeholder="floating label enabler" required>
+                <label for="Номер" class="px-4">Код</label>
             </div>
-        </div>
 
-        <div class="row mb-3">
-            <select class="form-select" aria-label="Должность" name="type" value="{{ old('type') }}">
-                <option value="" selected disabled>Тип</option>
-                <option value="Станция">Станция</option>
-                <option value="ПС">ПС</option>
-                <option value="ТП">ТП</option>
-                <option value="ПГ">ПГ</option>
-                <option value="ЦРП">ЦРП</option>
-            </select>
-        </div>
+            <div class="w-100"></div>
 
-        <div class="row mb-3">
-        <label for="Код" class="col-sm-2 col-form-label">Название</label>
-        <div class="col-sm-10">
-            <input type="text" class="form-control" id="Код" name="name" value="{{ old('name') }}">
-        </div>
-        </div>
+            <div class="col-6 my-4">
+                <select class="form-select form-floating" name="type" value="{{ old('type') }}" required>
+                    <option value="" selected disabled>Тип</option>
+                    <option value="{{ $type = 'Станция'}}" @if ( $type == old('type')) ? selected @endif>Станция</option>
+                    <option value="{{ $type = 'ПС'}}" @if ( $type == old('type')) ? selected @endif>ПС</option>
+                    <option value="{{ $type = 'ТП'}}" @if ( $type == old('type')) ? selected @endif>ТП</option>
+                    <option value="{{ $type = 'ПГ'}}" @if ( $type == old('type')) ? selected @endif>ПГ</option>
+                    <option value="{{ $type = 'ЦРП'}}" @if ( $type == old('type')) ? selected @endif>ЦРП</option>
+                </select>
+            </div>
 
-        <button type="submit" class="btn btn-primary">Создать</button>
+            <div class="w-100"></div>
+
+            <div class="col-6 my-4 form-floating">
+                <input type="text" class="form-control"  id="Название" name="name" value="{{ old('name') }}" placeholder="floating label enabler" required>
+                <label for="Напряжение ТС" class="px-4">Название</label>
+            </div>
+
+            <div class="w-100"></div>
+
+            <button type="submit" class="col-4 btn btn-primary">Создать</button>
+        </div>
     </form>
 </div>
+
 @endsection

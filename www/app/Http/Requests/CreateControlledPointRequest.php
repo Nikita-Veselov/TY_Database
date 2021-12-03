@@ -29,4 +29,13 @@ class CreateControlledPointRequest extends FormRequest
             'type' => 'required|max:255',
         ];
     }
+    
+    public function messages()
+    {
+        return [
+            'code.required' => 'Введите код',
+            'name.required' => 'Введите имя',
+            'type.required' => 'Введите тип',
+        ];
+    }
 }

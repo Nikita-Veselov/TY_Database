@@ -5,7 +5,7 @@ $(document).ready(function(){
 
 // Search all columns
     $('#txt_searchall').keyup(function(){
-        $('.header').addClass('pb-3')
+
         // Hide nav
         $('#nav').hide();
 
@@ -28,7 +28,6 @@ $(document).ready(function(){
         // Paginate if deleted search text
         if (!$(this).val()) {
             paginate();
-            $('.header').removeClass('pb-3')
         }
     });
 

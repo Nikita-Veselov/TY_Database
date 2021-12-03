@@ -30,4 +30,13 @@ class CreateDeviceRequest extends FormRequest
             'date' => 'required|max:255',
         ];
     }
+    public function messages()
+    {
+        return [
+            'code.required' => 'Введите фамилию',
+            'name.required' => 'Введите имя',
+            'class.required' => 'Введите класс точности',
+            'date.required' => 'Введите дату',
+        ];
+    }
 }

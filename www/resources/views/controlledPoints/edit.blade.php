@@ -2,50 +2,45 @@
 
 @section('content')
 
-<div class="col-6">
+<div class="col-8 mt-5">
     <form method="POST" action="{{ route('controlledPoints.update', ['controlledPoint' => $controlledPoint->id]) }}">
         @method('PUT')
         @csrf
-        <div class="row mb-3">
-            <label for="Код" class="col-sm-2 col-form-label">Код</label>
-            <div class="col-sm-10">
-            <input type="text" class="form-control" name="code" value="{{ $controlledPoint->code }}">
+        <div class="row justify-content-center">
+
+            <div class="col text-center fs-4">Изменение КП:</div>
+
+            <div class="w-100"></div>
+
+            <div class="col-6 my-4 form-floating ">
+                <input type="text" class="form-control" id="Код" name="code" value="{{ $controlledPoint->code }}" placeholder="floating label enabler" required>
+                <label for="Номер" class="px-4">Код</label>
             </div>
-        </div>
 
-        <div class="row mb-3">
-            <select class="form-select" aria-label="Должность" name="type" value="{{ $controlledPoint->type }}">
-                <option value="{{ $key1 = 'Станция' }}"
-                    @if ($key1 == $controlledPoint->type ) selected @endif
-                    >Станция
-                </option>
-                <option value="{{ $key2 = 'ПС' }}"
-                    @if ($key2 == $controlledPoint->type ) selected @endif
-                    >ПС
-                </option>
-                <option value="{{ $key3 = 'ТП' }}"
-                    @if ($key3 == $controlledPoint->type ) selected @endif
-                    >ТП
-                </option>
-                <option value="{{ $key4 = 'ПГ' }}"
-                    @if ($key4 == $controlledPoint->type ) selected @endif
-                    >ПГ
-                </option>
-                <option value="{{ $key5 = 'ЦРП' }}"
-                    @if ($key5 == $controlledPoint->type ) selected @endif
-                    >ЦРП
-                </option>
-            </select>
-        </div>
+            <div class="w-100"></div>
 
-        <div class="row mb-3">
-        <label for="Код" class="col-sm-2 col-form-label">Название</label>
-        <div class="col-sm-10">
-            <input type="text" class="form-control" id="Код" name="name" value="{{ $controlledPoint->name }}">
-        </div>
-        </div>
+            <div class="col-6 my-4">
+                <select class="form-select form-floating" name="type" value="{{ old('type') }}" required>
+                    <option value="" selected disabled>Тип</option>
+                    <option value="{{ $type = 'Станция'}}" @if ( $type == $controlledPoint->type) ? selected @endif>Станция</option>
+                    <option value="{{ $type = 'ПС'}}" @if ( $type == $controlledPoint->type) ? selected @endif>ПС</option>
+                    <option value="{{ $type = 'ТП'}}" @if ( $type == $controlledPoint->type) ? selected @endif>ТП</option>
+                    <option value="{{ $type = 'ПГ'}}" @if ( $type == $controlledPoint->type) ? selected @endif>ПГ</option>
+                    <option value="{{ $type = 'ЦРП'}}" @if ( $type == $controlledPoint->type) ? selected @endif>ЦРП</option>
+                </select>
+            </div>
 
-        <button type="submit" class="btn btn-primary">Изменить</button>
+            <div class="w-100"></div>
+
+            <div class="col-6 my-4 form-floating">
+                <input type="text" class="form-control"  id="Название" name="name" value="{{ $controlledPoint->name }}" placeholder="floating label enabler" required>
+                <label for="Напряжение ТС" class="px-4">Название</label>
+            </div>
+
+            <div class="w-100"></div>
+
+            <button type="submit" class="col-4 btn btn-primary">Изменить</button>
+        </div>
     </form>
 </div>
 @endsection

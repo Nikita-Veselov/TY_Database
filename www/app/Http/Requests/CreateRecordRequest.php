@@ -37,4 +37,20 @@ class CreateRecordRequest extends FormRequest
             "worker2" => 'required|max:255',
         ];
     }
+    public function messages()
+    {
+        return [
+            'number.required' => 'Введите номер',
+            'type.required' => 'Введите тип',
+            'date.required' => 'Введите дату',
+            'controlledPoint.required' => 'Выберите КП',
+            'device.required' => 'Выберите устройство',
+            'UTY.required' => 'Введите напряжение ТУ',
+            'UTC.required' => 'Введите напряжение ТС',
+            'UTP.required' => 'Введите напряжение ТП',
+            'conclusion.required' => 'Введите заключение',
+            'worker1.required' => 'Выберите работника 1',
+            'worker2.required' => 'Выберите работника 2',
+        ];
+    }
 }
