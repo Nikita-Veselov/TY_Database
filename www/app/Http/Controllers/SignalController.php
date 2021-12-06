@@ -58,7 +58,7 @@ class SignalController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function store(CreateSignalRequest $request)
+    public function store(Request $request)
     {
         $countTC = 1;
         $countTY = 1;
@@ -69,15 +69,17 @@ class SignalController extends Controller
             $invert = Str::of('invert')->append($countTC)->append('TC');
             $oper = Str::of('oper')->append($countTC)->append('TC');
             $DP = Str::of('DP')->append($countTC)->append('TC');
-            TC::create([
-                "name" => $request->$name,
-                "klemm" => $request->$klemm,
-                "number" => $request->$number,
-                "invert" => $request->$invert,
-                "oper" => $request->$oper,
-                "DP" => $request->$DP,
-                "cp-code" => $request->CP,
-            ]);
+            if ($request->$name != null) {
+                TC::create([
+                    "name" => $request->$name,
+                    "klemm" => $request->$klemm,
+                    "number" => $request->$number,
+                    "invert" => $request->$invert,
+                    "oper" => $request->$oper,
+                    "DP" => $request->$DP,
+                    "cp-code" => $request->CP,
+                ]);
+            }
             $countTC++;
         }
         while ($countTC <= $request->TCcount);
@@ -88,14 +90,16 @@ class SignalController extends Controller
             $number = Str::of('number')->append($countTY)->append('TY');
             $oper = Str::of('oper')->append($countTY)->append('TY');
             $DP = Str::of('DP')->append($countTY)->append('TY');
-            TY::create([
-                "name" => $request->$name,
-                "klemm" => $request->$klemm,
-                "number" => $request->$number,
-                "oper" => $request->$oper,
-                "DP" => $request->$DP,
-                "cp-code" => $request->CP,
-            ]);
+            if ($request->$name != null) {
+                TY::create([
+                    "name" => $request->$name,
+                    "klemm" => $request->$klemm,
+                    "number" => $request->$number,
+                    "oper" => $request->$oper,
+                    "DP" => $request->$DP,
+                    "cp-code" => $request->CP,
+                ]);
+            }
             $countTY++;
         }
         while ($countTY <= $request->TYcount);
@@ -119,7 +123,7 @@ class SignalController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function update(CreateSignalRequest $request)
+    public function update(Request $request)
     {
         $TC = TC::where('cp-code', $request->CP)->get();
 
@@ -131,18 +135,21 @@ class SignalController extends Controller
             $oper = Str::of('oper')->append($tc->id)->append('TC');
             $DP = Str::of('DP')->append($tc->id)->append('TC');
 
-            $tc->name = $request->$name;
-            $tc->klemm = $request->$klemm;
-            $tc->invert = $request->$invert;
-            $tc->number = $request->$number;
-            $tc->oper = $request->$oper;
-            $tc->DP = $request->$DP;
+            if ($request->$name != null) {
+                $tc->name = $request->$name;
+                $tc->klemm = $request->$klemm;
+                $tc->invert = $request->$invert;
+                $tc->number = $request->$number;
+                $tc->oper = $request->$oper;
+                $tc->DP = $request->$DP;
 
-            $tc->save();
-            $countTC = $tc->id;
+                $tc->save();
+                $countTC = $tc->id;
+            }
         }
 
-        if ($request->TCcount != $countTC) {
+        if ($request->TCcount > $countTC) {
+
             do {
                 $countTC++;
                 $name = Str::of('name')->append($countTC)->append('TC');
@@ -151,16 +158,20 @@ class SignalController extends Controller
                 $invert = Str::of('invert')->append($countTC)->append('TC');
                 $oper = Str::of('oper')->append($countTC)->append('TC');
                 $DP = Str::of('DP')->append($countTC)->append('TC');
-                TC::create([
-                    "name" => $request->$name,
-                    "klemm" => $request->$klemm,
-                    "number" => $request->$number,
-                    "invert" => $request->$invert,
-                    "oper" => $request->$oper,
-                    "DP" => $request->$DP,
-                    "cp-code" => $request->CP,
-                ]);
-            } while ($countTC++ < $request->TCcount);
+
+                if ($request->$name != null) {
+                    TC::create([
+                        "name" => $request->$name,
+                        "klemm" => $request->$klemm,
+                        "number" => $request->$number,
+                        "invert" => $request->$invert,
+                        "oper" => $request->$oper,
+                        "DP" => $request->$DP,
+                        "cp-code" => $request->CP,
+                    ]);
+                }
+
+            } while ($countTC < $request->TCcount);
         }
 
         $TY = TY::where('cp-code', $request->CP)->get();
@@ -172,17 +183,19 @@ class SignalController extends Controller
             $oper = Str::of('oper')->append($ty->id)->append('TY');
             $DP = Str::of('DP')->append($ty->id)->append('TY');
 
-            $ty->name = $request->$name;
-            $ty->klemm = $request->$klemm;
-            $ty->number = $request->$number;
-            $ty->oper = $request->$oper;
-            $ty->DP = $request->$DP;
+            if ($request->$name != null) {
+                $ty->name = $request->$name;
+                $ty->klemm = $request->$klemm;
+                $ty->number = $request->$number;
+                $ty->oper = $request->$oper;
+                $ty->DP = $request->$DP;
 
-            $ty->save();
-            $countTY = $ty->id;
+                $ty->save();
+                $countTY = $ty->id;
+            }
         }
 
-        if ($request->TYcount != $countTY) {
+        if ($request->TYcount > $countTY) {
             do {
                 $countTY++;
                 $name = Str::of('name')->append($countTY)->append('TY');
@@ -190,15 +203,17 @@ class SignalController extends Controller
                 $number = Str::of('number')->append($countTY)->append('TY');
                 $oper = Str::of('oper')->append($countTY)->append('TY');
                 $DP = Str::of('DP')->append($countTY)->append('TY');
-                TY::create([
-                    "name" => $request->$name,
-                    "klemm" => $request->$klemm,
-                    "number" => $request->$number,
-                    "oper" => $request->$oper,
-                    "DP" => $request->$DP,
-                    "cp-code" => $request->CP,
-                ]);
-            } while ($countTY++ < $request->TYcount);
+                if ($request->$name != null) {
+                    TY::create([
+                        "name" => $request->$name,
+                        "klemm" => $request->$klemm,
+                        "number" => $request->$number,
+                        "oper" => $request->$oper,
+                        "DP" => $request->$DP,
+                        "cp-code" => $request->CP,
+                    ]);
+                }
+            } while ($countTY < $request->TYcount);
         }
 
         return $this->index($request);

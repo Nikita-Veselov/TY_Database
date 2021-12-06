@@ -19,6 +19,9 @@
                 <a class="col-3 btn btn-outline-success" href="{{ route('controlledPoints.index') }}" role="button">Назад</a>
             @endif
 
+            @if (Request::is('signals/*'))
+                <a class="col-3 btn btn-outline-success" href="javascript:history.back()" role="button">Назад</a>
+            @endif
         @endif
     </div>
 
