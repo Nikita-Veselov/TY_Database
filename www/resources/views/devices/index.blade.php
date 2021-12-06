@@ -2,7 +2,9 @@
 
 @section('content')
 
-<div class="col-10 mt-5">
+<div class="col-10 mt-3">
+
+@if ($devices->isNotEmpty())
         {{-- Search form --}}
     <x-search-bar></x-search-bar>
 
@@ -53,6 +55,14 @@
         {{-- scriptst moved to views/components/scripts for easy include in all views--}}
     <x-scripts.paginate-script></x-scripts.paginate-script>
     <x-scripts.search-script></x-scripts.search-script>
+
+@else
+
+<div class="row text-center pt-5">
+    <div class="col-12 fs-3">Устройства не добавлены</div>
+</div>
+
+@endif
 
 </div>
 

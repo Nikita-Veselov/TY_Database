@@ -72,6 +72,7 @@
 }
 
 body {
+
   margin: 0;
   font-family: var(--bs-body-font-family);
   font-size: var(--bs-body-font-size);
@@ -11277,3 +11278,16 @@ textarea.form-control-lg {
 .headerSorted {
   text-shadow: #ffc107 2px 4px 0px;
 }
+
+    /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 15px;
+  }
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 10px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #dee2e6;
+    border-radius: 10px;
+  }

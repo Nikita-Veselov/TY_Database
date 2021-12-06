@@ -2,7 +2,10 @@
 
 @section('content')
 
-<div class="col-8 mt-5">
+<div class="col-10 mt-3">
+
+@if ($controlledPoints->isNotEmpty())
+
         {{-- Search form --}}
     <x-search-bar></x-search-bar>
         {{-- Main table --}}
@@ -19,7 +22,6 @@
         </thead>
 
         <tbody>
-
             @foreach ($controlledPoints as $controlledPoint)
                 <tr>
                     <td>{{ $controlledPoint->code }}</td>
@@ -29,7 +31,7 @@
                         <td class="w-15">
                             <div class="row btn-group" role="group" aria-label="Basic example">
                                 <div class="col-6">
-                                    <a type="button" class="btn btn-secondary btn-sm" href="{{ URL::to('controlledPoints/' . $controlledPoint->id . '/edit') }}" role="button">Изменит</a>
+                                    <a type="button" class="btn btn-secondary btn-sm" href="{{ URL::to('controlledPoints/' . $controlledPoint->id . '/edit') }}" role="button">Изменить</a>
                                 </div>
                                 <div class="col-6">
                                     <form class="delete" action="{{ route('controlledPoints.destroy', $controlledPoint->id) }}" method="POST">
@@ -51,6 +53,14 @@
         {{-- scriptst moved to views/components/scripts for easy include in all views--}}
     <x-scripts.paginate-script></x-scripts.paginate-script>
     <x-scripts.search-script></x-scripts.search-script>
+
+@else
+
+<div class="row text-center pt-5">
+    <div class="col-12 fs-3">КП не добавлены</div>
+</div>
+
+@endif
 
 </div>
 @endsection

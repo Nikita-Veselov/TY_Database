@@ -29,11 +29,11 @@
             <button class="btn btn-primary disabled" role="button" aria-disabled="true">Сигналы</button>
 
             <div class="input-group">
-                <span class="input-group-text">Поиск КП:</span>
-                <input type="text" class="form-control" aria-label="search" id="search" name="search" onkeyup="filter()">
+                <span class="input-group-text rounded-0">Поиск КП:</span>
+                <input type="text" class="form-control rounded-0" aria-label="search" id="search" name="search" onkeyup="filter()">
             </div>
 
-            <select id="select" class="form-select text-center" size="5" aria-label="КП" name="CP" value="{{ old('CP') }}" >
+            <select id="select" class="form-select text-center rounded-0" size="5" aria-label="КП" name="CP" value="{{ old('CP') }}" >
                 @foreach ($CP as $cp)
                     <option value="{{ $cp->code }}">{{ $cp->type }} {{ $cp->name }}</option>
                 @endforeach
