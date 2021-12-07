@@ -402,7 +402,7 @@
                 {{ mb_substr($worker1->name3, 0, 1); }}.
             </div>
             <div class="col-3 position-absolute top-0 start-50 translate-middle-x"  style="z-index: -1;">
-                <img class="img-fluid w-75" style="" src="{{ Storage::url("signature/$worker1->name1.png") }}" alt="">
+                <img class="img-fluid w-75" style="margin-top: -15%;" src="{{ Storage::url("signature/$worker1->name1.png") }}" alt="">
             </div>
         </div>
         @if ($worker2 != null)
@@ -414,7 +414,7 @@
                     {{ mb_substr($worker2->name3, 0, 1); }}.
                 </div>
                 <div class="col-3 position-absolute top-0 start-50 translate-middle-x" style="z-index: -1;">
-                    <img class="img-fluid w-75" style="" src="{{ Storage::url("signature/$worker2->name1.png") }}" alt="">
+                    <img class="img-fluid w-75" style="margin-top: -20%;" src="{{ Storage::url("signature/$worker2->name1.png") }}" alt="">
                 </div>
             </div>
         @endif
