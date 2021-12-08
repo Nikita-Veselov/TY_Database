@@ -107,7 +107,7 @@
             </div>
 
             <div class="w-100"></div>
-            <button type="submit" class="col-4 btn btn-primary">Создать</button>
+            <button type="submit" class="col-4 btn btn-primary">Изменить</button>
         </div>
     </form>
 </div>

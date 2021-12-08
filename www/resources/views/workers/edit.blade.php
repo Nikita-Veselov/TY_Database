@@ -39,8 +39,8 @@
             <div class="col-6 my-4">
                 <select class="form-select form-floating" name="position" value="{{ $worker->position }}" required>
                     <option value="" selected disabled>Должность</option>
-                    <option value="{{ $type = 'Электромеханик'}}" @if ( $type == $worker->position)) ? selected @endif>Электромеханик</option>
-                    <option value="{{ $type = 'Старший электромеханик'}}" @if ( $type == $worker->position) ? selected @endif>Старший электромеханик</option>
+                    <option value="{{ $type = 'эл.мех.'}}" @if ( $type == $worker->position)) ? selected @endif>Электромеханик</option>
+                    <option value="{{ $type = 'ст.эл.мех.'}}" @if ( $type == $worker->position) ? selected @endif>Старший электромеханик</option>
                     <option value="{{ $type = 'Начальник РРУ'}}" @if ( $type == $worker->position) ? selected @endif>Начальник РРУ</option>
                 </select>
             </div>

@@ -31,8 +31,8 @@
             <div class="col-6 my-4">
                 <select class="form-select form-floating" name="position" value="{{ old('position') }}" required>
                     <option value="" selected disabled>Должность</option>
-                    <option value="{{ $type = 'Электромеханик'}}" @if ( $type == old('type')) ? selected @endif>Электромеханик</option>
-                    <option value="{{ $type = 'Старший электромеханик'}}" @if ( $type == old('type')) ? selected @endif>Старший электромеханик</option>
+                    <option value="{{ $type = 'эл.мех.'}}" @if ( $type == old('type')) ? selected @endif>Электромеханик</option>
+                    <option value="{{ $type = 'ст.эл.мех.'}}" @if ( $type == old('type')) ? selected @endif>Старший электромеханик</option>
                     <option value="{{ $type = 'Начальник РРУ'}}" @if ( $type == old('type')) ? selected @endif>Начальник РРУ</option>
                 </select>
             </div>
