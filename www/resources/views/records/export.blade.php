@@ -56,7 +56,7 @@
                     </div>
                         {{-- Station --}}
                     <div class="col title text-center fs-4 fw-bold mb-2">
-                        ст. {{ $CP->name }}
+                        {{ $CP->type }} {{ $CP->name }}
                     </div>
 
                         {{-- Record number and date --}}
@@ -324,8 +324,8 @@
 
                         {{-- Controller file --}}
                     <div class="col text-start">
-                        <div class="col">Для контроллера МКД</div>
-                        <div class="col">Имя файла прошивки - "ст. {{ $CP->name }}.mkd"</div>
+                        <div class="col">Для контроллера</div>
+                        <div class="col">Имя файла прошивки - "{{ $CP->type }} {{ $CP->name }}.mkd"</div>
                     </div>
 
                         {{-- New page --}}

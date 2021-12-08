@@ -36,22 +36,22 @@
 
         {{-- Station --}}
     <div class="col text-center fs-4 fw-bold mb-2">
-        ст. {{ $CP->name }}
+        {{ $CP->type }} {{ $CP->name }}
     </div>
 
         {{-- Record number and date --}}
-        <div class="col text-center">
-            <div class="row">
-                <div class="col-5"></div>
-                <div class="col">№{{ $record->number }}</div>
-                <div class="col-5 position-relative" style="z-index: -1;">
-                    <div class="position-absolute col-7">
-                        <img class="img-fluid top-0 start-50" style="margin-top: -30%; margin-left: 0%; transform: rotate(-10deg);" src="{{ asset("img/ЭЧ.png") }}" alt="">
-                    </div>
+    <div class="col text-center">
+        <div class="row">
+            <div class="col-5"></div>
+            <div class="col">№{{ $record->number }}</div>
+            <div class="col-5 position-relative" style="z-index: -1;">
+                <div class="position-absolute col-7">
+                    <img class="img-fluid top-0 start-50" style="margin-top: -30%; margin-left: 0%; transform: rotate(-10deg);" src="{{ asset("img/ЭЧ.png") }}" alt="">
                 </div>
             </div>
         </div>
-        <div class="col text-center mb-4">{{ $record->date }}</div>
+    </div>
+    <div class="col text-center mb-4">{{ $record->date }}</div>
 
         {{-- Modem data --}}
     <div class="col-6 mb-4">
@@ -305,8 +305,8 @@
 
         {{-- Controller file --}}
     <div class="col text-start">
-        <div class="col">Для контроллера МКД</div>
-        <div class="col">Имя файла прошивки - "ст. {{ $CP->name }}.mkd"</div>
+        <div class="col">Для контроллера</div>
+        <div class="col">Имя файла прошивки - "{{ $CP->type }}  {{ $CP->name }}.mkd"</div>
     </div>
 
         {{-- TC table --}}
