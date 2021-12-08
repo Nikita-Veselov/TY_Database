@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateControlledPointRequest;
 use App\Models\ControlledPoint;
 use App\Models\Record;
+use App\Models\TC;
+use App\Models\TY;
 use Illuminate\Http\Request;
 
 
@@ -78,7 +80,7 @@ class ControlledPointController extends Controller
      * @param  \App\Models\Devices  $record
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ControlledPoint $controlledPoint)
+    public function update(CreateControlledPointRequest $request, ControlledPoint $controlledPoint)
     {
         // Update all codes in all records contining this CP
         $records = Record::where('controlledPoint', $controlledPoint->code)->get();
@@ -86,13 +88,27 @@ class ControlledPointController extends Controller
             $record->controlledPoint = $request->code;
             $record->save();
         }
+        // Update all codes in all signals contining this CP
+        $cpcode = 'cp-code';
+
+        $TC = TC::where('cp-code', $controlledPoint->code)->get();
+        foreach ($TC as $signal) {
+            $signal->$cpcode = $request->code;
+            $signal->save();
+        }
+
+        $TY = TY::where('cp-code', $controlledPoint->code)->get();
+        foreach ($TY as $signal) {
+            $signal->$cpcode = $request->code;
+            $signal->save();
+        }
 
         $controlledPoint = ControlledPoint::find($controlledPoint->id);
         $controlledPoint->code = $request->code;
         $controlledPoint->name = $request->name;
         $controlledPoint->type = $request->type;
         $controlledPoint->save();
-        
+
         return $this->index()->with('success');
     }
 

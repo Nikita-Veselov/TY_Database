@@ -24,12 +24,12 @@ class CreateControlledPointRequest extends FormRequest
     public function rules()
     {
         return [
-            'code' => 'required|max:255|unique:controlled_points',
+            'code' => 'required|max:255|unique:controlled_points|numeric',
             'name' => 'required|max:255',
             'type' => 'required|max:255',
         ];
     }
-    
+
     public function messages()
     {
         return [

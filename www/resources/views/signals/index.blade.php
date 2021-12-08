@@ -14,12 +14,11 @@
             @endif
         </div>
     @else
-
         <div class="col-12 text-center py-4">
             <div class="col fs-3 pb-4">№{{ $CP->code }} - {{ $CP->type }} {{ $CP->name }}</div>
             <div class="button-group">
                 @if (Auth::check())
-                    <a class="btn btn-success col-4" href="{{ route('signals.edit', ['signal'=> $CP->code, 'CP' => $CP->code]) }}" role="button">Изменить</a>
+                    <a class="btn btn-success col-4" href="{{ route('signals.edit', ['signal'=> $CP->code]) }}" role="button">Изменить</a>
                 @endif
                 <a class="btn btn-warning col-4" href="{{ route('print', ['CP'=> $CP->code]) }}" role="button">Печать</a>
             </div>

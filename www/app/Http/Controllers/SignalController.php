@@ -2,14 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CreateSignalRequest;
 use App\Models\ControlledPoint;
 use App\Models\TC;
 use App\Models\TY;
 use Barryvdh\Snappy\Facades\SnappyPdf;
-use Error;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 
 use function PHPUnit\Framework\once;
@@ -107,12 +104,13 @@ class SignalController extends Controller
         return $this->index($request);
     }
 
-    public function edit(Request $request)
+    public function edit($signal)
     {
-        $CP = ControlledPoint::where('code', $request->CP)->first();
+        $CP = ControlledPoint::where('code', $signal)->first();
+
         return view('signals.edit', [
-            'TC' => TC::where('cp-code', $request->CP)->get(),
-            'TY' => TY::where('cp-code', $request->CP)->get(),
+            'TC' => TC::where('cp-code', $signal)->get(),
+            'TY' => TY::where('cp-code', $signal)->get(),
             'CP' => $CP,
         ]);
     }
@@ -246,7 +244,7 @@ class SignalController extends Controller
             'CP' => ControlledPoint::where('code', $request->CP)->first()
         ]);
 
-        $pdf->save("tmp/print.pdf", true);
+        $pdf->save("tmp/tmp.pdf", true);
         return $this->index($request, true);
     }
 }

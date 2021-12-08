@@ -34,7 +34,12 @@ Route::resource('/workers', WorkersController::class);
 
 Route::resource('/devices', DevicesController::class);
 
-Route::resource('/signals', SignalController::class);
+Route::resource('/signals', SignalController::class,
+    [
+    'names' => [
+        'edit' => 'signals.edit',
+        ]
+    ]);
     Route::get('/print/{CP}', [SignalController::class, 'print'])->name('print');
 
 Route::get('/login', [LoginController::class, 'index'])->name('login');
