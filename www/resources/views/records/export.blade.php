@@ -37,6 +37,18 @@
                     $worker2->name3 = $arr2[2];
                 @endphp
             @endif
+            @php
+                $arr3 = explode(' ', $worker3->BIO);
+                $worker3->name1 = $arr3[0];
+                $worker3->name2 = $arr3[1];
+                $worker3->name3 = $arr3[2];
+            @endphp
+            @php
+                $arr4 = explode(' ', $worker4->BIO);
+                $worker4->name1 = $arr4[0];
+                $worker4->name2 = $arr4[1];
+                $worker4->name3 = $arr4[2];
+            @endphp
 
                 <div class="container">
                         {{-- Title --}}
@@ -441,18 +453,30 @@
                     </div>
                     <div class="row position-relative">
                         <div class="col-12 mt-3 fw-bolder">Протокол проверил:</div>
-                        <div class="col-4 mt-3">
-                            Начальник РРУ Акудович Е.В.
+                        <div class="row position-relative">
+                            <div class="col-4 mt-3">
+                                {{ $worker3->position }}
+                                {{ $worker3->name1 }}
+                                {{ mb_substr($worker3->name2, 0, 1) }}.
+                                {{ mb_substr($worker3->name3, 0, 1); }}.
+                            </div>
+                            <div class="col-2 position-absolute top-0 start-50"  style="z-index: -1;">
+                                <img class="img-fluid w-75" style="margin-top: -3{{ rand(0,5) }}%; margin-left: -8{{ rand(0,5) }}%" src="{{ asset("../storage/signature/$worker3->name1.png") }}" alt="">
+                            </div>
                         </div>
-                        <div class="col-2 position-absolute top-0 start-50">
-                            <img class="img-fluid w-75" style="margin-top: -1{{ rand(0,5) }}%; margin-left: -10{{ rand(0,5) }}%" src="{{ asset("../storage/signature/Акудович.png") }}" alt="">
-                        </div>
+
                         <div class="wh-100"></div>
-                        <div class="col-4 mt-3">
-                            ст.эл.мех. Соколов Е.И.
-                        </div>
-                        <div class="col-2 position-absolute top-0 start-50">
-                            <img class="img-fluid w-75" style="margin-top: 1{{ rand(0,5) }}%; margin-left: -9{{ rand(0,5) }}%" src="{{ asset("../storage/signature/Соколов.png") }}" alt="">
+
+                        <div class="row position-relative">
+                            <div class="col-4 mt-3">
+                                {{ $worker4->position }}
+                                {{ $worker4->name1 }}
+                                {{ mb_substr($worker4->name2, 0, 1) }}.
+                                {{ mb_substr($worker4->name3, 0, 1); }}.
+                            </div>
+                            <div class="col-2 position-absolute top-0 start-50"  style="z-index: -1;">
+                                <img class="img-fluid w-75" style="margin-top: -3{{ rand(0,5) }}%; margin-left: -8{{ rand(0,5) }}%" src="{{ asset("../storage/signature/$worker4->name1.png") }}" alt="">
+                            </div>
                         </div>
                     </div>
                 </div>

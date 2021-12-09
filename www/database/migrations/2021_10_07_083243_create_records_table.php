@@ -25,6 +25,8 @@ class CreateRecordsTable extends Migration
             $table->string('UTP');
             $table->string('worker1');
             $table->string('worker2')->nullable();
+            $table->string('worker3');
+            $table->string('worker4');
             $table->string('conclusion');
             $table->timestamps();
         });

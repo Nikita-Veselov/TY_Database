@@ -101,6 +101,30 @@
                 </select>
             </div>
 
+            <div class="col-4 my-4">
+                <select class="form-select form-floating" name="worker3" required>
+                    <option value="" selected disabled>Начальник РРУ</option>
+                    <option >Нет</option>
+                    @foreach ($workers as $worker)
+                        <option value="{{ $worker->BIO }}" @if ($worker->BIO == $record->worker3)) ? selected @endif>
+                            {{ $worker->BIO }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="col-4 my-4">
+                <select class="form-select form-floating" name="worker4" required>
+                    <option value="" selected disabled>Старший механик</option>
+                    <option >Нет</option>
+                    @foreach ($workers as $worker)
+                        <option value="{{ $worker->BIO }}" @if ($worker->BIO == $record->worker4)) ? selected @endif>
+                            {{ $worker->BIO }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+
             <div class="col-8 my-4 form-floating">
                 <textarea type="text" class="form-control" id="Заключение" name="conclusion" style="height: 100px" placeholder="floating label enabler" required>{{ $record->conclusion }}</textarea>
                 <label for="Заключение" class="px-4">Заключение</label>

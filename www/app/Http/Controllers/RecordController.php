@@ -93,6 +93,8 @@ class RecordController extends Controller
             "conclusion" => $request->conclusion,
             "worker1" => $request->worker1,
             "worker2" => $request->worker2,
+            "worker3" => $request->worker3,
+            "worker4" => $request->worker4,
         ]);
 
         $this->publishPDF($record);
@@ -112,6 +114,8 @@ class RecordController extends Controller
             'record' => $record,
             'worker1' => Workers::where('BIO', $record->worker1)->first(),
             'worker2' => Workers::where('BIO', $record->worker2)->first(),
+            'worker3' => Workers::where('BIO', $record->worker3)->first(),
+            'worker4' => Workers::where('BIO', $record->worker4)->first(),
             'device' => Devices::where('name', $record->device)->first(),
             'CP' => ControlledPoint::where('code', $record->controlledPoint)->first(),
             'TC' => TC::where('cp-code', $record->controlledPoint)->get(),
@@ -165,6 +169,8 @@ class RecordController extends Controller
         $record->UTP = $request->UTP;
         $record->worker1 = $request->worker1;
         $record->worker2 = $request->worker2;
+        $record->worker3 = $request->worker3;
+        $record->worker4 = $request->worker4;
         $record->conclusion = $request->conclusion;
         $record->save();
 
@@ -228,6 +234,8 @@ class RecordController extends Controller
             'record' => $record,
             'worker1' => Workers::where('BIO', $record->worker1)->first(),
             'worker2' => Workers::where('BIO', $record->worker2)->first(),
+            'worker3' => Workers::where('BIO', $record->worker3)->first(),
+            'worker4' => Workers::where('BIO', $record->worker4)->first(),
             'device' => Devices::where('name', $record->device)->first(),
             'CP' => $CP,
             'TC' => TC::where('cp-code', $record->controlledPoint)->get(),
@@ -264,6 +272,8 @@ class RecordController extends Controller
             'record' => $record,
             'worker1' => Workers::where('BIO', $record->worker1)->first(),
             'worker2' => Workers::where('BIO', $record->worker2)->first(),
+            'worker3' => Workers::where('BIO', $record->worker3)->first(),
+            'worker4' => Workers::where('BIO', $record->worker4)->first(),
             'device' => Devices::where('name', $record->device)->first(),
             'CP' => $CP,
             'TC' => TC::where('cp-code', $record->controlledPoint)->get(),
