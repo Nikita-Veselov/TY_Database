@@ -80,7 +80,7 @@
 
             <div class="col-4 my-4">
                 <select class="form-select form-floating" name="worker1" required>
-                    <option value="" selected disabled>Работник 1</option>
+                    <option value="" disabled>Работник 1</option>
                     @foreach ($workers as $worker)
                         <option value="{{ $worker->BIO }}" @if ( $worker->BIO == $record->worker1) ? selected @endif>
                             {{ $worker->BIO }}
@@ -91,8 +91,8 @@
 
             <div class="col-4 my-4">
                 <select class="form-select form-floating" name="worker2" required>
-                    <option value="" selected disabled>Работник 2</option>
-                    <option >Нет</option>
+                    <option value="" disabled>Работник 2</option>
+                    <option  @if ($worker->BIO == $record->worker2)) ? selected @endif>Нет</option>
                     @foreach ($workers as $worker)
                         <option value="{{ $worker->BIO }}" @if ($worker->BIO == $record->worker2)) ? selected @endif>
                             {{ $worker->BIO }}
@@ -101,10 +101,11 @@
                 </select>
             </div>
 
+            <div class="w-100"></div>
+
             <div class="col-4 my-4">
                 <select class="form-select form-floating" name="worker3" required>
                     <option value="" selected disabled>Начальник РРУ</option>
-                    <option >Нет</option>
                     @foreach ($workers as $worker)
                         <option value="{{ $worker->BIO }}" @if ($worker->BIO == $record->worker3)) ? selected @endif>
                             {{ $worker->BIO }}
@@ -116,7 +117,6 @@
             <div class="col-4 my-4">
                 <select class="form-select form-floating" name="worker4" required>
                     <option value="" selected disabled>Старший механик</option>
-                    <option >Нет</option>
                     @foreach ($workers as $worker)
                         <option value="{{ $worker->BIO }}" @if ($worker->BIO == $record->worker4)) ? selected @endif>
                             {{ $worker->BIO }}
@@ -124,6 +124,8 @@
                     @endforeach
                 </select>
             </div>
+
+            <div class="w-100"></div>
 
             <div class="col-8 my-4 form-floating">
                 <textarea type="text" class="form-control" id="Заключение" name="conclusion" style="height: 100px" placeholder="floating label enabler" required>{{ $record->conclusion }}</textarea>

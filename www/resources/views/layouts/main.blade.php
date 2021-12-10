@@ -23,10 +23,11 @@
         <x-footer />
 
         <script>
+                // delete confirmation
             $(".delete").on("submit", function(){
-                return confirm("Do you want to delete this item?");
+                return confirm("Точно хочешь удалить?");
             });
-
+                // alert auto closing
             $(".alert").delay(4000).slideUp(200, function() {
                 $(this).alert('close');
             });
