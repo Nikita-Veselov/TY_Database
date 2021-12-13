@@ -27,6 +27,8 @@ class Record extends Model
         "UTP",
         "worker1",
         "worker2",
+        "worker3",
+        "worker4",
         "conclusion",
     ];
 }

@@ -81,6 +81,7 @@ class RecordController extends Controller
      */
     public function store(CreateRecordRequest $request)
     {
+
         $record = Record::create([
             "number" => $request->number,
             "type" => $request->type,

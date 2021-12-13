@@ -35,6 +35,8 @@ class CreateRecordRequest extends FormRequest
             "conclusion" => 'required|max:255',
             "worker1" => 'required|max:255',
             "worker2" => 'required|max:255',
+            "worker3" => 'required|max:255',
+            "worker4" => 'required|max:255',
         ];
     }
     public function messages()
@@ -51,6 +53,8 @@ class CreateRecordRequest extends FormRequest
             'conclusion.required' => 'Введите заключение',
             'worker1.required' => 'Выберите работника 1',
             'worker2.required' => 'Выберите работника 2',
+            'worker3.required' => 'Выберите начальника РРУ',
+            'worker4.required' => 'Выберите старшего механика',
         ];
     }
 }
