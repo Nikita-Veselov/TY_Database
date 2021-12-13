@@ -23,7 +23,8 @@
                 <select class="form-select form-floating" name="type" value="{{ old('type') }}" required>
                     <option value="" selected disabled>Тип</option>
                     <option value="{{ $type = 'Станция'}}" @if ( $type == $controlledPoint->type) ? selected @endif>Станция</option>
-                    <option value="{{ $type = 'ПС'}}" @if ( $type == $controlledPoint->type) ? selected @endif>ПС</option>
+                    <option value="{{ $type = 'ПСК'}}" @if ( $type == $controlledPoint->type) ? selected @endif>ПСК</option>
+                    <option value="{{ $type = 'ППС'}}" @if ( $type == $controlledPoint->type) ? selected @endif>ППС</option>
                     <option value="{{ $type = 'ТП'}}" @if ( $type == $controlledPoint->type) ? selected @endif>ТП</option>
                     <option value="{{ $type = 'ПГ'}}" @if ( $type == $controlledPoint->type) ? selected @endif>ПГ</option>
                     <option value="{{ $type = 'ЦРП'}}" @if ( $type == $controlledPoint->type) ? selected @endif>ЦРП</option>
