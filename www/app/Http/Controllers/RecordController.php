@@ -256,7 +256,7 @@ class RecordController extends Controller
         }
 
         //загрузка на сервер
-        if (!ftp_put($ftp, $server_file, $local_file, FTP_BINARY)) {
+        if (!@ftp_put($ftp, $server_file, $local_file, FTP_BINARY)) {
             return back()->withErrors('Сохранение не удалось');
         }
 
