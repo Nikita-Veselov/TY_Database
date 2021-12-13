@@ -459,6 +459,7 @@
             </div>
         </div>
     </div>
+
         {{-- calling for print if rendred after saving or editing --}}
     @if ($print)
         <script>

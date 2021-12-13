@@ -105,7 +105,7 @@
                         {{-- Evalueted data --}}
                     @switch($record->type)
                         @case("Профвосстановление")
-                            <table class="table table-bordered align-middle text-center mb-3">
+                            <table class="table table-bordered align-middle text-center mb-3 table-fixed border-dark">
                                 <thead>
                                 <tr class="align-middle">
                                     <th scope="col" class="col-4">Проверяемый показатель (характеристика)</th>
@@ -194,7 +194,7 @@
                             </table>
                         @break
                             @case("Профконтроль")
-                            <table class="table table-bordered align-middle text-center mb-3">
+                            <table class="table table-bordered align-middle text-center mb-3 table-fixed border-dark">
                                 <thead>
                                 <tr class="align-middle">
                                     <th scope="col" class="col-4">Проверяемый показатель (характеристика)</th>
@@ -275,7 +275,7 @@
                             </table>
                         @break
                             @default
-                            <table class="table table-bordered align-middle text-center mb-3">
+                            <table class="table table-bordered align-middle text-center mb-3 table-fixed border-dark">
                                 <thead>
                                 <tr class="align-middle">
                                     <th scope="col" class="col-4">Проверяемый показатель (характеристика)</th>
@@ -345,7 +345,7 @@
 
                         {{-- TC table --}}
                     <div class="col text-start mt-2">Таблица ТС</div>
-                    <table class="table table-bordered table-sm mb-4">
+                    <table class="table table-bordered table-sm table-fixed border-dark mb-4">
                         <thead class="text-center align-middle">
                         <tr>
                             <th scope="col" class="col-3">Название сигнала</th>
@@ -383,10 +383,10 @@
                             @endforeach
                         </tbody>
                     </table>
-                        {{-- TY table --}}
 
+                        {{-- TY table --}}
                     <div class="col text-start">Таблица ТУ</div>
-                    <table class="table table-bordered table-sm table-fixed">
+                    <table class="table table-bordered table-sm table-fixed border-dark">
                         <thead>
                         <tr class="text-center align-middle">
                             <th scope="col" class="col-3">Название сигнала</th>
@@ -418,11 +418,13 @@
                             @endforeach
                         </tbody>
                     </table>
+
                         {{-- Conclusion --}}
                     <div class="row mb-4">
                         <div class="col fw-bold">Заключение:</div>
                         <div class="col">{{ $record->conclusion }}</div>
                     </div>
+
                         {{-- Workers --}}
                     <div class="row mt-3">
                         <div class="col-12 mt-3 fw-bolder">Проверку проводил:</div>
@@ -479,6 +481,7 @@
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
