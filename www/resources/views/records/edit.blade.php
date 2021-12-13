@@ -107,9 +107,11 @@
                 <select class="form-select form-floating" name="worker3" required>
                     <option value="" selected disabled>Начальник РРУ</option>
                     @foreach ($workers as $worker)
-                        <option value="{{ $worker->BIO }}" @if ($worker->BIO == $record->worker3)) ? selected @endif>
-                            {{ $worker->BIO }}
-                        </option>
+                        @if ($worker->position == "Начальник РРУ")
+                            <option value="{{ $worker->BIO }}" @if ($worker->BIO == $record->worker3)) ? selected @endif>
+                                {{ $worker->BIO }}
+                            </option>
+                        @endif
                     @endforeach
                 </select>
             </div>
@@ -118,9 +120,11 @@
                 <select class="form-select form-floating" name="worker4" required>
                     <option value="" selected disabled>Старший механик</option>
                     @foreach ($workers as $worker)
-                        <option value="{{ $worker->BIO }}" @if ($worker->BIO == $record->worker4)) ? selected @endif>
-                            {{ $worker->BIO }}
-                        </option>
+                        @if ($worker->position == "ст.эл.мех.")
+                            <option value="{{ $worker->BIO }}" @if ($worker->BIO == $record->worker4)) ? selected @endif>
+                                {{ $worker->BIO }}
+                            </option>
+                        @endif
                     @endforeach
                 </select>
             </div>

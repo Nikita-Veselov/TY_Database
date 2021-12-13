@@ -1,4 +1,5 @@
-<div class="header row text-start bg-light shadow rounded justify-content-between" style="min-height: 5em">
+<div style="min-height: 5em"></div>
+<div class="header row text-start bg-light shadow rounded justify-content-between fixed-top px-5" style="min-height: 5em">
     <div class="col-4 text-start px-3 align-self-center">
         @if (!Request::is('/'))
                 <a class="col-4 btn btn-outline-warning" href="/" role="button">На главную</a>
